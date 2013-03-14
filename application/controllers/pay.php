@@ -18,7 +18,7 @@ class Pay extends CI_Controller {
 	}
 
 	/**
-	 * @deprecated 计算订单总价,生成订单
+	 * 计算订单总价,生成订单
 	 */
 	public function figureUp() {
 		$this->permission->login_check();
@@ -76,6 +76,9 @@ class Pay extends CI_Controller {
 		output(0, array('invoid_id'=>$invoice_id, 'amount'=>$amount));
 	}
 
+	/**
+	 * 支付成功
+	 */
 	public function billover() {
 		$option = $this->input->post('option');
 		if($option == 54 || $option == 56) {
@@ -132,14 +135,41 @@ class Pay extends CI_Controller {
 					'checkout_plugin_id'=> $option,
 				);
 				$this->base->update_data('invoice', $updata_array, array('id'=>$invoid_id));
-				
-				$items = $this->base->get_data('invoice_item', array('id'=>$invoid_id))->result_array();
-				foreach($items as $v) {
 
+				$invoice = $this->base->get_data('invoice', array('id'=>$invoid_id), 'parent_id')->row_array();
+				$items = $this->base->get_data('invoice_item', array('invoice_id'=>$invoid_id))->result_array();
+				foreach($items as $v) {
+					$prod = $this->base->get_data('product', array('id'=>$v['product_id']), 'taxable')->row_array();
+					if($v['price_type'] == 2) {
+						$bind = 1;
+					} else if($v['price_type'] == 1) {
+						$bind = 1;
+					} else if($v['price_type'] == 0) {
+						$bind = 0;
+					} else {
+
+					}
+					$ser_data[] = array(
+						'date_orig'			=> $this->timestamp,
+						'parent_id'			=> $v['parent_id'],
+						'invoice_id'		=> $v['invoice_id'],
+						'invoice_item_id'	=> $v['id'],
+						'account_id'		=> $v['account_id'],
+						'account_billing_id'=> $invoice['account_id'],
+						'product_id'		=> $v['product_id'],
+						'sku'				=> $v['sku'],
+						'active'			=> 1,
+						'bind'				=> $bind,
+						'type'				=> 'group',		//item_type好像都为0
+						'queue'				=> 'none',
+						'price'				=> $v['price_base'],
+						'price_type'		=> $v['price_type'],
+						'taxable'			=> $prod['taxable'],
+					);
 				}
 
 				$this->id = sqlGenID($db,"service");
-				$fields = Array('date_orig' 				=> time(),
+				$fields = Array(
 				'date_orig'					=> time(),
 				'parent_id' 				=> $this->parent_id,
 				'invoice_id'				=> $item->fields['invoice_id'],
