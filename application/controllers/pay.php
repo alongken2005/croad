@@ -33,7 +33,7 @@ class Pay extends CI_Controller {
 
 		foreach($lists as $v) {
 			$invoice_item[] = array(
-				'id'				=> $item_id = getId('invoice_item'),
+				'id'				=> getId('invoice_item'),
 				'site_id'			=> 1,
 				'date_orig'			=> $this->timestamp,
 				'parent_id'			=> $user['parent_id'],
@@ -150,69 +150,41 @@ class Pay extends CI_Controller {
 
 					}
 					$ser_data[] = array(
-						'date_orig'			=> $this->timestamp,
-						'parent_id'			=> $v['parent_id'],
-						'invoice_id'		=> $v['invoice_id'],
-						'invoice_item_id'	=> $v['id'],
-						'account_id'		=> $v['account_id'],
-						'account_billing_id'=> $invoice['account_id'],
-						'product_id'		=> $v['product_id'],
-						'sku'				=> $v['sku'],
-						'active'			=> 1,
-						'bind'				=> $bind,
-						'type'				=> 'group',		//item_type好像都为0
-						'queue'				=> 'none',
-						'price'				=> $v['price_base'],
-						'price_type'		=> $v['price_type'],
-						'taxable'			=> $prod['taxable'],
+						'id'					=> getId('service'),
+						'date_orig'				=> $this->timestamp,
+						'parent_id'				=> $v['parent_id'],
+						'invoice_id'			=> $v['invoice_id'],
+						'invoice_item_id'		=> $v['id'],
+						'account_id'			=> $v['account_id'],
+						'account_billing_id'	=> $invoice['account_id'],
+						'product_id'			=> $v['product_id'],
+						'sku'					=> $v['sku'],
+						'active'				=> 1,
+						'bind'					=> $bind,
+						'type'					=> 'group',		//item_type好像都为0
+						'queue'					=> 'none',
+						'price'					=> $v['price_base'],
+						'price_type'			=> $v['price_type'],
+						'taxable'				=> $prod['taxable'],
+						'date_last_invoice'		=> $invoice['date_orig'],
+						'date_next_invoice'		=> '', //待定
+						'recur_schedule'		=> $v['recurring_schedule'],
+						'recur_type'			=> $prod['price_recurr_type'],
+						'recur_weekday' 		=> $prod['price_recurr_weekday'],
+						'recur_week'			=> $prod['price_recurr_week'],
+						'recur_schedule_change' => $prod['price_recurr_schedule'],
+						'recur_cancel'			=> $prod['price_recurr_cancel'],
+						'recur_modify' 			=> $prod['price_recurr_modify'],
+						'group_grant'			=> $prod['assoc_grant_group'],
+						'group_type' 			=> $prod['assoc_grant_group_type'],
+						'group_days'			=> $prod['assoc_grant_group_days'],
 					);
 				}
 
-				$this->id = sqlGenID($db,"service");
-				$fields = Array(
-				'date_orig'					=> time(),
-				'parent_id' 				=> $this->parent_id,
-				'invoice_id'				=> $item->fields['invoice_id'],
-				'invoice_item_id' 			=> $invoice_item_id,
-				'account_id'				=> $invoice->fields['account_id'],
-				'account_billing_id'		=> $invoice->fields['account_billing_id'],
-				'product_id'				=> $item->fields['product_id'],
-				'sku' 						=> $item->fields['sku'],
-				'active'					=> $this->active,
-				'bind' 						=> $this->bind,
-				'type'						=> $this->type,
-				'queue' 					=> $this->queue,
-				'price'						=> $this->price,
-				'price_type' 				=> $item->fields['price_type'],
-				'taxable'					=> $prod->fields['taxable'],
-				'date_last_invoice' 		=> $invoice->fields['date_orig'],
-				'date_next_invoice'			=> $this->next_invoice,
-				'recur_schedule' 			=> $this->recurring_schedule,
-				'recur_type'				=> $prod->fields['price_recurr_type'],
-				'recur_weekday' 			=> $prod->fields['price_recurr_weekday'],
-				'recur_week'				=> $prod->fields['price_recurr_week'],
-				'recur_schedule_change' 	=> $prod->fields['price_recurr_schedule'],
-				'recur_cancel'				=> $prod->fields['price_recurr_cancel'],
-				'recur_modify' 				=> $prod->fields['price_recurr_modify'],
-				'group_grant'				=> $prod->fields['assoc_grant_group'],
-				'group_type' 				=> $prod->fields['assoc_grant_group_type'],
-				'group_days'				=> $prod->fields['assoc_grant_group_days'],
-				'host_server_id' 			=> $prod->fields['host_server_id'],
-				'host_provision_plugin_data'=> $prod->fields['host_provision_plugin_data'],
-				'host_ip' 					=> $this->host_ip,
-				'host_username'				=> $this->host_username,
-				'host_password' 			=> $this->host_password,
-				'domain_name'				=> $item->fields['domain_name'],
-				'domain_tld' 				=> $item->fields['domain_tld'],
-				'domain_term'				=> $item->fields['domain_term'],
-				'domain_type' 				=> $item->fields['domain_type'],
-				'domain_date_expire'		=> $this->domain_date_expire,
-				'domain_host_tld_id'		=> $this->domain_host_tld_id,
-				'domain_host_registrar_id'	=> $this->domain_host_registrar_id,
-				'prod_attr'					=> $item->fields['product_attr'],
-				'prod_attr_cart'			=> $item->fields['product_attr_cart'],
-				'prod_plugin_name' 			=> @$prod->fields["prod_plugin_file"],
-				'prod_plugin_data'			=> @$prod->fields["prod_plugin_data"]);
+				if($ser_data) {
+					$this->db->insert_batch('ab_service', $ser_data);
+					write_log(debug($ser_data, 0, 1), 'pay', 'pay');
+				}
 				output(0, $receiptResponse);
 			}
 		}
