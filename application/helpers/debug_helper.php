@@ -3,10 +3,11 @@
 function debug($value, $type=1, $rr=0) {
 	if(is_array($value) || is_object($value)) {
 		if($rr) {
-			echo print_r($value, true);
+			return print_r($value, true);
+		} else {
+			echo "<pre>";
+			print_r($value);
 		}
-		echo "<pre>";
-		print_r($value);
 	} else {
 		echo $value;
 	}

@@ -2,6 +2,32 @@
 $this->load->view('admin/header');
 ?>
 <h2>索票记录</h2>
+<form action="<?=site_url('admin/dataview/sell_tj')?>" method="get">
+<table cellspacing="0" cellpadding="0" border="0" class="condition">
+	<tr>
+		<th width="60">电影：</th>
+		<td width="160">
+			<select name="channel">
+				<option value=''>请选择</option>
+			</select>
+		</td>
+		<th>上映时间：</th>
+		<td width="55">
+			<select name="type">
+				<option value='1' <?php if($this->input->get('type') && $this->input->get('type') == 1) { echo 'selected';}?>>按日</option>
+				<option value="2" <?php if($this->input->get('type') && $this->input->get('type') == 2) { echo 'selected';}?>>按月</option>
+			</select>
+		</td>
+		<th>索票时间：</th>
+		<td width="190">
+			<input type="text" name="time_s" class="Wdate input5" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})" value="<?=$this->input->get('time_s')?>"/>
+		</td>
+		<td>
+			<input type="submit" value="查 询" class="search"/>
+		</td>
+	</tr>
+</table>
+</form>
 <table cellpadding="0" cellspacing="0" border="0" class="table2">
 	<tr>
 		<th width="120">索票确认号</th>

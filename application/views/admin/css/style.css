@@ -26,6 +26,7 @@ textarea { overflow: auto; vertical-align: top; border: 1px solid #e0dfdd; box-s
 
 /*按钮 */
 .but1 { padding: 3px 18px; text-shadow: #AF5B0A 0 1px 0; border:1px solid #ec5c0d; border-radius: 2px; background: #FC750A; background-image: -webkit-linear-gradient(top, #fc8746, #ec5d0e); color:#FFF; cursor: pointer; }
+.search { padding: 1px 18px; text-shadow: #AF5B0A 0 1px 0; border:1px solid #ec5c0d; border-radius: 2px; background: #FC750A; background-image: -webkit-linear-gradient(top, #fc8746, #ec5d0e); color:#FFF; cursor: pointer; }
 .but2 { padding: 3px 15px; *padding: 0 15px; *height: 24px;  font-size: 12px; text-align: center; text-shadow: #CF510B 0 1px 0; border:1px solid #ec5c0d; border-radius: 2px; background: #FC750A; background-image: -webkit-linear-gradient(top, #fc8746, #ec5d0e); color:#FFF; cursor: pointer; display: inline-block; }
 .abut1 { padding: 3px 15px; font-size: 12px; text-align: center; text-shadow: #80AD10 0 1px 0; border:1px solid #80AD10; border-radius: 2px; background: #A5D62D; background-image: -webkit-linear-gradient(top, #A5D62D, #9AC827); color:#FFF; cursor: auto; display: inline-block; }
 .abut1:hover { color: #32641C; }
@@ -68,8 +69,8 @@ textarea { overflow: auto; vertical-align: top; border: 1px solid #e0dfdd; box-s
 .table2 .parent a { color: #1C68BC; }
 
 .condition { margin: 0 auto; margin-bottom: 10px; margin-top: 5px; width: 100%; border-collapse: collapse; }
-.condition th { border: 1px solid #D0510B; padding: 2px 0; background: #F97E3A; color: #FFF; font-size: 14px; }
-.condition td { text-align: left; border: 1px solid #D0510B; padding: 2px 0 2px 2px; }
+.condition th { border: 1px solid #FAC4A6; padding: 1px 0 1px 5px; background: #F7EFDB; text-align: right; color: #F4722A; font-size: 13px; }
+.condition td { text-align: left; border: 1px solid #FAC4A6; padding: 1px 0 1px 2px; }
 
 .tetab .l-tab-links li.l-selected a { padding-right: 20px; background: url(../images/checkbox-checked.gif) no-repeat right 6px; }
 

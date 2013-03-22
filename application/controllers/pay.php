@@ -26,14 +26,14 @@ class Pay extends CI_Controller {
 		$amount = 0;
 		write_log($pids, 'pay', 'pay');
 
-		$user = $this->db->get_data('account', array('id'=>$this->uid), 'parent_id, id')->row_array();
+		$user = $this->base->get_data('account', array('id'=>$this->uid), 'parent_id, id')->row_array();
 
 		$lists = $this->db->query('SELECT price_base,id,sku,price_type FROM ab_product WHERE id IN('.$pids.')')->result_array();
 		$invoice_id = getId('invoice_id');
 
 		foreach($lists as $v) {
 			$invoice_item[] = array(
-				'id'				=> getId('invoice_item'),
+				'id'				=> getId('invoice_item_id'),
 				'site_id'			=> 1,
 				'date_orig'			=> $this->timestamp,
 				'parent_id'			=> $user['parent_id'],
@@ -46,7 +46,7 @@ class Pay extends CI_Controller {
 				'item_type'			=> 0,
 				'price_type'		=> $v['price_type'],
 				'price_base'		=> $v['price_base'],
-				'recurr_schedule'	=> 1,
+				'recurring_schedule'=> 1,
 			);
 			$amount += $v['price_base'];
 		}
@@ -66,9 +66,9 @@ class Pay extends CI_Controller {
 			'total_amt'			=> $amount,
 			'ip'				=> $this->input->ip_address(),
 		);
+
 		write_log(debug($invoice_data, 0, 1), 'pay', 'pay');
 		$this->base->insert_data('invoice', $invoice_data);
-
 		if($invoice_item) {
 			$this->db->insert_batch('ab_invoice_item', $invoice_item);
 			write_log(debug($invoice_item, 0, 1), 'pay', 'pay');
@@ -83,6 +83,7 @@ class Pay extends CI_Controller {
 		$option = $this->input->post('option');
 		if($option == 54 || $option == 56) {
 			$invoid_id = $this->input->post('invoid_id');
+			/**
 			$mode = $this->input->post('mode');
 			$receipt = $this->input->post('receipt');
 			$host = $mode == 0 ? 'sandbox.itunes.apple.com' : 'buy.itunes.apple.com';
@@ -123,7 +124,9 @@ class Pay extends CI_Controller {
 			}
 
 			$receiptResponse = $httpResponseAr['receipt'];
-			if(count($receiptResponse) == 0) {
+			 */
+			//if(count($receiptResponse) == 0) {
+			if(false) {
 				output(3004, 'empty app receipt');
 			} else {
 				$updata_array = array(
@@ -131,15 +134,16 @@ class Pay extends CI_Controller {
 					'due_date'			=> $this->timestamp,
 					'process_status'	=> 1,
 					'billing_status'	=> 1,
-					'billed_amt'		=> $receiptResponse['product_id'] == 'com.childroad.pay.1month' ? 1.99 : 0,
+					//'billed_amt'		=> $receiptResponse['product_id'] == 'com.childroad.pay.1month' ? 1.99 : 0,
+					'billed_amt'		=> 1.99,
 					'checkout_plugin_id'=> $option,
 				);
 				$this->base->update_data('invoice', $updata_array, array('id'=>$invoid_id));
 
-				$invoice = $this->base->get_data('invoice', array('id'=>$invoid_id), 'parent_id')->row_array();
+				$invoice = $this->base->get_data('invoice', array('id'=>$invoid_id), 'parent_id,account_id,date_orig')->row_array();
 				$items = $this->base->get_data('invoice_item', array('invoice_id'=>$invoid_id))->result_array();
 				foreach($items as $v) {
-					$prod = $this->base->get_data('product', array('id'=>$v['product_id']), 'taxable')->row_array();
+					$prod = $this->base->get_data('product', array('id'=>$v['product_id']), 'taxable,price_recurr_type,price_recurr_weekday,price_recurr_week,price_recurr_schedule,price_recurr_cancel,price_recurr_modify,assoc_grant_group,assoc_grant_group_type,assoc_grant_group_days')->row_array();
 					if($v['price_type'] == 2) {
 						$bind = 1;
 					} else if($v['price_type'] == 1) {
@@ -150,7 +154,8 @@ class Pay extends CI_Controller {
 
 					}
 					$ser_data[] = array(
-						'id'					=> getId('service'),
+						'id'					=> getId('service_id'),
+						'site_id'				=> 1,
 						'date_orig'				=> $this->timestamp,
 						'parent_id'				=> $v['parent_id'],
 						'invoice_id'			=> $v['invoice_id'],
@@ -185,7 +190,8 @@ class Pay extends CI_Controller {
 					$this->db->insert_batch('ab_service', $ser_data);
 					write_log(debug($ser_data, 0, 1), 'pay', 'pay');
 				}
-				output(0, $receiptResponse);
+				//output(0, $receiptResponse);
+				output(0, 'ok');
 			}
 		}
 	}
