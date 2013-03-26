@@ -3,7 +3,6 @@ $this->load->view('admin/header');
 ?>
 <h2><?=intval($this->input->get('id')) ? '修改' : '添加'?><div class="operate"><a href="<?=site_url('admin/product/lists')?>">管理</a></div></h2>
 <div class="slider3">
-<?php if($kind == 'video'):?>
 	<form action="<?=site_url('admin/stuff/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
 	<table cellspacing="0" cellpadding="0" border="0" class="table1">
 		<tr>
@@ -72,6 +71,23 @@ $this->load->view('admin/header');
 			</td>
 		</tr>
 		<tr>
+			<th style="position: relative">
+				附件：<br>
+				<a href="javascript:void(0)" class="abut2 add_play" style="margin:5px">增加</a>
+				<div class="atttype">
+					<a href="javascript:void(0)" class="unvideo">非视频</a>
+					<a href="javascript:void(0)" class="video">视频</a>
+				</div>
+			</th>
+			<td>
+				<select name="type">
+				<?php foreach($kinds as $k=>$v):?>
+					<option value="<?=$k?>" <?=(isset($content['kind']) && $content['kind'] == $k) ? 'selected' : ''?>><?=$v?></option>
+				<?php endforeach;?>
+				</select>
+			</td>
+		</tr>
+		<tr>
 			<th> 标签：</th>
 			<td>
 				<input type="text" name="tag" value="<?=set_value('tag', isset($tags) ? $tags : '')?>" class="input2"/>
@@ -111,108 +127,6 @@ $this->load->view('admin/header');
 		</tr>
 	</table>
 	</form>
-<?php else:?>
-	<form action="<?=site_url('admin/stuff/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
-	<table cellspacing="0" cellpadding="0" border="0" class="table1">
-		<tr>
-			<th><b>*</b> 标题：</th>
-			<td>
-				<input type="text" name="title" value="<?=set_value('title', isset($content['title']) ? $content['title'] : '')?>" class="input2"/>
-				<?php if(form_error('title')) { echo form_error('title'); } ?>
-			</td>
-		</tr>
-		<tr>
-			<th>教案封面：</th>
-			<td>
-				<input type="file" name="userfile"/>
-			</td>
-		</tr>
-	<?php if(isset($content['filepic']) && $content['filepic']):?>
-		<tr class="tr_icon">
-			<th></th>
-			<td>
-				<img src="<?=base_url('./data/uploads/stuff/'.$content['filepic'])?>"/><a href="<?=site_url('admin/stuff/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
-			</td>
-		</tr>
-	<?php endif; ?>
-	<?php
-		$dir_arr = get_filenames('./data/tmp/');
-	?>
-		<tr>
-			<th>当前附件：</th>
-			<td>
-				<?php foreach($dir_arr as $v):?>
-				<div class="videoNameList"><input type="checkbox" name="attach[]" value="<?=$v?>" <?=isset($content['filename']) && $content['filename'] == $v ? 'checked' : ''?>/> <?=$v?></div>
-				<?php endforeach;?>
-			</td>
-		</tr>
-		<tr>
-			<th>可选附件：</th>
-			<td>
-				<?php foreach($dir_arr as $v):?>
-				<div class="videoNameList"><input type="checkbox" name="attach[]" value="<?=$v?>" <?=isset($content['filename']) && $content['filename'] == $v ? 'checked' : ''?>/> <?=$v?></div>
-				<?php endforeach;?>
-			</td>
-		</tr>
-		<tr>
-			<th>分类：</th>
-			<td>
-				<select name="type">
-				<?php foreach($type_list as $v):?>
-					<option value="<?=$v['id']?>" <?=(isset($content['typeid']) && $content['typeid'] == $v['id']) ? 'selected' : ''?>><?=$v['name']?></option>
-				<?php endforeach;?>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<th><b>*</b> 创建时间：</th>
-			<td>
-				<input type="text" name="ctime" value="<?=set_value('ctime', isset($content['ctime']) ? date('Y-m-d H:i:s', $content['ctime']) : date('Y-m-d H:i:s', time()))?>" class="input1"/>
-				<?php if(form_error('ctime')) { echo form_error('ctime'); } ?>
-			</td>
-		</tr>
-		<tr>
-			<th> 排序：</th>
-			<td>
-				<input type="text" name="sort" value="<?=set_value('sort', isset($content['sort']) ? $content['sort'] : 0)?>" class="input3"/>
-			</td>
-		</tr>
-		<tr>
-			<th><b>*</b> 作者：</th>
-			<td>
-				<select name="authorid">
-				<?php foreach($authorlist as $v):?>
-					<option value="<?=$v['id']?>" <?=(isset($content['authorid']) && $content['authorid'] == $v['id']) ? 'selected' : ''?>><?=$v['name']?></option>
-				<?php endforeach;?>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<th> 是否付费：</th>
-			<td>
-				<select name="is_free">
-					<option value="0">免费</option>
-					<option value="1">收费</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<th> 介绍：</th>
-			<td>
-				<textarea name="content" id="content"><?=set_value('content', isset($content['content']) ? $content['content'] : '')?></textarea>
-				<?php if(form_error('content')) { echo form_error('content'); } ?>
-			</td>
-		</tr>
-		<tr>
-			<th></th>
-			<td>
-				<input type="hidden" name="kind" value="<?=$kind?>"/>
-				<input type="submit" name="submit" value="提 交" class="but2"/>
-			</td>
-		</tr>
-	</table>
-	</form>
-<?php endif;?>
 </div>
 
 
