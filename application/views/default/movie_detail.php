@@ -69,7 +69,7 @@
 				<a href="" class="m5"></a-->
 			</div>
 
-			<?php if((stripos($movie['area'], '2') !== false || stripos($movie['area'], '4') !== false) && $movie['movie']): $url = $movie['is_local'] == 1 ? "http://bbs.51mxd.com/flv/flvplayer.swf?vcastr_file=".base_url('./data/uploads/stuff/'.$movie['movie']) : $movie['movie'];?>
+			<?php if((stripos($movie['area'], '2') !== false || stripos($movie['area'], '4') !== false) && $movie['movie']): $url = $movie['is_local'] == 1 ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('data/uploads/stuff/'.$movie['movie']) : $movie['movie'];?>
 			<a href="#video_play" class="play"></a>
 			<div style="display: none;">
 				<div id="video_play">
@@ -97,7 +97,7 @@
 					foreach($mviews as $k=>$v):
 						$url = '';
 						if($k != 0 && $k%3 == 0) { echo "</div><div>";}
-						if($v['video']) { $url = $v['is_local'] == 1 ? "http://bbs.51mxd.com/flv/flvplayer.swf?vcastr_file=".base_url('./data/uploads/stuff/'.$v['video']) : $v['video'];}
+						if($v['video']) { $url = $v['is_local'] == 1 ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('./data/uploads/stuff/'.$v['video']) : $v['video'];}
 				?>
 					<span class="li">
 						<a href="#xinshang_<?=$k?>" class="detail_xinshang">
@@ -138,7 +138,7 @@
 					foreach($mclips as $k=>$v):
 						$url = '';
 						if($k != 0 && $k%3 == 0) { echo "</div><div>";}
-						if($v['video']) { $url = $v['is_local'] == 1 ? "http://bbs.51mxd.com/flv/flvplayer.swf?vcastr_file=".base_url('./data/uploads/stuff/'.$v['video']) : $v['video'];}
+						if($v['video']) { $url = $v['is_local'] == 1 ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('./data/uploads/stuff/'.$v['video']) : $v['video'];}
 				?>
 					<span class="li">
 						<a href="#pianhua_<?=$k?>" class="detail_pianhua">

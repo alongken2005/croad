@@ -54,7 +54,7 @@
 				</a>
 				<?php
 				if($ext == 'flv' or $ext == 'swf'):
-				$url = $ext == 'flv' ? "http://bbs.51mxd.com/flv/flvplayer.swf?vcastr_file=".base_url('./data/uploads/stuff/'.$v['url']) : $v['url'];
+				$url = $ext == 'flv' ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('./data/uploads/stuff/'.$v['url']) : $v['url'];
 				?>
 				<div style="display: none;">
 					<div id="focus_video_<?=$k?>" style="width:600px;">
@@ -92,7 +92,7 @@
 					foreach($mviews as $k=>$v):
 						$url = '';
 						if($k != 0 && $k%4 == 0) { echo "</div><div>"; }
-						if($v['movie']) { $url = $v['is_local'] == 1 ? "http://bbs.51mxd.com/flv/flvplayer.swf?vcastr_file=".base_url('./data/uploads/stuff/'.$v['movie']) : $v['movie'];}
+						if($v['movie']) { $url = $v['is_local'] == 1 ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('./data/uploads/stuff/'.$v['movie']) : $v['movie'];}
 				?>
 					<span class="li">
 						<a href="<?=site_url('movie/detail?id='.$v['id'])?>"><img src="<?=base_url(get_thumb($v['cover1']))?>"/></a>
