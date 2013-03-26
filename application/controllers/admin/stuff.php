@@ -13,7 +13,7 @@ class Stuff extends CI_Controller
     {
 		parent::__construct();
 		$this->_data['thisClass'] = $this->input->get('kind') ? $this->input->get('kind') : 'video';
-		$this->_data['kinds'] = array('video'=>'视频', 'stuff'=>'教案');
+		$this->_data['kinds'] = $this->config->item('stuff_kinds');
 		$this->load->model('base_mdl', 'base');
 		$this->permission->power_check();
 		//$this->output->enable_profiler(TRUE);
@@ -30,11 +30,10 @@ class Stuff extends CI_Controller
     * @deprecated 文章管理
     */
     public function lists () {
-		$this->_data['kind'] = $kind = $this->input->get('kind') ? $this->input->get('kind') : 'video';
 
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('stuff', array('kind'=>$kind))->num_rows();
+		$total_num = $this->base->get_data('stuff')->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -42,10 +41,10 @@ class Stuff extends CI_Controller
 		$this->gpagination->currentPage($page);
 		$this->gpagination->items($total_num);
 		$this->gpagination->limit($limit);
-		$this->gpagination->target(site_url('admin/stuff/lists?kind='.$kind));
+		$this->gpagination->target(site_url('admin/stuff/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('stuff', array('kind'=>$kind), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
+		$this->_data['lists'] = $this->base->get_data('stuff', array(), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
         $this->load->view('admin/stuff_list', $this->_data);
     }
 

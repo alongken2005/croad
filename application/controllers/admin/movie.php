@@ -16,7 +16,6 @@ class Movie extends CI_Controller
 		$this->load->model('base_mdl', 'base');
 		$this->permission->power_check();
 
-		$this->load->config('common');
 		$this->_data['areas'] = $this->config->item('area');
 		//$this->output->enable_profiler(TRUE);
     }

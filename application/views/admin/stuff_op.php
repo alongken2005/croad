@@ -14,7 +14,7 @@ $this->load->view('admin/header');
 			</td>
 		</tr>
 		<tr>
-			<th>视频封面：</th>
+			<th>封面：</th>
 			<td>
 				<input type="file" name="userfile"/>
 			</td>
@@ -39,19 +39,19 @@ $this->load->view('admin/header');
 		</tr>
 	<?php endif;?>
 		<tr class="tr_icon">
-			<th>可选视频：</th>
+			<th>视频：</th>
 			<td>
 				<div class="videoNameList" style="width:80px">
 					<input type="radio" name="fname" value="" checked/> 不选
 				</div>
-				<?php foreach($dir_arr as $v):?>
+				<?php if($dir_arr):foreach($dir_arr as $v):?>
 				<div class="videoNameList">
 					<input type="radio" name="fname" value="<?=$v?>" <?=isset($content['filename']) && $content['filename'] == $v ? 'checked' : ''?>/> <?=$v?>
 				</div>
-				<?php endforeach;?>
+				<?php endforeach; endif;?>
 			</td>
 		</tr>
-		<tr>
+		<!--tr>
 			<th><b>*</b> 分类：</th>
 			<td>
 				<select name="type">
@@ -60,18 +60,21 @@ $this->load->view('admin/header');
 				<?php endforeach;?>
 				</select>
 			</td>
+		</tr-->
+		<tr>
+			<th><b>*</b> 类型：</th>
+			<td>
+				<select name="type">
+				<?php foreach($kinds as $k=>$v):?>
+					<option value="<?=$k?>" <?=(isset($content['kind']) && $content['kind'] == $k) ? 'selected' : ''?>><?=$v?></option>
+				<?php endforeach;?>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<th> 标签：</th>
 			<td>
 				<input type="text" name="tag" value="<?=set_value('tag', isset($tags) ? $tags : '')?>" class="input2"/>
-			</td>
-		</tr>
-		<tr>
-			<th><b>*</b> 创建时间：</th>
-			<td>
-				<input type="text" name="ctime" value="<?=set_value('ctime', isset($content['ctime']) ? date('Y-m-d H:i:s', $content['ctime']) : date('Y-m-d H:i:s', time()))?>" class="input1"/>
-				<?php if(form_error('ctime')) { echo form_error('ctime'); } ?>
 			</td>
 		</tr>
 		<tr>
