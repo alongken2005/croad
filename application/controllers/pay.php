@@ -142,6 +142,7 @@ class Pay extends CI_Controller {
 
 				$invoice = $this->base->get_data('invoice', array('id'=>$invoid_id), 'parent_id,account_id,date_orig')->row_array();
 				$items = $this->base->get_data('invoice_item', array('invoice_id'=>$invoid_id))->result_array();
+
 				foreach($items as $v) {
 					$prod = $this->base->get_data('product', array('id'=>$v['product_id']), 'taxable,price_recurr_type,price_recurr_weekday,price_recurr_week,price_recurr_schedule,price_recurr_cancel,price_recurr_modify,assoc_grant_group,assoc_grant_group_type,assoc_grant_group_days')->row_array();
 					if($v['price_type'] == 2) {
@@ -153,6 +154,8 @@ class Pay extends CI_Controller {
 					} else {
 
 					}
+
+					//开通服务数据
 					$ser_data[] = array(
 						'id'					=> getId('service_id'),
 						'site_id'				=> 1,
@@ -183,11 +186,32 @@ class Pay extends CI_Controller {
 						'group_grant'			=> $prod['assoc_grant_group'],
 						'group_type' 			=> $prod['assoc_grant_group_type'],
 						'group_days'			=> $prod['assoc_grant_group_days'],
+						'checkdata'				=> $receipt,
 					);
+
+					//用户阅读权限组
+					if ($prod['assoc_grant_group_type'] == 0) {
+						$expire = $this->timestamp + (86400*$prod['assoc_grant_group_days']);
+					} else {
+						$expire = 0;
+					}
+					$group_ids = unserialize($prod['assoc_grant_group']);
+					foreach($group_ids as $group_id) {
+						$group_data[] = array(
+							'id'			=> getId('account_group_id'),
+							'site_id'		=> 1,
+							'date_orig'		=> $this->timestamp,
+							'date_start'	=> $this->timestamp,
+							'date_expire'	=> $expire,
+							'group_id'		=> $group_id,
+						);
+					}
+
 				}
 
 				if($ser_data) {
 					$this->db->insert_batch('ab_service', $ser_data);
+					$this->db->insert_batch('ab_account_group', $group_data);
 					write_log(debug($ser_data, 0, 1), 'pay', 'pay');
 				}
 				//output(0, $receiptResponse);
