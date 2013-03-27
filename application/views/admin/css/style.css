@@ -79,6 +79,8 @@ textarea { overflow: auto; vertical-align: top; border: 1px solid #e0dfdd; box-s
 .mvalue .del_play, .mvalue .del_oplay { width: 16px; height: 16px; background: url(../images/cross.gif) no-repeat; float: left; margin-top: 5px; margin-right: 5px; }
 .ex { display: none; }
 
+.atttype {  }
+
 /*分页*/
 .pagination { padding: 3px; font-size: 12px; text-align: center; margin-top: 5px; }
 .pagination a { padding: 2px 5px 2px 5px; margin: 2px; border: 1px solid #FC750A; text-decoration: none; color:#FC750A;}
