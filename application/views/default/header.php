@@ -9,7 +9,7 @@
 <body>
 	<div class="box">
 		<div class="room_header">
-			<a class="logo png" href="<?=site_url()?>"></a>
+			<a class="logo png" href="<?=base_url()?>" target="_blank"></a>
 			<!--div class="menu">
 				<div class="first_menu">
 					<a href="#" class="room1 png"></a>

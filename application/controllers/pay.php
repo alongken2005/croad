@@ -155,6 +155,12 @@ class Pay extends CI_Controller {
 
 					}
 
+					if($prod['assoc_grant_group_type'] == 0 && $v['recurring_schedule'] == 0) {
+						$date_next_invoice = $this->timestamp + 86400*$prod['assoc_grant_group_days'];
+					} else {
+						$date_next_invoice = 0;
+					}
+
 					//开通服务数据
 					$ser_data[] = array(
 						'id'					=> getId('service_id'),
@@ -169,14 +175,14 @@ class Pay extends CI_Controller {
 						'sku'					=> $v['sku'],
 						'active'				=> 1,
 						'bind'					=> $bind,
-						'type'					=> 'group',		//item_type好像都为0
+						'type'					=> 'group',							//item_type好像都为0
 						'queue'					=> 'none',
 						'price'					=> $v['price_base'],
 						'price_type'			=> $v['price_type'],
 						'taxable'				=> $prod['taxable'],
 						'date_last_invoice'		=> $invoice['date_orig'],
-						'date_next_invoice'		=> '', //待定
-						'recur_schedule'		=> $v['recurring_schedule'],
+						'date_next_invoice'		=> $date_next_invoice,				//下一次支付时间
+						'recur_schedule'		=> $v['recurring_schedule'],		
 						'recur_type'			=> $prod['price_recurr_type'],
 						'recur_weekday' 		=> $prod['price_recurr_weekday'],
 						'recur_week'			=> $prod['price_recurr_week'],
@@ -185,7 +191,7 @@ class Pay extends CI_Controller {
 						'recur_modify' 			=> $prod['price_recurr_modify'],
 						'group_grant'			=> $prod['assoc_grant_group'],
 						'group_type' 			=> $prod['assoc_grant_group_type'],
-						'group_days'			=> $prod['assoc_grant_group_days'],
+						'group_days'			=> $prod['assoc_grant_group_days'],	//服务有效天数
 						'checkdata'				=> $receipt,
 					);
 
