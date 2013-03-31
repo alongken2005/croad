@@ -18,7 +18,6 @@ function debug($value, $type=1, $rr=0) {
 }
 
 function output($result = 0, $value='') {
-	echo json_encode(array('state'=>$result, 'msg'=>$value));
-	exit;
+	exit(json_encode(array('state'=>$result, 'msg'=>$value)));
 }
 ?>

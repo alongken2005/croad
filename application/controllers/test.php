@@ -18,6 +18,9 @@ class Test extends CI_Controller {
 	}
 
 	public function index() {
+		echo date('Z').'<br>';
+		echo date('e').'<br>';
+		echo date('T').'<br>';
 		$this->load->view(THEME.'/paytest');
 	}
 }

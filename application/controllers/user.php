@@ -31,14 +31,14 @@ class User extends CI_Controller {
 			output(2101, '用户名或密码为空');			//用户名或密码为空
 		}
 
-		$user = $this->base->get_data('account', array('email'=>$username), 'id,status,email,password')->row_array();
+		$user = $this->base->get_data('account', array('username'=>$username), 'id,status,username,password')->row_array();
 
 		if($user) {
 			if($user['password'] != $md5password) {
 				output(2102, '密码错误');		//密码错误
 			} else {
 				if($user['status'] == 1) {
-					$this->session->set_userdata(array('uid'=>$user['id'], 'email'=>$user['email']));
+					$this->session->set_userdata(array('uid'=>$user['id'], 'username'=>$user['username']));
 					output(0, '登录成功');
 				} else {
 					output(2103, '账号被锁');	//账号被锁
@@ -80,7 +80,7 @@ class User extends CI_Controller {
 				'date_last'		=> $timestamp,
 			);
 			$this->base->insert_data('account', $insert_data);
-			$this->session->set_userdata(array('uid'=>$uid, 'email'=>$email));
+			$this->session->set_userdata(array('uid'=>$uid, 'username'=>$email));
 			output(0, '注册成功');
 		} else {
 			output(2108, '注册失败');
