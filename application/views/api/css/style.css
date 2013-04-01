@@ -44,3 +44,5 @@ textarea { overflow: auto; vertical-align: top; color: #714a3a; border: 1px soli
 .api_table1 td { padding: 5px 10px; border-top: 1px solid #FFF; background: #EEE; }
 .api_table1 .name { text-align: right; padding-right: 10px; width: 15%; font-weight: 600; }
 .api_table1 .title { font-weight: 600; }
+
+.top_line { border-top: 3px solid #D34231; }

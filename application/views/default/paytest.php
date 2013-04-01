@@ -11,8 +11,16 @@
 	</form>
 
 	<form action="<?=site_url('pay/billover')?>" method="post">
-		<input type="text" name="option" value="54" /><br>
-		<input type="text" name="invoid_id" value="3011" /><br>
+		option：<input type="text" name="option" value="54" /><br>
+		invoid_id:<input type="text" name="invoid_id" value="3011" /><br>
+		receipt:<input type="text" name="receipt" value="receipt" /><br>
+		mode:<input type="text" name="mode" value="0" /><br>
+		<input type="submit" value="提交" />
+	</form>
+
+	<form action="<?=site_url('pay/gg')?>" method="post">
+		receipt:<input type="text" name="receipt" value="receipt" /><br>
+		mode:<input type="text" name="mode" value="0" /><br>
 		<input type="submit" value="提交" />
 	</form>
 </body>

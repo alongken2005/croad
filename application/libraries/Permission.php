@@ -46,14 +46,39 @@ class Permission
 	/**
 	* 前台权限检测
 	*/
-	public function login_check($url = '')
-	{
+	public function login_check($url = '') {
 		//登录检查
 		if(!$this->ci->session->userdata('uid')) {
-			if($url) {
-				$this->ci->input->set_cookie('redirect', $url, 0);
+			if($user = $this->get_cr()) {
+				$this->ci->session->set_userdata(array('uid'=>$user['id'], 'username'=>$user['username']));
+				return $user['id'];
+			} else {
+				if($url) {
+					$this->ci->input->set_cookie('redirect', $url, 0);
+				}
+				$this->ci->msg->showmessage('您还未登录！', site_url('reg'));
 			}
-			$this->ci->msg->showmessage('您还未登录！', site_url('reg'));
 		}
+		return $this->ci->session->userdata('uid');
+	}
+
+	/**
+	 * 从儿童之路获取用户登录信息
+	 */
+	public function get_cr() {
+		$sn_id = get_cookie('CR');
+		if($sn_id) {
+			$this->ci->db->select('account_id');
+			$this->ci->db->where(array('id'=>$sn_id, 'logged'=>1, 'date_expire >'=>time()));
+			$session = $this->ci->db->get('ab_session')->row_array();
+
+			if($session && $session['account_id']) {
+				$this->ci->db->select('id, username');
+				$this->ci->db->where(array('id'=>$session['account_id']));
+				$user = $this->ci->db->get('ab_account')->row_array();
+				return $user;
+			}
+		}
+		return false;
 	}
 }
