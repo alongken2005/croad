@@ -46,17 +46,21 @@ class Permission
 	/**
 	* 前台权限检测
 	*/
-	public function login_check($url = '') {
+	public function login_check($url = '', $jump = true) {
 		//登录检查
 		if(!$this->ci->session->userdata('uid')) {
 			if($user = $this->get_cr()) {
 				$this->ci->session->set_userdata(array('uid'=>$user['id'], 'username'=>$user['username']));
 				return $user['id'];
 			} else {
-				if($url) {
-					$this->ci->input->set_cookie('redirect', $url, 0);
+				if($jump) {
+					if($url) {
+						$this->ci->input->set_cookie('redirect', $url, 0);
+					}
+					$this->ci->msg->showmessage('您还未登录！', site_url('reg'));
+				} else {
+					return false;
 				}
-				$this->ci->msg->showmessage('您还未登录！', site_url('reg'));
 			}
 		}
 		return $this->ci->session->userdata('uid');

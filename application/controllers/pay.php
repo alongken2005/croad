@@ -14,8 +14,9 @@ class Pay extends CI_Controller {
 		parent::__construct();
 		$this->load->model('base_mdl', 'base');
 		$this->timestamp = time();
-		$this->uid = $this->permission->login_check();
-
+		if(!$this->uid = $this->permission->login_check('', false)) {
+			output(100, 'please login');
+		}
 	}
 
 	/**
