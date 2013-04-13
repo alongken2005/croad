@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>儿童之路-运河电影院</title>
+	<title>儿童之路-千岛湖研习营</title>
 	<script type="text/javascript" src="<?=base_url('./common/js/jquery.js')?>"></script>
 	<script type="text/javascript" src="<?=base_url('./common/js/jquery.scrollable.js')?>"></script>
 	<script type="text/javascript" src="<?=THEME_VIEW?>/js/slide.js"></script>
@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="<?=base_url('./common/fancybox/jquery.fancybox-1.3.4.pack.js')?>"></script>
 	<link rel="stylesheet" type="text/css" href="<?=base_url('./common/fancybox/jquery.fancybox-1.3.4.css')?>"/>
 	<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/style.css"/>
-	<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/movie.css"/>
+	<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/lake.css"/>
 </head>
 <body>
 <!--div class="color_line"></div>
