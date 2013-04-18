@@ -9,7 +9,7 @@ $this->load->view('admin/header');
 		<th style="text-align: left;padding-left: 5px">收货地址</th>
 		<th width="40">数量</th>
 		<th width="80">总价</th>
-		<th width="40">状态</th>
+		<th width="50">状态</th>
 		<th width="110">创建时间</th>
 	</tr>
 <?php if($lists): foreach($lists as $v):?>
@@ -19,7 +19,7 @@ $this->load->view('admin/header');
 		<td style="text-align: left;padding-left: 5px" class="addr"><?=$v['receiver'].'，'.$v['tel'].'，'.$v['address'].'，'.$v['postcode']?></td>
 		<td><?=$v['amount']?></td>
 		<td><?=$v['price']?></td>
-		<td><?=$v['state']?></td>
+		<td><?php if($v['state'] == 1) { echo '成功';} elseif($v['state'] == 0) { echo '未支付';} else {echo '失败';}?></td>
 		<td><?=date('Y-m-d H:i',$v['ctime'])?></td>
 	</tr>
 <?php endforeach; endif;?>
