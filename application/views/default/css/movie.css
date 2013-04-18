@@ -152,6 +152,3 @@ html { background: url(../images/bg.jpg); }
 .gamefoucs ul li a { position: relative; }
 .gamefoucs ul li .slide_title { position: absolute; height: 28px; line-height: 28px; padding: 0 10px; filter:alpha(opacity=30); opacity: 0.7; background: #000; bottom: 1px; left: 0; width: 1000px; color: #FFF; }
 .gamefoucs ul li img { width: 1000px; height: 400px; }
-
-.back_layer { padding: 5px 0; overflow: hidden; zoom: 1; }
-.back_layer .back { float: left; margin: 5px 0; padding: 4px 15px; border: 1px solid #666; border-radius: 3px; background-image: -webkit-linear-gradient(top, #CCC 0%,#999 100%); background-image: -ms-linear-gradient(top, #BDD95F 0%,#92B228 100%); background-image: linear-gradient(to bottom, #BDD95F 0%,#92B228 100%); color: #444; font-size: 14px; font-weight: 600; text-shadow: #CCC 0 1px 0; box-shadow: 0 0px 3px #999; }

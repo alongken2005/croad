@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>儿童之路-运河电影院</title>
+	<title>儿童之路</title>
 	<script type="text/javascript" src="<?=base_url('./common/js/jquery.js')?>"></script>
 	<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/style.css"/>
 </head>
 <body>
 	<div class="box">
-		<div class="room_header">
+		<div class="room_header" style="margin-top: 50px;">
 			<a class="logo png" href="<?=base_url()?>" target="_blank"></a>
 			<!--div class="menu">
 				<div class="first_menu">

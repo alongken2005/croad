@@ -5,7 +5,7 @@
 * @version 1.0.0 (13-4-15 下午9:36)
 * @author ZhangHao
 */
-class Single extends CI_Controller
+class SingleOrder extends CI_Controller
 {
 	private $_data;
 
@@ -31,7 +31,7 @@ class Single extends CI_Controller
 
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('single')->num_rows();
+		$total_num = $this->base->get_data('single_order')->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -39,11 +39,11 @@ class Single extends CI_Controller
 		$this->gpagination->currentPage($page);
 		$this->gpagination->items($total_num);
 		$this->gpagination->limit($limit);
-		$this->gpagination->target(site_url('admin/single/lists'));
+		$this->gpagination->target(site_url('admin/singleOrder/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('single', array(), '*', $limit, $offset, 'sort DESC, id DESC')->result_array();
-        $this->load->view('admin/single_list', $this->_data);
+		$this->_data['lists'] = $this->base->get_data('single_order', array(), '*', $limit, $offset, 'id DESC')->result_array();
+        $this->load->view('admin/singleOrder_list', $this->_data);
     }
 
     /**
@@ -58,15 +58,12 @@ class Single extends CI_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->helper('file');
 			if ($id = $this->input->get('id')) {
-				$this->_data['row'] = $this->base->get_data('single', array('id'=>$id))->row_array();
+				$this->_data['row'] = $this->base->get_data('single_order', array('id'=>$id))->row_array();
 			}
-			$this->_data['movies'] = $this->base->get_data('single', array(), '*', 0, 0, 'sort DESC, ctime DESC')->result_array();
-			$this->load->view('admin/single_op', $this->_data);
+			$this->load->view('admin/singleOrder_op', $this->_data);
 		} else {
 			$id = $this->input->get('id') ? (int)$this->input->get('id') : 0;
 			$timestamp = time();
-			$dirname = './data/uploads/pics/'.date('Y/m/');
-			createFolder($dirname);
 
 			$deal_data = array(
 				'title'		=> $this->input->post('title'),
@@ -76,61 +73,6 @@ class Single extends CI_Controller
 				'intro'		=> $this->input->post('intro'),
 				'sort'		=> $this->input->post('sort'),
 			);
-
-			$config['upload_path']		= $dirname;
-			$config['allowed_types']	= 'gif|jpg|png';
-			$config['max_size']			= '5000';
-			$config['max_width']		= '3000';
-			$config['max_height']		= '3000';
-			$config['encrypt_name']		= true;
-
-			$this->load->library('upload', $config);
-
-			$config2 = array(
-				'create_thumb'	=> true,
-				'source_image'	=> '',
-				'maintain_ratio'=> true,
-				'width'			=> 300,
-				'height'		=> 300
-			);
-
-			$this->load->library('image_lib');
-
-			if($_FILES['cover']['size'] > 0) {
-				if(!$this->upload->do_upload('cover')) {
-					$this->_data['upload_err1'] = $this->upload->display_errors();
-					$this->load->view('admin/single_op', $this->_data);
-				}
-				$upload_data = $this->upload->data();
-				$config2['source_image'] = $upload_data['full_path'];
-				$this->image_lib->initialize($config2);
-				$this->image_lib->resize();
-				$deal_data['cover'] = date('Y/m/').$upload_data['file_name'];
-			}
-
-			if($_FILES['pic1']['size'] > 0) {
-				if(!$this->upload->do_upload('pic1')) {
-					$this->_data['upload_err2'] = $this->upload->display_errors();
-					$this->load->view('admin/single_op', $this->_data);
-				}
-				$upload_data = $this->upload->data();
-				$config2['source_image'] = $upload_data['full_path'];
-				$this->image_lib->initialize($config2);
-				$this->image_lib->resize();
-				$deal_data['pic1'] = date('Y/m/').$upload_data['file_name'];
-			}
-
-			if($_FILES['pic2']['size'] > 0) {
-				if(!$this->upload->do_upload('pic2')) {
-					$this->_data['upload_err3'] = $this->upload->display_errors();
-					$this->load->view('admin/single_op', $this->_data);
-				}
-				$upload_data = $this->upload->data();
-				$config2['source_image'] = $upload_data['full_path'];
-				$this->image_lib->initialize($config2);
-				$this->image_lib->resize();
-				$deal_data['pic2'] = date('Y/m/').$upload_data['file_name'];
-			}
 
 			if($id) {
 				$this->base->update_data('single', array('id' => $id), $deal_data);

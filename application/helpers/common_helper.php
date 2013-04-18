@@ -63,9 +63,28 @@ function get_thumb($picUrl, $baseUrl = './data/uploads/pics/') {
 	}
 }
 
+/**
+ * 获取插入id
+ * @param type $table
+ * @return type
+ */
 function getId($table) {
 	$CI =& get_instance();
 	$CI->load->database();
 	$CI->db->query("UPDATE ".$CI->db->dbprefix($table)." SET id = LAST_INSERT_ID(id+1)");
 	return $uid = $CI->db->insert_id();
+}
+
+/**
+ * 将换行符等转为html标签
+ * @param type $str
+ * @return type
+ */
+function t2h($str) {
+	$str = htmlspecialchars($str);
+	$str = str_replace(" ", "&nbsp;", $str);
+	$str = str_replace("\r\n", "<br>", $str);
+	$str = str_replace("\r", "<br>", $str);
+	$str = str_replace("\n", "<br>", $str);
+	return $str;
 }

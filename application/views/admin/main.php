@@ -75,6 +75,12 @@
 					</li>
 				</ul>
 			</div>
+			<div title="单本购买">
+				<ul>
+					<li><a href="<?=site_url('admin/single/lists')?>" class="add_tab">书单管理</a></li>
+					<li><a href="<?=site_url('admin/singleOrder/lists')?>" class="add_tab">订单管理</a></li>
+				</ul>
+			</div>
 		</div>
 		<div position="center" id="framecenter"></div>
 	</div>
