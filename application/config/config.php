@@ -1,5 +1,4 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 //书本资源目录
 $config['book_file'] = 'content/books/';
 $config['magazine_file'] = 'content/magazine/';

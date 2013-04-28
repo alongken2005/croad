@@ -68,9 +68,12 @@ class Single extends CI_Controller {
 			$receiver	= $this->input->post('receiver');
 			$area		= $this->input->post('province').' '.$this->input->post('city').' '.$this->input->post('area');
 			$address	= $this->input->post('address');
-			$postcode	= $this->input->post('postcode');
 			$tel		= $this->input->post('tel');
 
+			$zip = $this->db->query("SELECT z.zip FROM ab_areas a LEFT JOIN ab_zipcode z ON a.areaid=z.areaid WHERE a.area='".$this->input->post('area')."' LIMIT 1")->row_array();
+
+			$postcode = $zip['zip'];
+			$this->base->update_data('address', array('uid'=>$uid), array('state'=>0));
 			$insert_data = array(
 				'uid'		=> $uid,
 				'receiver'	=> $receiver,
@@ -80,7 +83,6 @@ class Single extends CI_Controller {
 				'tel'		=> $tel,
 				'state'		=> 1,
 			);
-
 			$this->base->insert_data('address', $insert_data);
 		} elseif($addid > 0) {
 			$add = $this->base->get_data('address', array('id'=>$addid))->row_array();
@@ -164,6 +166,7 @@ class Single extends CI_Controller {
 					'ptime'		=> time()
 				);
 				$this->base->update_data('single_order', array('id'=>$id), $update_data);
+				$this->db->query("UPDATE ab_single_suit SET total=total-".$sorder['amount']." WHERE id=1");
 			}
 			$this->_data['buy_state'] = 'ok';
 			$this->load->view(THEME.'/single_return', $this->_data);

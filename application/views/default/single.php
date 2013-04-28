@@ -1,17 +1,25 @@
 <?php $this->load->view(THEME.'/header');?>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/single.css"/>
 <div class="box">
-	<div class="iland" style="margin-top: 90px;"></div>
+	<div class="iland" style="margin-top: 95px;"></div>
 	<div class="single_top">
 		<div class="single_t1"></div>
-		<div class="single_intro">据美联社报道，一名执法官员说，波士顿地区手机服务已经被关闭，以防止任何潜在的远程引爆炸药。据美国媒体报道，当地时间15日下午，美国波士顿地区连续发生三起爆炸，目前至少已造成2人死亡据美联社报道，一名执法官员说，波士顿地区手机服务已经被关闭，以防止任何潜在的远程引爆炸药。据美国媒体报道，当地时间15日下午，美国波士顿地区连续发生三起爆炸，目前至少已造成2人死亡据美联社报道，一名执法官员说，波士顿地区手机服务已经被关闭，以防止任何潜在的远程引爆炸药。据美国媒体报道，当地时间15日下午，美国波士顿地区连续发生三起爆炸</div>
+		<div class="single_intro">
+			<h4 style="font-size: 18px;">《德国少年儿童百科知识全书 什么是什么 •WAS IST WAS 》<span style="color: #DE3168">精选</span></h4>
+			浙江儿童阅读推广研究中心科学年推荐阅读书目<br>
+			100余位科学家参与创作，图文并茂的科普经典<br>
+			德国本土销量超过5000万册，版权遍及全球45个国家和地区，<br>
+			CCTV2009年度获奖图书，2009年度最佳少儿百科知识图书奖<br>
+			2009年度最值得一读的三十本好书奖  2009年度最有影响的十本好书奖 畅销5000万册<br>
+			WAS IST WAS=逻辑思维培养+知识体系构建＝诺贝尔奖的摇篮<br>
+		</div>
 		<div class="clear"></div>
 		<div class="right">
 			<div class="price">
-				<span>￥208.00</span><br>
+				<span>￥200.00</span><br>
 				市场价:￥<b>300.00</b>
 			</div>
-			<a href="<?=site_url('single/check?id=1')?>" class="buy">节省￥92（7折）免费送货</a>
+			<a href="<?=site_url('single/check?id=1')?>" target="_blank" class="buy">节省￥100（6.6折）免费送货</a>
 		</div>
 	</div>
 	<div class="single_bottom"></div>

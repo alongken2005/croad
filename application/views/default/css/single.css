@@ -1,7 +1,6 @@
 body { font-size: 12px; font-family: tahoma,arial; background: #081F48 url(../images/lake_bg.png) repeat-x; }
-html { }
 
-.iland { height: 221px; margin: 0 auto; margin-top: 10px; background: url(../images/iland.png) no-repeat; }
+.iland { height: 221px; margin: 0 auto; margin-top: 20px; background: url(../images/iland.png) no-repeat; }
 .single_top { overflow: hidden; zoom: 1; background: #CCE9EF; padding-bottom: 10px; }
 .single_top .single_t1 { float: left; width: 118px; height: 27px; margin-left: 30px; margin-top: 80px; background: url(../images/single_t1.png) no-repeat; }
 .single_top .single_intro { float: left; width: 800px; margin-top: 30px; margin-left: 30px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 600; color: #65778C; }
@@ -14,8 +13,8 @@ html { }
 
 .check { padding: 30px 50px 10px 80px; font-family: '微软雅黑';  }
 .check .single_cover { float: left; }
-.check .single_cover img { width: 170px; }
-.check .single_intro { width: 600px; margin-top: 0; font-size: 15px; font-weight: normal; color: #333; }
+.check .single_cover img { height: 220px; }
+.check .single_intro { width: 550px; margin-top: 0; font-size: 15px; font-weight: normal; color: #333; }
 .check .single_intro h2 { line-height: 20px; margin-bottom: 10px; color: #000; }
 .check .orig_price { margin-top: 50px; font-weight: 600; }
 .check .orig_price b { text-decoration:line-through; }
@@ -50,7 +49,7 @@ html { }
 .single_suit .single_summary { display: none; padding: 30px; margin-top: 26px; border-radius: 30px; background: #FEFFFF; background: -webkit-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background: -ms-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background: linear-gradient(to bottom, #feffff 0%,#ddf8ff 100%); overflow: hidden; zoom: 1; }
 .single_suit .single_summary .word { float: left; width: 480px; text-align: left; }
 .single_suit .single_summary h2 { color: #666; }
-.single_suit .single_summary .author { color: #666; height: 30px; line-height: 30px; }
+.single_suit .single_summary .author { color: #666; line-height: 30px; }
 .single_suit .single_summary .intro { color: #666; line-height: 1.8; }
 .single_suit .single_summary .pic { float: right; width: 460px; text-align: right; }
 .single_suit .single_summary .pic img { height: 250px; margin-left: 30px; }

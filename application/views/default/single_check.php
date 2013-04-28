@@ -24,10 +24,9 @@
 				<tr class="ttitle">
 					<td width="30"></td>
 					<td width="90">收货人</td>
-					<td width="150">所在地区</td>
+					<td width="170">所在地区</td>
 					<td>街道地址</td>
-					<td width="90">邮编</td>
-					<td width="110">电话手机</td>
+					<td width="100">电话手机</td>
 					<td width="120" align="center">操作</td>
 				</tr>
 			<?php foreach($address as $v):?>
@@ -36,7 +35,6 @@
 					<td><?=$v['receiver']?></td>
 					<td><?=$v['area']?></td>
 					<td><?=$v['address']?></td>
-					<td><?=$v['postcode']?></td>
 					<td><?=$v['tel']?></td>
 					<td align="center">
 						<?php if($v['state'] == 1):?>
@@ -49,6 +47,7 @@
 			<?php endforeach;?>
 			</table>
 		<?php endif;?>
+		<?php if($suit['total'] > 0):?>
 			<table cellspacing="5" cellpadding="0" border="0" class="tb_address" width="100%">
 				<tr>
 					<th><input type="radio" name="addid" value="-1" <?php if(!$address): echo 'style="display:none" checked'; endif;?>/>收货人姓名：</th>
@@ -75,10 +74,10 @@
 					<th>街道地址：</th>
 					<td><textarea name="address"></textarea></td>
 				</tr>
-				<tr>
+				<!--tr>
 					<th>邮政编码：</th>
 					<td><input type="text" name="postcode" class="input3"/></td>
-				</tr>
+				</tr-->
 				<tr>
 					<th>手机号码：</th>
 					<td><input type="text" name="tel" class="input3"/></td>
@@ -103,6 +102,9 @@
 				<input type="hidden" name="suit_id" value="<?=$suit_id?>"/>
 				<input type="submit" class="gopay" value=" "/>
 			</div>
+		<?php else:?>
+			<h1 style="color: #F00">对不起，已经没库存了</h1>
+		<?php endif;?>
 		</form>
 	</div>
 	<div class="single_bottom2"></div>
@@ -153,8 +155,8 @@ DD_belatedPNG.fix('.png, .browse');
 			$('.snum').text(val);
 			$('#snum').val(val);
 			var sval = sprice*val;
-			if(sval > 1) sval+'.00';
-			$('.price span').text('￥'+sval);
+			//if(sval > 1) sval+'.00';
+			$('.price span').text('￥'+sval+'.00');
 			$('#price').val(sprice*val);
 			return false;
 		})
@@ -165,8 +167,8 @@ DD_belatedPNG.fix('.png, .browse');
 			$('.snum').text(val);
 			$('#snum').val(val);
 			var sval = sprice*val;
-			if(sval > 1) sval+'.00';
-			$('.price span').text('￥'+sval);
+			//if(sval > 1) sval+'.00';
+			$('.price span').text('￥'+sval+'.00');
 			$('#price').val(sprice*val);
 			return false;
 		})

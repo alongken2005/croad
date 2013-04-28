@@ -58,11 +58,11 @@ $this->load->view('admin/header');
 						<div class="videoNameList" style="width:80px">
 							<input type="radio" name="local" value="" checked/> 不选
 						</div>
-						<?php $dir_arr = get_filenames('./data/tmp/'); foreach($dir_arr as $v):?>
+						<?php $dir_arr = get_filenames('./data/tmp/'); if($dir_arr): foreach($dir_arr as $v):?>
 						<div class="videoNameList">
 							<input type="radio" name="local" value="<?=$v?>" /> <?=$v?>
 						</div>
-						<?php endforeach;?>
+						<?php endforeach; endif;?>
 					</div>
 				</div>
 				<input type="hidden" name="is_local" class="is_local"/>
@@ -71,7 +71,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th>电影所属：</th>
 			<td>
-			<?php foreach($areas as $k=>$v):?>
+			<?php debug($areas); foreach($areas as $k=>$v):?>
 				<input type="checkbox" name="area[]" value="<?=$k?>" <?=isset($row['area']) && stripos($row['area'], (string)$k) !== false ? 'checked' : ''?>/> <?=$v?>&nbsp;
 			<?php endforeach;?>
 			</td>
