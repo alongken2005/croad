@@ -18,48 +18,14 @@ $this->load->view('admin/header');
 				<input type="file" name="userfile"/>
 			</td>
 		</tr>
-	<?php if(isset($content['filepic']) && $content['filepic']):?>
+	<?php if(isset($content['cover']) && $content['cover']):?>
 		<tr class="tr_icon">
 			<th></th>
 			<td>
-				<img src="<?=base_url('./data/uploads/stuff/'.$content['filepic'])?>"/><a href="<?=site_url('admin/stuff/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
+				<img src="<?=base_url('./data/uploads/stuff/'.$content['cover'])?>"/><a href="<?=site_url('admin/stuff/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
 			</td>
 		</tr>
 	<?php endif; ?>
-	<?php
-		$dir_arr = get_filenames('./data/tmp/');
-		if(isset($content['filename']) && $content['filename']) :
-	?>
-		<tr class="tr_icon">
-			<th>当前视频：</th>
-			<td>
-				/data/uploads/stuff/<?=$content['filename']?> (原文件名：<?=$content['realname']?>) <a href="<?=site_url('admin/stuff/file_del?type=video&id='.$content['id'])?>" class="del">删除</a>
-			</td>
-		</tr>
-	<?php endif;?>
-		<tr class="tr_icon">
-			<th>视频：</th>
-			<td>
-				<div class="videoNameList" style="width:80px">
-					<input type="radio" name="fname" value="" checked/> 不选
-				</div>
-				<?php if($dir_arr):foreach($dir_arr as $v):?>
-				<div class="videoNameList">
-					<input type="radio" name="fname" value="<?=$v?>" <?=isset($content['filename']) && $content['filename'] == $v ? 'checked' : ''?>/> <?=$v?>
-				</div>
-				<?php endforeach; endif;?>
-			</td>
-		</tr>
-		<!--tr>
-			<th><b>*</b> 分类：</th>
-			<td>
-				<select name="type">
-				<?php foreach($type_list as $v):?>
-					<option value="<?=$v['id']?>" <?=(isset($content['typeid']) && $content['typeid'] == $v['id']) ? 'selected' : ''?>><?=$v['name']?></option>
-				<?php endforeach;?>
-				</select>
-			</td>
-		</tr-->
 		<tr>
 			<th><b>*</b> 类型：</th>
 			<td>
@@ -72,19 +38,14 @@ $this->load->view('admin/header');
 		</tr>
 		<tr>
 			<th style="position: relative">
-				附件：<br>
-				<a href="javascript:void(0)" class="abut2 add_play" style="margin:5px">增加</a>
+				课件内容：<br>
+			</th>
+			<td>
+				<a href="javascript:void(0)" class="abut2 add_subject" style="margin:5px">增加</a>
 				<div class="atttype">
 					<a href="javascript:void(0)" class="unvideo">非视频</a>
 					<a href="javascript:void(0)" class="video">视频</a>
 				</div>
-			</th>
-			<td>
-				<select name="type">
-				<?php foreach($kinds as $k=>$v):?>
-					<option value="<?=$k?>" <?=(isset($content['kind']) && $content['kind'] == $k) ? 'selected' : ''?>><?=$v?></option>
-				<?php endforeach;?>
-				</select>
 			</td>
 		</tr>
 		<tr>
@@ -110,12 +71,10 @@ $this->load->view('admin/header');
 			</td>
 		</tr>
 		<tr>
-			<th> 是否付费：</th>
+			<th>介绍：</th>
 			<td>
-				<select name="is_free">
-					<option value="0">免费</option>
-					<option value="1">收费</option>
-				</select>
+				<textarea name="content" id="content"><?=set_value('content', isset($content['content']) ? $content['content'] : '')?></textarea>
+				<?php if(form_error('content')) { echo form_error('content'); } ?>
 			</td>
 		</tr>
 		<tr>

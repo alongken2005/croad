@@ -11,6 +11,6 @@ $config['book_dir']['BME']	= 'magazine/bme/dazuiyingyu/';
 $config['pic_type'][1] = '影院相册';
 $config['pic_type'][3] = '电影首页焦点图';
 
-$config['stuff_kinds']['lakeTeach'] = '千岛湖教案';
-$config['stuff_kinds']['lakeCamp'] = '千岛湖研习营';
+$config['stuff_kinds']['lakeRead'] = '班级读书会';
+$config['stuff_kinds']['lakeCamp'] = '阅读研习营';
 ?>

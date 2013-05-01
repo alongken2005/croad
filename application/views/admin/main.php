@@ -52,7 +52,7 @@
 					<li><a href="<?=site_url('admin/movie/ticketlog')?>" class="add_tab">索票记录</a></li>
 				</ul>
 			</div>
-			<div title="视频教案管理">
+			<div title="千岛湖">
 				<ul>
 					<li>
 						<a href="<?=site_url('admin/stuff/lists?kind=video')?>" class="add_tab">视频管理</a>

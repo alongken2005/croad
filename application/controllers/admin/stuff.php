@@ -93,11 +93,10 @@ class Stuff extends CI_Controller
 
 			$deal_data = array(
 				'title'		=> $this->input->post('title'),
-				'kind'		=> $kind,
 				'type'		=> $this->input->post('type'),
 				'sort'		=> $this->input->post('sort'),
 				'authorid'	=> $this->input->post('authorid'),
-				'is_free'	=> $this->input->post('is_free'),
+				'content'	=> $this->input->post('content'),
 				'ctime'		=> strtotime($this->input->post('ctime')),
 				'mtime'		=> $timestamp
 			);

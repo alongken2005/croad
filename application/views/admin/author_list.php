@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->load->view('admin/header');
 ?>
-<h2>作者管理</h2>
+<h2>作者管理<div class="operate"><a href="<?=site_url('admin/author/op')?>">添加</a></div></h2>
 <table cellpadding="0" cellspacing="0" border="0" class="table2">
 	<tr>
 		<th>名字</th>
