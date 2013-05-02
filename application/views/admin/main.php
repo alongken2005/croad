@@ -55,10 +55,10 @@
 			<div title="千岛湖">
 				<ul>
 					<li>
-						<a href="<?=site_url('admin/stuff/lists?kind=video')?>" class="add_tab">视频管理</a>
+						<a href="<?=site_url('admin/stuff/lists')?>" class="add_tab">教案管理</a>
 					</li>
 					<li>
-						<a href="<?=site_url('admin/stuff/lists')?>" class="add_tab">教案管理</a>
+						<a href="<?=site_url('admin/stuff/attach_lists')?>" class="add_tab">教案课件管理</a>
 					</li>
 					<li>
 						<a href="<?=site_url('admin/author/lists')?>" class="add_tab">作者管理</a>

@@ -37,18 +37,6 @@ $this->load->view('admin/header');
 			</td>
 		</tr>
 		<tr>
-			<th style="position: relative">
-				课件内容：<br>
-			</th>
-			<td>
-				<a href="javascript:void(0)" class="abut2 add_subject" style="margin:5px">增加</a>
-				<div class="atttype">
-					<a href="javascript:void(0)" class="unvideo">非视频</a>
-					<a href="javascript:void(0)" class="video">视频</a>
-				</div>
-			</td>
-		</tr>
-		<tr>
 			<th> 标签：</th>
 			<td>
 				<input type="text" name="tag" value="<?=set_value('tag', isset($tags) ? $tags : '')?>" class="input2"/>

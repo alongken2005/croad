@@ -79,7 +79,10 @@ textarea { overflow: auto; vertical-align: top; border: 1px solid #e0dfdd; box-s
 .mvalue .del_play, .mvalue .del_oplay { width: 16px; height: 16px; background: url(../images/cross.gif) no-repeat; float: left; margin-top: 5px; margin-right: 5px; }
 .ex { display: none; }
 
-.atttype {  }
+.attach_select { position: relative; }
+.select_item { position: absolute; left: 42px; top: 5px; border: 1px solid #80AD10; display: none; }
+.select_item a { display: block; padding: 1px 7px; color: #FFF; text-shadow: #80AD10 0 1px 0; background: #A0D02A; }
+.select_item a:hover { background: #80AD10; }
 
 /*分页*/
 .pagination { padding: 3px; font-size: 12px; text-align: center; margin-top: 5px; }

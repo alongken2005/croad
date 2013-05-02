@@ -31,7 +31,7 @@ class Author extends CI_Controller
     public function lists () {
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('author')->num_rows();
+		$total_num = $this->base->get_data('lake_author')->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -42,7 +42,7 @@ class Author extends CI_Controller
 		$this->gpagination->target(site_url('admin/author/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('author', array(), '*', $limit, $offset)->result_array();
+		$this->_data['lists'] = $this->base->get_data('lake_author', array(), '*', $limit, $offset)->result_array();
         $this->load->view('admin/author_list', $this->_data);
     }
 
@@ -57,23 +57,57 @@ class Author extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE) {
 			if ($id = $this->input->get_post('id')) {
-				$this->_data['content'] = $this->base->get_data('author', array('id' => $id))->row_array();
+				$this->_data['content'] = $this->base->get_data('lake_author', array('id' => $id))->row_array();
 			}
 			$this->load->view('admin/author_op', $this->_data);
 		} else {
 			$deal_data = array(
+				'title'			=> $this->input->post('title'),
 				'content'		=> $this->input->post('content'),
 				'name'			=> $this->input->post('name'),
 			);
 
+			$dirname = './data/uploads/pics/'.date('Y/m/');
+			createFolder($dirname);
+
+			if($_FILES['cover']['size'] > 0) {
+				$config = array(
+					'upload_path'	=> $dirname,
+					'allowed_types'	=> 'gif|jpg|png',
+					'max_size'		=> 5000,
+					'max_width'		=> 3000,
+					'max_height'	=> 3000,
+					'encrypt_name'	=> true,
+				);
+
+				$this->load->library('upload', $config);
+
+				if(!$this->upload->do_upload('cover')) {
+					$this->_data['upload_err'] = $this->upload->display_errors();
+					$this->load->view('admin/pic_op', $this->_data);
+				}
+				$upload_data = $this->upload->data();
+
+				$config2 = array(
+					'source_image'	=> $upload_data['full_path'],
+					'maintain_ratio'=> true,
+					'width'			=> 200,
+				);
+
+				$this->load->library('image_lib', $config2);
+				$this->image_lib->resize();
+
+				$deal_data['cover'] = date('Y/m/').$upload_data['file_name'];
+			}
+
 			if ($id = $this->input->get('id')) {
-				if ($this->base->update_data('author', array('id' => $id), $deal_data)) {
+				if ($this->base->update_data('lake_author', array('id' => $id), $deal_data)) {
 					$this->msg->showmessage('更新成功', site_url('admin/author/lists'));
 				} else {
 					$this->msg->showmessage('更新失败', site_url('admin/author/op?cid='.$id));
 				}
 			} else {
-				if ($this->base->insert_data('author', $deal_data)) {
+				if ($this->base->insert_data('lake_author', $deal_data)) {
 					$this->msg->showmessage('添加成功', site_url('admin/author/lists'));
 				} else {
 					$this->msg->showmessage('添加失败', site_url('admin/author/op'));
@@ -87,7 +121,7 @@ class Author extends CI_Controller
     */
     public function del () {
         $id = intval($this->input->get('id'));
-        if($id && $this->base->del_data('author', array('id' => $id))) {
+        if($id && $this->base->del_data('lake_author', array('id' => $id))) {
         	exit('ok');
         } else {
         	exit('no');

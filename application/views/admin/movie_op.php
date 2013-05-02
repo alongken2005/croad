@@ -71,7 +71,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th>电影所属：</th>
 			<td>
-			<?php debug($areas); foreach($areas as $k=>$v):?>
+			<?php foreach($areas as $k=>$v):?>
 				<input type="checkbox" name="area[]" value="<?=$k?>" <?=isset($row['area']) && stripos($row['area'], (string)$k) !== false ? 'checked' : ''?>/> <?=$v?>&nbsp;
 			<?php endforeach;?>
 			</td>
