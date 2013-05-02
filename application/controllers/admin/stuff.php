@@ -222,7 +222,7 @@ class Stuff extends CI_Controller
 	public function attach_lists() {
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('attach', "`kind` = 'lakeRead' OR `kind` = 'lakeCamp'")->num_rows();
+		$total_num = $this->base->get_data('attach', array('kind'=>'stuff'))->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -233,7 +233,7 @@ class Stuff extends CI_Controller
 		$this->gpagination->target(site_url('admin/stuff/attach_lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('attach', "`kind` = 'lakeRead' OR `kind` = 'lakeCamp'", '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
+		$this->_data['lists'] = $this->base->get_data('attach', array('kind'=>'stuff'), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
         $this->load->view('admin/stuff_attach_list', $this->_data);
 	}
 
@@ -243,126 +243,99 @@ class Stuff extends CI_Controller
 	public function attach_op() {
     	//验证表单规则
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('title', '标题', 'required|trim');
-		$this->form_validation->set_rules('ctime', '创建时间', 'required|trim');
-		$this->form_validation->set_rules('authorid', '作者', 'required|trim');
-
-		$this->form_validation->set_rules('fname', '视频', 'required|trim');
-
+		$this->form_validation->set_rules('relaid', '标题', 'required|trim');
+		$this->form_validation->set_rules('filetype', '视频', 'required|trim');
 		$this->form_validation->set_error_delimiters('<span class="err">', '</span>');
-
+		$this->load->helper('file');
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->load->helper('file');
 			$this->_data['stufflist'] = $this->base->get_data('lake_stuff')->result_array();
 
 			if ($id = $this->input->get('id')) {
-				if($kind == 'video') {
-					$rows = $this->db->query('SELECT t.name FROM ab_video_tag vt LEFT JOIN ab_tag t ON vt.tid=t.id WHERE vt.vid='.$id)->result_array();
-					foreach($rows as $v) {
-						$tags[] = $v['name'];
-					}
-					$this->_data['tags'] = implode(' ', $tags);
-				}
-				$this->_data['content'] = $this->base->get_data('stuff', array('id'=>$id, 'kind'=>$kind))->row_array();
+				$this->_data['content'] = $this->base->get_data('attach', array('id'=>$id))->row_array();
 			}
 			$this->load->view('admin/stuff_attach_op', $this->_data);
 		} else {
-			$id = $this->input->get('id') ? (int)$this->input->get('id') : 0;
-			$timestamp = time();
-			$filename = uniqid();
-			$dirname = './data/uploads/stuff/'.date('Y/m/');
-			createFolder($dirname);
+			$id = $this->input->get('id');
 
 			$deal_data = array(
-				'title'		=> $this->input->post('title'),
-				'type'		=> $this->input->post('type'),
+				'relaid'	=> $this->input->post('relaid'),
+				'kind'		=> 'stuff',
+				'filetype'	=> $this->input->post('filetype'),
 				'sort'		=> $this->input->post('sort'),
-				'authorid'	=> $this->input->post('authorid'),
-				'content'	=> $this->input->post('content'),
-				'ctime'		=> strtotime($this->input->post('ctime')),
-				'mtime'		=> $timestamp
+				'ctime'		=> time(),
 			);
 
-			if($_FILES['userfile']['size'] > 0) {
-				$config['upload_path']		= $dirname;
-				$config['allowed_types']	= 'gif|jpg|png';
-				$config['file_name']		= $filename;
-				$config['max_size']			= '5000';
-				$config['max_width']		= '3000';
-				$config['max_height']		= '3000';
-				$config['overwrite']		= FALSE;
+			$this->load->library('upload');
 
-				$this->load->library('upload', $config);
+			if($_FILES['cover']['size'] > 0) {
+				$dirname = './data/uploads/pics/'.date('Y/m/');
+				createFolder($dirname);
+				$config = array(
+					'upload_path'	=> $dirname,
+					'allowed_types'	=> 'gif|jpg|png',
+					'max_size'		=> 5000,
+					'max_width'		=> 3000,
+					'max_height'	=> 3000,
+					'encrypt_name'	=> TRUE,
+					'overwrite'		=> FALSE
+				);
 
-				if(!$this->upload->do_upload()) {
+				$this->upload->initialize($config);
+
+				if(!$this->upload->do_upload('cover')) {
 					$this->_data['upload_err'] = $this->upload->display_errors();
 					$this->load->view('admin/stuff_attach_op', $this->_data);
 				}
 				$upload_data = $this->upload->data();
 
 				$config2['source_image']	= $upload_data['full_path'];
-				$config2['maintain_ratio']	= FALSE;
-				$config2['width']			= 172;
-				$config2['height']			= 128;
+				$config2['maintain_ratio']	= TRUE;
+				$config2['width']			= 300;
+				$config2['height']			= 180;
 
 				$this->load->library('image_lib', $config2);
 				$this->image_lib->resize();
 
-				$deal_data['filepic'] = date('Y/m/').$upload_data['file_name'];
+				$deal_data['cover'] = date('Y/m/').$upload_data['file_name'];
 			}
 
-			if($kind == 'video') {
-				$fname = $filename.'.'.pathinfo($this->input->post('fname'), PATHINFO_EXTENSION);
-				if(copy('./data/tmp/'.$this->input->post('fname'), $dirname.$fname)) {
-					unlink('./data/tmp/'.$this->input->post('fname'));
+			$filetype = $this->input->post('filetype');
+			if($filetype == 'doc' && $_FILES['doc']['size'] > 0) {
+				$dirname = './data/uploads/attach/'.date('Y/m/');
+				createFolder($dirname);
+				$config = array(
+					'upload_path'	=> $dirname,
+					'allowed_types'	=> 'doc|docx|xls|txt|rar|jpg|png|gif|pdf|ppt|xlsx',
+					'max_size'		=> 5000,
+					'encrypt_name'	=> TRUE,
+					'overwrite'		=> FALSE
+				);
+
+				$this->upload->initialize($config);
+				if(!$this->upload->do_upload('doc')) {
+					$this->_data['upload_err'] = $this->upload->display_errors();
+					$this->load->view('admin/stuff_attach_op', $this->_data);
 				}
-				$deal_data['filename'] = date('Y/m/').$fname;
-				$deal_data['realname'] = $this->input->post('fname');
-			} elseif($kind == 'stuff') {
-				$deal_data['content'] = $this->input->post('content');
+
+				$upload_data = $this->upload->data();
+
+				$deal_data['filename'] = date('Y/m/').$upload_data['file_name'];
+				$deal_data['realname'] = $upload_data['orig_name'];
+				$deal_data['filesize'] = $upload_data['file_size'];
+			} elseif($filetype == 'online') {
+				$deal_data['filename'] = $this->input->post('online');
+			} elseif($filetype == 'local') {
+				$deal_data['filename'] = $this->input->post('local');
 			}
 
 			if($id) {
-				$this->base->update_data('lake_stuff', array('id' => $id), $deal_data);
-				if($kind == 'stuff') $this->base->del_data('attach', array('relaid'=>$id, 'kind'=>'stuff'));
+				$this->base->update_data('attach', array('id' => $id), $deal_data);
 			} else {
-				$id = $this->base->insert_data('lake_stuff', $deal_data);
-				if($kind == 'video') {
-					$tag = array_filter(explode(' ', $this->input->post('tag')));
-					if($tag) {
-						foreach($tag as $v) {
-							$tagrow = $this->base->get_data('tag', array('name'=>$v), 'id')->row_array();
-							if(!$tagrow) {
-								$tid = $this->base->insert_data('tag', array('name'=>$v));
-							} else {
-								$tid = $tagrow['id'];
-							}
-							$this->base->insert_data('video_tag', array('vid'=>$id, 'tid'=>$tid));
-						}
-					}
-				}
-
+				$id = $this->base->insert_data('attach', $deal_data);
 			}
 
-			if($kind == 'stuff') {
-				$attach = $this->input->post('attach');
-				$attachdir = './data/uploads/attach/'.date('Y/m/');
-				createFolder($attachdir);
-				$values = '';
-				foreach($attach as $v) {
-					$size = (int)(filesize('./data/tmp/'.$v)/1024);
-					if(copy('./data/tmp/'.$v, $attachdir.uniqid().'.'.pathinfo($v, PATHINFO_EXTENSION))) {
-						unlink('./data/tmp/'.$v);
-					}
-
-					$values .= "(".$id.", 'stuff', '".$v."', '".$realname."', ".$size.",".$timestamp."),";
-				}
-				$values = substr($values, 0, -1);
-				$this->db->query("INSERT INTO ab_attach (`relaid`, `kind`, `filename`, `realname`, `filesize`, `ctime`) VALUES ".$values);
-			}
-
-			$this->msg->showmessage('添加成功', site_url('admin/stuff/lists?kind='.$kind));
+			$this->msg->showmessage('添加成功', site_url('admin/stuff/attach_lists'));
 		}
 	}
 }

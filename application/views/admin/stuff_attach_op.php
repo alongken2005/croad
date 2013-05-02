@@ -33,8 +33,8 @@ $this->load->view('admin/header');
 			<th>课件类型：</th>
 			<td>
 				<input type="radio" name="filetype" value="doc" /> 文档
-				<input type="radio" name="filetype" value="video_online" /> 在线视频
-				<input type="radio" name="filetype" value="video_local" /> 本地视频
+				<input type="radio" name="filetype" value="online" /> 在线视频
+				<input type="radio" name="filetype" value="local" /> 本地视频
 			</td>
 		</tr>
 		<tr id="doc">

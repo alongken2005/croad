@@ -5,12 +5,14 @@ $this->load->view('admin/header');
 <table cellpadding="0" cellspacing="0" border="0" class="table2">
 	<tr>
 		<th>标题</th>
+		<th>课件名称</th>
 		<th width="150">发布日期</th>
 		<th width="150">操作</th>
 	</tr>
 <?php if($lists): foreach($lists as $v):?>
 	<tr>
-		<td style="text-align: left; padding-left: 10px"><?=$v['title']?></td>
+		<td><?=$v['realname']?></td>
+		<td style="text-align: left; padding-left: 10px"><?=$v['realname']?></td>
 		<td><?=date('Y-m-d H:i', $v['ctime'])?></td>
 		<td>
 			<a href="<?=site_url('admin/stuff/attach_op?id='.$v['id'])?>">修改</a>
