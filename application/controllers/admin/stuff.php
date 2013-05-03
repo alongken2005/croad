@@ -60,18 +60,12 @@ class Stuff extends CI_Controller
 		$this->form_validation->set_rules('kind', '分类', 'required|trim');
 		$this->form_validation->set_rules('ctime', '创建时间', 'required|trim');
 		$this->form_validation->set_rules('authorid', '作者', 'required|trim');
-		if($kind == 'stuff') {
-
-		} else {
-			$this->form_validation->set_rules('fname', '视频', 'required|trim');
-		}
 		$this->form_validation->set_error_delimiters('<span class="err">', '</span>');
-
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->helper('file');
-			$this->_data['type_list'] = $this->base->get_data('type', array('type'=>$kind))->result_array();
 			$this->_data['authorlist'] = $this->base->get_data('lake_author')->result_array();
+			$this->_data['gradelist'] = $this->base->get_data('lake_grade')->result_array();
 
 			if ($id = $this->input->get('id')) {
 				if($kind == 'video') {
@@ -81,7 +75,7 @@ class Stuff extends CI_Controller
 					}
 					$this->_data['tags'] = implode(' ', $tags);
 				}
-				$this->_data['content'] = $this->base->get_data('stuff', array('id'=>$id, 'kind'=>$kind))->row_array();
+				$this->_data['content'] = $this->base->get_data('lake_stuff', array('id'=>$id))->row_array();
 			}
 			$this->load->view('admin/stuff_op', $this->_data);
 		} else {
@@ -94,6 +88,7 @@ class Stuff extends CI_Controller
 			$deal_data = array(
 				'title'		=> $this->input->post('title'),
 				'type'		=> $this->input->post('type'),
+				'grade'		=> $this->input->post('grade'),
 				'sort'		=> $this->input->post('sort'),
 				'authorid'	=> $this->input->post('authorid'),
 				'content'	=> $this->input->post('content'),
@@ -213,129 +208,6 @@ class Stuff extends CI_Controller
 			} else {
 				echo 'no';
 			}
-		}
-	}
-
-	/**
-	 * 教案附件内容列表
-	 */
-	public function attach_lists() {
-		//分页配置
-        $this->load->library('gpagination');
-		$total_num = $this->base->get_data('attach', array('kind'=>'stuff'))->num_rows();
-		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
-		$limit = 25;
-		$offset = ($page - 1) * $limit;
-
-		$this->gpagination->currentPage($page);
-		$this->gpagination->items($total_num);
-		$this->gpagination->limit($limit);
-		$this->gpagination->target(site_url('admin/stuff/attach_lists'));
-
-		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('attach', array('kind'=>'stuff'), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
-        $this->load->view('admin/stuff_attach_list', $this->_data);
-	}
-
-	/**
-	 * 教案附件内容添加
-	 */
-	public function attach_op() {
-    	//验证表单规则
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('relaid', '标题', 'required|trim');
-		$this->form_validation->set_rules('filetype', '视频', 'required|trim');
-		$this->form_validation->set_error_delimiters('<span class="err">', '</span>');
-		$this->load->helper('file');
-
-		if ($this->form_validation->run() == FALSE) {
-			$this->_data['stufflist'] = $this->base->get_data('lake_stuff')->result_array();
-
-			if ($id = $this->input->get('id')) {
-				$this->_data['content'] = $this->base->get_data('attach', array('id'=>$id))->row_array();
-			}
-			$this->load->view('admin/stuff_attach_op', $this->_data);
-		} else {
-			$id = $this->input->get('id');
-
-			$deal_data = array(
-				'relaid'	=> $this->input->post('relaid'),
-				'kind'		=> 'stuff',
-				'filetype'	=> $this->input->post('filetype'),
-				'sort'		=> $this->input->post('sort'),
-				'ctime'		=> time(),
-			);
-
-			$this->load->library('upload');
-
-			if($_FILES['cover']['size'] > 0) {
-				$dirname = './data/uploads/pics/'.date('Y/m/');
-				createFolder($dirname);
-				$config = array(
-					'upload_path'	=> $dirname,
-					'allowed_types'	=> 'gif|jpg|png',
-					'max_size'		=> 5000,
-					'max_width'		=> 3000,
-					'max_height'	=> 3000,
-					'encrypt_name'	=> TRUE,
-					'overwrite'		=> FALSE
-				);
-
-				$this->upload->initialize($config);
-
-				if(!$this->upload->do_upload('cover')) {
-					$this->_data['upload_err'] = $this->upload->display_errors();
-					$this->load->view('admin/stuff_attach_op', $this->_data);
-				}
-				$upload_data = $this->upload->data();
-
-				$config2['source_image']	= $upload_data['full_path'];
-				$config2['maintain_ratio']	= TRUE;
-				$config2['width']			= 300;
-				$config2['height']			= 180;
-
-				$this->load->library('image_lib', $config2);
-				$this->image_lib->resize();
-
-				$deal_data['cover'] = date('Y/m/').$upload_data['file_name'];
-			}
-
-			$filetype = $this->input->post('filetype');
-			if($filetype == 'doc' && $_FILES['doc']['size'] > 0) {
-				$dirname = './data/uploads/attach/'.date('Y/m/');
-				createFolder($dirname);
-				$config = array(
-					'upload_path'	=> $dirname,
-					'allowed_types'	=> 'doc|docx|xls|txt|rar|jpg|png|gif|pdf|ppt|xlsx',
-					'max_size'		=> 5000,
-					'encrypt_name'	=> TRUE,
-					'overwrite'		=> FALSE
-				);
-
-				$this->upload->initialize($config);
-				if(!$this->upload->do_upload('doc')) {
-					$this->_data['upload_err'] = $this->upload->display_errors();
-					$this->load->view('admin/stuff_attach_op', $this->_data);
-				}
-
-				$upload_data = $this->upload->data();
-
-				$deal_data['filename'] = date('Y/m/').$upload_data['file_name'];
-				$deal_data['realname'] = $upload_data['orig_name'];
-				$deal_data['filesize'] = $upload_data['file_size'];
-			} elseif($filetype == 'online') {
-				$deal_data['filename'] = $this->input->post('online');
-			} elseif($filetype == 'local') {
-				$deal_data['filename'] = $this->input->post('local');
-			}
-
-			if($id) {
-				$this->base->update_data('attach', array('id' => $id), $deal_data);
-			} else {
-				$id = $this->base->insert_data('attach', $deal_data);
-			}
-
-			$this->msg->showmessage('添加成功', site_url('admin/stuff/attach_lists'));
 		}
 	}
 }

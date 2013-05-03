@@ -5,7 +5,7 @@
 * @version 1.0.0 (12-12-13 下午7:25)
 * @author ZhangHao
 */
-class Author extends CI_Controller
+class Stuff_author extends CI_Controller
 {
 	private $_data;
 

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->load->view('admin/header');
 ?>
-<h2><?=intval($this->input->get('id')) ? '修改' : '添加'?><div class="operate"><a href="<?=site_url('admin/product/lists')?>">管理</a></div></h2>
+<h2><?=intval($this->input->get('id')) ? '修改' : '添加'?><div class="operate"><a href="<?=site_url('admin/stuff/lists')?>">管理</a></div></h2>
 <div class="slider3">
 	<form action="<?=site_url('admin/stuff/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
 	<table cellspacing="0" cellpadding="0" border="0" class="table1">
@@ -32,6 +32,16 @@ $this->load->view('admin/header');
 				<select name="type">
 				<?php foreach($kinds as $k=>$v):?>
 					<option value="<?=$k?>" <?=(isset($content['kind']) && $content['kind'] == $k) ? 'selected' : ''?>><?=$v?></option>
+				<?php endforeach;?>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th><b>*</b> 界数：</th>
+			<td>
+				<select name="grade">
+				<?php foreach($gradelist as $v):?>
+					<option value="<?=$v['id']?>" <?=(isset($content['grade']) && $content['grade'] == $v['id']) ? 'selected' : ''?>><?=$v['title']?></option>
 				<?php endforeach;?>
 				</select>
 			</td>
