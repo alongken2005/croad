@@ -15,14 +15,14 @@ $this->load->view('admin/header');
 		<tr>
 			<th>封面：</th>
 			<td>
-				<input type="file" name="userfile"/>
+				<input type="file" name="cover"/>
 			</td>
 		</tr>
 	<?php if(isset($content['cover']) && $content['cover']):?>
 		<tr class="tr_icon">
 			<th></th>
 			<td>
-				<img src="<?=base_url('./data/uploads/stuff/'.$content['cover'])?>"/><a href="<?=site_url('admin/stuff/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
+				<img src="<?=base_url(get_thumb($content['cover']))?>"/><a href="<?=site_url('admin/stuff/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
 			</td>
 		</tr>
 	<?php endif; ?>

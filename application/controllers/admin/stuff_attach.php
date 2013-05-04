@@ -95,10 +95,12 @@ class Stuff_attach extends CI_Controller
 				}
 				$upload_data = $this->upload->data();
 
-				$config2['source_image']	= $upload_data['full_path'];
-				$config2['maintain_ratio']	= TRUE;
-				$config2['width']			= 300;
-				$config2['height']			= 180;
+				$config2 = array(
+					'source_image'		=> $upload_data['full_path'],
+					'maintain_ratio'	=> TRUE,
+					'width'				=> 300,
+					'height'			=> 180,
+				);
 
 				$this->load->library('image_lib', $config2);
 				$this->image_lib->resize();

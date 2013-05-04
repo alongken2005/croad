@@ -1,62 +1,61 @@
 <?php $this->load->view(THEME.'/header');?>
-<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/lake.css"/>
 <div class="box">
 	<div class="iland" style="margin-top: 95px;"></div>
-	<div class="single_top">
-		<div class="single_t1"></div>
-		<div class="single_intro">
-			<h4 style="font-size: 18px;">《德国少年儿童百科知识全书 什么是什么 •WAS IST WAS 》<span style="color: #DE3168">精选</span></h4>
-			浙江儿童阅读推广研究中心科学年推荐阅读书目<br>
-			100余位科学家参与创作，图文并茂的科普经典<br>
-			德国本土销量超过5000万册，版权遍及全球45个国家和地区，<br>
-			CCTV2009年度获奖图书，2009年度最佳少儿百科知识图书奖<br>
-			2009年度最值得一读的三十本好书奖  2009年度最有影响的十本好书奖 畅销5000万册<br>
-			WAS IST WAS=逻辑思维培养+知识体系构建＝诺贝尔奖的摇篮<br>
+	<div class="lake_focus">
+		<div class="lake_menu">
+			<a href="" class="sp_index lake_tab_a"></a>
+			<a href="" class="sp_index lake_tab_b"></a>
+			<a href="" class="sp_index lake_tab_c"></a>
+			<a href="" class="sp_index lake_tab_d"></a>
+			<a href="" class="sp_index lake_tab_e"></a>
+			<a href="" class="sp_index lake_tab_f"></a>
 		</div>
-		<div class="clear"></div>
-		<div class="right">
-			<div class="price">
-				<span>￥200.00</span><br>
-				市场价:￥<b>300.00</b>
-			</div>
-			<a href="<?=site_url('single/check?id=1')?>" target="_blank" class="buy">节省￥100（6.6折）免费送货</a>
+		<div class="focus"></div>
+		<div class="intro">
+			<div class="title sp_index"></div>
+			<div class="content"></div>
 		</div>
 	</div>
 	<div class="single_bottom2"></div>
 
-	<div class="single_list png"></div>
-	<div class="single_suit">
-		<div class="corner"></div>
-	<?php $count = count($lists); foreach($lists as $k=>$v) {?>
-		<div class="li">
-			<img src="<?=base_url(get_thumb($v['cover']))?>" class="img"/>
-		</div>
-		<div class="single_summary">
-			<div class="word">
-				<h2><?=$v['title']?></h2>
-				<div class="author">
-					<?php
-					if($v['author1']) { echo "作者：".$v['author1'];}
-					if($v['author2']) { echo "&nbsp;&nbsp;&nbsp;插图作者：".$v['author2'];}
-					if($v['author3']) { echo "&nbsp;&nbsp;&nbsp;译者：".$v['author3'];}
-					?>
+	<div id="lake_tab_a">
+		<div class="title"><span class="sp_index"></span></div>
+
+		<div class="content clearfix">
+			<div class="scrollable-panel">
+				<div class="clearfix cn">
+					<div class="screen">
+				<?php
+					$i=1;
+					foreach($toplist as $v):
+						if($i%7==0) echo '</div><div class="screen">';
+				?>
+					<div class="li">
+						<img src="<?=base_url(get_thumb($v['cover']))?>"/>
+						<div class="clearfix">
+							<span class="a1"><?=$v['title']?></span>
+							<span class="a2">时长：<?=$i?></span>
+						</div>
+						<div class="clearfix">
+							<span class="a3">作者：</span>
+							<span class="a4">浏览量：</span>
+						</div>
+					</div>
+				<?php
+					$i++;
+					endforeach;
+				?>
+					</div>
 				</div>
-				<div class="intro"><?=$v['intro']?></div>
 			</div>
-			<div class="pic">
-				<img src="<?=base_url(get_thumb($v['pic1']))?>"/>
-				<img src="<?=base_url(get_thumb($v['pic2']))?>"/>
+			<div class="trigger-bar">
+				<a href="javascript:void(0);" title="下翻" class="next"></a>
+				<a href="javascript:void(0);" title="上翻" class="prev"></a>
+				<div class="scrollable-trigger"></div>
 			</div>
 		</div>
-		<?php if(($k+1)%3 == 0 || ($k+1) == $count) {?>
-		<div class="clear"></div>
-		<div class="summary"></div>
-	<?php }}?>
 	</div>
 </div>
-<script type="text/javascript">
-
-</script>
 <table cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td class="bottom_left" width="50%"></td>
@@ -66,42 +65,28 @@
 		<td class="bottom_right" width="50%"></td>
 	</tr>
 </table>
-<div class="scrollable-trigger"></div>
+<script type="text/javascript">
+$(function(){
+	window.api = $(".scrollable-trigger").switchable(".scrollable-panel .screen", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 1,
+		visible: 1,
+		api: true
+	});
+	$(".next").click(function(){
+		api.next();
+	});
+	$(".prev").click(function(){
+		api.prev();
+	});
 
+});
+</script>
 <!--[if IE 6]>
 <script type="text/javascript" src="<?=base_url('./common/js/fixpng-min.js')?>"></script>
 <script type="text/javascript">
 DD_belatedPNG.fix('.png, .browse');
 </script>
 <![endif]-->
-
-<script type="text/javascript">
-
-	$(function() {
-		$('.single_suit .li').click(function() {
-			$('.single_summary').slideUp('fast');
-			var obj = $(this).nextAll('.summary').first();
-			obj.html($(this).next('.single_summary').clone());
-			var li = $(this);
-			obj.find('.single_summary').slideDown('fast', function() {
-				var offset = li.offset();
-				$('.single_suit .corner').offset({top: offset.top+300, left: offset.left+130});
-			});
-		})
-	})
-
-	$(window).load(function() {
-		$('.single_suit .li').first().click();
-	})
-
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-26645818-3']);
-	_gaq.push(['_trackPageview']);
-
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-</script>
 <?php $this->load->view(THEME.'/footer');?>

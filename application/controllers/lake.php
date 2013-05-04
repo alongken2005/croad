@@ -22,6 +22,7 @@ class Lake extends CI_Controller {
 	}
 
 	public function main() {
+		$this->_data['toplist'] = $this->base->get_data('lake_stuff', array('top'=>1))->result_array();
 		$this->load->view(THEME.'/lake', $this->_data);
 	}
 

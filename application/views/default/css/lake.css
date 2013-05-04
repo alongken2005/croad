@@ -1,12 +1,44 @@
 body { font-size: 12px; font-family: tahoma,arial; background: #081F48 url(../images/lake_bg.png) repeat-x; }
 
+.sp_index { background-repeat: no-repeat; background-image: url(../images/lake.png); }
 .iland { height: 221px; margin: 0 auto; margin-top: 20px; background: url(../images/iland.png) no-repeat; }
-.single_top { overflow: hidden; zoom: 1; background: #CCE9EF; padding-bottom: 10px; }
-.single_top .single_t1 { float: left; width: 118px; height: 27px; margin-left: 30px; margin-top: 80px; background: url(../images/single_t1.png) no-repeat; }
-.single_top .single_intro { float: left; width: 800px; margin-top: 30px; margin-left: 30px; margin-bottom: 20px; line-height: 1.8; font-size: 14px; font-weight: 600; color: #65778C; }
-.single_top .price { float: left; width: 120px; height: 55px; color: #666; font-size: 14px; font-weight: 600; text-align: right; }
-.single_top .price span { color: #D00406; font-size: 26px; }
-.single_top .price b { text-decoration:line-through; }
-.single_top .buy { float: left; width: 223px; height: 21px; margin: 0 15px; padding: 34px 0 0 18px; font-size: 12px; color: #FFF; font-weight: 600; background: url(../images/single_btn.png) no-repeat; text-decoration: none; }
-.single_bottom { height: 25px; background: url(../images/single_buttom.png) no-repeat; }
+.lake_focus { overflow: hidden; zoom: 1; background: #CCE9EF; padding-bottom: 10px; }
+.lake_focus .intro { overflow: hidden; zoom: 1; }
+.lake_focus .intro .title { float: left; width: 115px; height: 62px; background-position: -0px -0px; }
+.lake_focus .intro .content { float: left; width: 115px; height: 62px; background-position: -0px -0px; }
+.lake_menu { overflow: hidden; zoom: 1; margin-top: 20px; }
+.lake_menu a { float: left; margin-left: 67px; }
+.lake_tab_a { width:98px; height:19px; background-position: -401px -38px; }
+.lake_tab_a:hover { background-position: -262px -19px; }
+.lake_tab_b { width:97px; height:19px; background-position: -457px -18px; }
+.lake_tab_b:hover { background-position: -360px -19px; }
+.lake_tab_c { width:99px; height:19px; background-position: -361px -0px; }
+.lake_tab_c:hover { background-position: -262px -0px; }
+.lake_tab_d { width:79px; height:18px; background-position: -401px -56px; }
+.lake_tab_d:hover { background-position: -468px -74px; }
+.lake_tab_e { width:79px; height:18px; background-position: -460px -0px; }
+.lake_tab_e:hover { background-position: -539px -0px; }
+.lake_tab_f { width:58px; height:18px; background-position: -480px -56px; }
+.lake_tab_f:hover { background-position: -499px -36px; }
 .single_bottom2 { height: 40px; background: url(../images/single_buttom2.png) no-repeat; }
+
+#lake_tab_a .title { width: 250px; margin: 0 auto; padding-top: 10px; padding-bottom: 5px; background-color: #FFF; border-top-left-radius: 20px; border-top-right-radius: 20px; }
+#lake_tab_a .title span { display: block; width:147px; height:27px; margin: 0 auto; background-position: -254px -54px }
+#lake_tab_a .content { border-top-left-radius: 20px; border-top-right-radius: 20px; background-image: #FEFFFF; background-image: -webkit-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: -ms-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: linear-gradient(to bottom, #feffff 0%,#ddf8ff 100%); }
+#lake_tab_a .screen { float: left; display: inline; width: 985px; height: 500px; padding-left: 15px; }
+#lake_tab_a .li { float: left; display: inline; margin: 30px 8px 0 8px; padding: 12px; width: 284px; height: 200px; border-radius: 10px; background: #DFDFDF; }
+#lake_tab_a .li img { width: 284px; height: 160px; }
+#lake_tab_a .scrollable-panel { height: 550px; }
+
+.trigger-bar { width: 423px; height: 18px; }
+.trigger-bar .prev, .trigger-bar .next { float: right; width: 18px; height: 18px; display: block; outline: none; background-image: url(../images/navigator.png); background-repeat: no-repeat; }
+.trigger-bar .prev { margin-right: -1px; background-position: -40px 0; }
+.trigger-bar .next { background-position: -17px 0 }
+.trigger-bar .prev:hover { text-decoration: none; background-position: 0 0; }
+.trigger-bar .next:hover { text-decoration: none; background-position: -57px 0; }
+.scrollable-trigger { float: right }
+.scrollable-trigger a { display: inline-block; width: 6px; height: 6px; margin: 6px 5px 0 0; font-size: 0px; color: #70B2D5; background: url(../images/navigator.png) -80px -10px no-repeat; outline: none; overflow: hidden; }
+.scrollable-trigger a.current, .scrollable-trigger a:hover { color: #CACACA; background: url(../images/navigator.png) -80px 0 no-repeat; }
+/* 下面四项必须设置 */
+.scrollable-panel { position: relative; width: 1000px; height: 120px; overflow: hidden; }
+.scrollable-panel .cn { position: absolute; nowhitespace: afterproperty; width: 2010em; /* 设置足够的宽度 */ }

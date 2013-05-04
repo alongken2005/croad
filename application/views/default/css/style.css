@@ -12,7 +12,7 @@ textarea { overflow: auto; vertical-align: top; }
 .right { float: right; }
 .clear { clear: both; height: 0; line-height: 0; overflow: hidden; font-size: 0; }
 .clear10 { clear: both; height: 10px; overflow: hidden; font-size: 0; }
-.clearfix{ overflow: hidden; _zoom: 1; }
+.clearfix { overflow: hidden; zoom: 1; }
 
 /*输入框*/
 .input1 { width: 80px; height: 26px; line-height: 26px; background: #FFF; color: #714a3a; font-size: 14px; font-weight: bold; padding: 0 3px; border: 1px solid #e0dfdd; }
