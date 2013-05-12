@@ -5,7 +5,7 @@
 * @version 1.0.0 (Tue Feb 21 08:17:46 GMT 2012)
 * @author ZhangHao
 */
-class Stuff extends CI_Controller
+class Subject extends CI_Controller
 {
 	private $_data;
 
@@ -33,7 +33,7 @@ class Stuff extends CI_Controller
 
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('lake_stuff')->num_rows();
+		$total_num = $this->base->get_data('subject')->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -44,8 +44,8 @@ class Stuff extends CI_Controller
 		$this->gpagination->target(site_url('admin/stuff/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('lake_stuff', array(), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
-        $this->load->view('admin/stuff_list', $this->_data);
+		$this->_data['lists'] = $this->base->get_data('subject', array(), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
+        $this->load->view('admin/subject_list', $this->_data);
     }
 
     /**
@@ -61,8 +61,8 @@ class Stuff extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->helper('file');
-			$this->_data['authorlist'] = $this->base->get_data('lake_author')->result_array();
-			$this->_data['gradelist'] = $this->base->get_data('lake_grade')->result_array();
+			$this->_data['authorlist'] = $this->base->get_data('author')->result_array();
+			$this->_data['gradelist'] = $this->base->get_data('grade')->result_array();
 
 			if ($id = $this->input->get('id')) {
 				$tags = array();
@@ -71,9 +71,9 @@ class Stuff extends CI_Controller
 					$tags[] = $v['name'];
 				}
 				$this->_data['tags'] = implode(' ', $tags);
-				$this->_data['content'] = $this->base->get_data('lake_stuff', array('id'=>$id))->row_array();
+				$this->_data['content'] = $this->base->get_data('subject', array('id'=>$id))->row_array();
 			}
-			$this->load->view('admin/stuff_op', $this->_data);
+			$this->load->view('admin/subject_op', $this->_data);
 		} else {
 			$id = $this->input->get('id') ? (int)$this->input->get('id') : 0;
 			$timestamp = time();
@@ -107,7 +107,7 @@ class Stuff extends CI_Controller
 
 				if(!$this->upload->do_upload('cover')) {
 					$this->_data['upload_err'] = $this->upload->display_errors();
-					$this->load->view('admin/stuff_op', $this->_data);
+					$this->load->view('admin/subject_op', $this->_data);
 				}
 				$upload_data = $this->upload->data();
 
@@ -125,9 +125,9 @@ class Stuff extends CI_Controller
 			}
 
 			if($id) {
-				$this->base->update_data('lake_stuff', array('id' => $id), $deal_data);
+				$this->base->update_data('subject', array('id' => $id), $deal_data);
 			} else {
-				$id = $this->base->insert_data('lake_stuff', $deal_data);
+				$id = $this->base->insert_data('subject', $deal_data);
 				$tag = array_filter(explode(' ', $this->input->post('tag')));
 				if($tag) {
 					foreach($tag as $v) {
@@ -142,7 +142,7 @@ class Stuff extends CI_Controller
 				}
 			}
 
-			$this->msg->showmessage('添加成功', site_url('admin/stuff/lists?kind='.$kind));
+			$this->msg->showmessage('添加成功', site_url('admin/subject/lists'));
 		}
     }
 

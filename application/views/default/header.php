@@ -4,8 +4,6 @@
 	<meta charset="utf-8">
 	<title>儿童之路</title>
 	<script type="text/javascript" src="<?=base_url('./common/js/jquery.js')?>"></script>
-	<script type="text/javascript" src="<?=base_url('./common/js/jquery.switchable.js')?>"></script>
-<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/lake.css"/>
 	<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/style.css"/>
 </head>
 <body>

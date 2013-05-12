@@ -1,0 +1,70 @@
+<?php $this->load->view(THEME.'/header');?>
+<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/lake.css"/>
+<div class="box authors">
+	<div class="iland2" style="margin-top: 95px;"></div>
+
+	<div class="lead">
+		<a href="<?=base_url()?>">儿童之路首页 </a> > <a href="#">视频馆</a> > <a href="<?=site_url('lake')?>">千岛湖研习营</a>
+	</div>
+	<div class="content1 clearfix">
+		<div class="author clearfix">
+			<img src="<?=get_thumb($author['cover'])?>" class="left"/>
+			<div class="right">
+				<div class="title">
+					<b><?=$author['name']?></b>
+					<span><?=$author['title']?></span>
+				</div>
+				<div class="intro"><?=$author['content']?></div>
+			</div>
+		</div>
+
+		<h3><?=$author['name']?>的作品</h3>
+		<div class="attachs clearfix">
+		<?php foreach($author_subject as $v):?>
+			<div class="li">
+				<a href="333"><img src="<?=get_thumb($v['cover'])?>"/></a>
+				<div><?=$v['title']?><b>浏览量：<?=$v['hits']?></b></div>
+			</div>
+		<?php endforeach;?>
+		</div>
+	</div>
+
+	<div class="ge"></div>
+	<div class="author_title"></div>
+	<div class="author_top">
+	<?php foreach($author_top as $v):?>
+		<div class="li">
+			<a href="<?=site_url('lake/author?id='.$v['id'])?>"><img src="<?=get_thumb($v['cover'])?>"/></a>
+			<h3><?=$v['name']?></h3>
+		</div>
+	<?php endforeach;?>
+	</div>
+</div>
+<table cellspacing="0" cellpadding="0" border="0">
+	<tr>
+		<td class="bottom_left" width="50%"></td>
+		<td class="bottom_center">
+			<div class="box" style="text-align: center; font-family: '微软雅黑'; font-size: 20px; font-weight: 600; margin-top: 30px;"><a href="<?=base_url()?>" target="_blank" style="color: #3399CC;">成为儿童之路会员，有机会参加更多活动！ </a></div>
+		</td>
+		<td class="bottom_right" width="50%"></td>
+	</tr>
+</table>
+<script type="text/javascript" src="<?=base_url('./common/js/jquery.switchable.js')?>"></script>
+<script type="text/javascript">
+$(function(){
+	$(".tab a").click(function() {
+		$(".tab a").removeClass('current');
+		$(this).addClass('current');
+		var index = $(".tab a").index($(this));
+		$(".subject .content0, .subject .content1").hide();
+		$(".subject .content"+index).show();
+	})
+});
+</script>
+<!--[if IE 6]>
+<script type="text/javascript" src="<?=base_url('./common/js/fixpng-min.js')?>"></script>
+<script type="text/javascript">
+DD_belatedPNG.fix('.png, .browse');
+</script>
+<![endif]-->
+<?php $this->load->view(THEME.'/footer');?>

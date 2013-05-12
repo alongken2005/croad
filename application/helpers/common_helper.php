@@ -52,15 +52,16 @@ function createFolder($path) {
  * @param type $picUrl
  * @return type
  */
-function get_thumb($picUrl, $baseUrl = './data/uploads/pics/') {
+function get_thumb($picUrl, $thumb = TRUE, $baseUrl = './data/uploads/pics/', $base = TRUE) {
 	if(!$picUrl) return false;
 	$cover = pathinfo($picUrl);
 	$thumbUrl = $baseUrl.$cover['dirname'].'/'.$cover['filename'].'_thumb.'.$cover['extension'];
-	if(file_exists($thumbUrl)) {
-		return $thumbUrl;
+	if($thumb && file_exists($thumbUrl)) {
+		$picUrl = $thumbUrl;
 	} else {
-		return $baseUrl.$picUrl;
+		$picUrl = $baseUrl.$picUrl;
 	}
+	return $base ? base_url($picUrl) : $picUrl;
 }
 
 /**
@@ -87,4 +88,19 @@ function t2h($str) {
 	$str = str_replace("\r", "<br>", $str);
 	$str = str_replace("\n", "<br>", $str);
 	return $str;
+}
+
+/**
+ * 把秒格式化为时间格式
+ */
+function secfmt($seconds) {
+	$seconds = (int)$seconds;
+	if ($seconds>3600){
+		$hours = intval($seconds/3600);
+		$minutes = $seconds%3600;
+		$time = $hours.":".gmstrftime('%M:%S', $minutes);
+	} else {
+		$time = gmstrftime('%M:%S', $seconds);
+	}
+	return $time;
 }

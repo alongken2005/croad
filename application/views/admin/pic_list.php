@@ -11,7 +11,7 @@ $this->load->view('admin/header');
 <?php if($lists): foreach($lists as $v):?>
 	<tr>
 		<td><?=$typelist[$v['place']]?></td>
-		<td><img src="<?=base_url(get_thumb($v['filename']))?>"/></td>
+		<td><img src="<?=get_thumb($v['filename'])?>"/></td>
 		<td>
 			<a href="<?=site_url('admin/pic/op?id='.$v['id'])?>">修改</a>
 			<a href="<?=site_url('admin/pic/del?id='.$v['id'])?>" class="del">删除</a>

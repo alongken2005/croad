@@ -1,11 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * 教案课件管理
-* @see Stuff_attach
 * @version 1.0.0 (12-12-13 下午7:25)
 * @author ZhangHao
 */
-class Stuff_attach extends CI_Controller
+class Lake_attach extends CI_Controller
 {
 	private $_data;
 
@@ -28,7 +27,7 @@ class Stuff_attach extends CI_Controller
 	public function lists() {
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('attach', array('kind'=>'stuff'))->num_rows();
+		$total_num = $this->base->get_data('attach', array('kind'=>'lake'))->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -39,8 +38,8 @@ class Stuff_attach extends CI_Controller
 		$this->gpagination->target(site_url('admin/stuff/attach_lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('attach', array('kind'=>'stuff'), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
-        $this->load->view('admin/stuff_attach_list', $this->_data);
+		$this->_data['lists'] = $this->base->get_data('attach', array('kind'=>'lake'), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
+        $this->load->view('admin/lake_attach_list', $this->_data);
 	}
 
 	/**
@@ -55,18 +54,19 @@ class Stuff_attach extends CI_Controller
 		$this->load->helper('file');
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->_data['stufflist'] = $this->base->get_data('lake_stuff')->result_array();
+			$this->_data['stufflist'] = $this->base->get_data('subject')->result_array();
 
 			if ($id = $this->input->get('id')) {
 				$this->_data['content'] = $this->base->get_data('attach', array('id'=>$id))->row_array();
 			}
-			$this->load->view('admin/stuff_attach_op', $this->_data);
+			$this->load->view('admin/lake_attach_op', $this->_data);
 		} else {
 			$id = $this->input->get('id');
 
 			$deal_data = array(
 				'relaid'	=> $this->input->post('relaid'),
-				'kind'		=> 'stuff',
+				'title'		=> $this->input->post('title'),
+				'kind'		=> 'lake',
 				'filetype'	=> $this->input->post('filetype'),
 				'sort'		=> $this->input->post('sort'),
 				'ctime'		=> time(),
@@ -91,7 +91,7 @@ class Stuff_attach extends CI_Controller
 
 				if(!$this->upload->do_upload('cover')) {
 					$this->_data['upload_err'] = $this->upload->display_errors();
-					$this->load->view('admin/stuff_attach_op', $this->_data);
+					$this->load->view('admin/lake_attach_op', $this->_data);
 				}
 				$upload_data = $this->upload->data();
 
@@ -123,7 +123,7 @@ class Stuff_attach extends CI_Controller
 				$this->upload->initialize($config);
 				if(!$this->upload->do_upload('doc')) {
 					$this->_data['upload_err'] = $this->upload->display_errors();
-					$this->load->view('admin/stuff_attach_op', $this->_data);
+					$this->load->view('admin/lake_attach_op', $this->_data);
 				}
 
 				$upload_data = $this->upload->data();
@@ -143,7 +143,7 @@ class Stuff_attach extends CI_Controller
 				$id = $this->base->insert_data('attach', $deal_data);
 			}
 
-			$this->msg->showmessage('添加成功', site_url('admin/stuff/attach_lists'));
+			$this->msg->showmessage('添加成功', site_url('admin/lake_attach/lists'));
 		}
 	}
 
@@ -152,7 +152,7 @@ class Stuff_attach extends CI_Controller
     */
     public function del () {
         $id = intval($this->input->get('id'));
-        if($id && $this->base->del_data('lake_author', array('id' => $id))) {
+        if($id && $this->base->del_data('attach', array('id' => $id))) {
         	exit('ok');
         } else {
         	exit('no');

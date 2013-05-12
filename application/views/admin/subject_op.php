@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->load->view('admin/header');
 ?>
-<h2><?=intval($this->input->get('id')) ? '修改' : '添加'?><div class="operate"><a href="<?=site_url('admin/stuff/lists')?>">管理</a></div></h2>
+<h2><?=intval($this->input->get('id')) ? '修改' : '添加'?><div class="operate"><a href="<?=site_url('admin/subject/lists')?>">管理</a></div></h2>
 <div class="slider3">
-	<form action="<?=site_url('admin/stuff/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
+	<form action="<?=site_url('admin/subject/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
 	<table cellspacing="0" cellpadding="0" border="0" class="table1">
 		<tr>
 			<th><b>*</b> 标题：</th>
@@ -22,7 +22,7 @@ $this->load->view('admin/header');
 		<tr class="tr_icon">
 			<th></th>
 			<td>
-				<img src="<?=base_url(get_thumb($content['cover']))?>"/><a href="<?=site_url('admin/stuff/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
+				<img src="<?=get_thumb($content['cover'])?>"/><a href="<?=site_url('admin/subject/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
 			</td>
 		</tr>
 	<?php endif; ?>

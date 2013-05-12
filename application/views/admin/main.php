@@ -55,17 +55,23 @@
 			<div title="千岛湖">
 				<ul>
 					<li>
-						<a href="<?=site_url('admin/stuff_grade/lists')?>" class="add_tab">界数管理</a>
+						<a href="<?=site_url('admin/grade/lists')?>" class="add_tab">界数管理</a>
 					</li>
 					<li>
-						<a href="<?=site_url('admin/stuff_author/lists')?>" class="add_tab">作者管理</a>
+						<a href="<?=site_url('admin/author/lists')?>" class="add_tab">作者管理</a>
 					</li>
 					<li>
-						<a href="<?=site_url('admin/stuff/lists')?>" class="add_tab">教案管理</a>
+						<a href="<?=site_url('admin/subject/lists')?>" class="add_tab">教案管理</a>
 					</li>
 					<li>
-						<a href="<?=site_url('admin/stuff_attach/lists')?>" class="add_tab">教案课件管理</a>
+						<a href="<?=site_url('admin/lake_attach/lists')?>" class="add_tab">教案课件管理</a>
 					</li>
+				</ul>
+			</div>
+			<div title="单本购买">
+				<ul>
+					<li><a href="<?=site_url('admin/single/lists')?>" class="add_tab">书单管理</a></li>
+					<li><a href="<?=site_url('admin/singleOrder/lists')?>" class="add_tab">订单管理</a></li>
 				</ul>
 			</div>
 			<div title="其他">
@@ -76,12 +82,7 @@
 						<a href="<?=site_url('admin/type/lists')?>" class="add_tab left">分类管理</a>
 						<a href="<?=site_url('admin/type/op')?>" class="add_tab right">分类添加</a>
 					</li>
-				</ul>
-			</div>
-			<div title="单本购买">
-				<ul>
-					<li><a href="<?=site_url('admin/single/lists')?>" class="add_tab">书单管理</a></li>
-					<li><a href="<?=site_url('admin/singleOrder/lists')?>" class="add_tab">订单管理</a></li>
+					<li><a href="<?=site_url('admin/ip/lists')?>" class="add_tab">IP访问管理</a></li>
 				</ul>
 			</div>
 		</div>
