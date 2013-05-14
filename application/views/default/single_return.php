@@ -26,7 +26,7 @@
 				<th width="100">商品总价(元)</th>
 			</tr>
 			<tr>
-				<td height="120" width="120" align="center"><img src="<?=base_url(get_thumb($suit['cover']))?>"/></td>
+				<td height="120" width="120" align="center"><img src="<?=get_thumb($suit['cover'])?>"/></td>
 				<td style="padding-left: 10px;"><?=$suit['title']?></td>
 				<td align="center"><?=$suit['orig_price']?></td>
 				<td align="center"><?=$sorder['amount']?></td>

@@ -29,7 +29,7 @@ $this->load->view('admin/header');
 		<tr class="tr_icon">
 			<th></th>
 			<td>
-				<img src="<?=base_url('./data/uploads/pics/'.$content['cover'])?>"/><a href="<?=site_url('admin/lake_attach/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
+				<img src="<?=get_thumb($content['cover'])?>"/><a href="<?=site_url('admin/lake_attach/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
 			</td>
 		</tr>
 	<?php endif; ?>

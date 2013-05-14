@@ -23,7 +23,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th></th>
 			<td>
-				<img src="<?=base_url(get_thumb($row['cover1']))?>" style="width:120px"/>
+				<img src="<?=get_thumb($row['cover1'])?>" style="width:120px"/>
 			</td>
 		</tr>
 	<?php endif;?>
@@ -38,7 +38,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th></th>
 			<td>
-				<img src="<?=base_url(get_thumb($row['cover2']))?>" style="width:120px"/>
+				<img src="<?=get_thumb($row['cover2'])?>" style="width:120px"/>
 			</td>
 		</tr>
 	<?php endif;?>

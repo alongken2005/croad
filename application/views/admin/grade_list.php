@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->load->view('admin/header');
 ?>
-<h2>管理<div class="operate"><a href="<?=site_url('admin/stuff_grade/op')?>">添加</a></div></h2>
+<h2>管理<div class="operate"><a href="<?=site_url('admin/grade/op')?>">添加</a></div></h2>
 <table cellpadding="0" cellspacing="0" border="0" class="table2">
 	<tr>
 		<th>名称</th>
@@ -11,8 +11,8 @@ $this->load->view('admin/header');
 	<tr>
 		<td><?=$v['title']?></td>
 		<td>
-			<a href="<?=site_url('admin/stuff_grade/op?id='.$v['id'])?>">修改</a>
-			<a href="<?=site_url('admin/stuff_grade/del?id='.$v['id'])?>" class="del">删除</a>
+			<a href="<?=site_url('admin/grade/op?id='.$v['id'])?>">修改</a>
+			<a href="<?=site_url('admin/grade/del?id='.$v['id'])?>" class="del">删除</a>
 		</td>
 	</tr>
 <?php endforeach; endif;?>

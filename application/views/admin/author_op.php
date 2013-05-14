@@ -23,7 +23,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th></th>
 			<td>
-				<img src="<?=base_url(get_thumb($content['cover']))?>"/>
+				<img src="<?=get_thumb($content['cover'])?>"/>
 			</td>
 		</tr>
 	<?php endif;?>

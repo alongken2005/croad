@@ -6,7 +6,7 @@
 	<div class="iland"></div>
 	<div class="single_top check">
 		<div class="single_cover">
-			<img src="<?=base_url(get_thumb($suit['cover']))?>"/>
+			<img src="<?=get_thumb($suit['cover'])?>"/>
 		</div>
 		<div class="single_intro">
 			<h2><?=$suit['title']?></h2>

@@ -38,7 +38,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th></th>
 			<td>
-				<img src="<?=base_url(get_thumb($row['filename']))?>"/>
+				<img src="<?=get_thumb($row['filename'])?>"/>
 			</td>
 		</tr>
 	<?php endif;?>

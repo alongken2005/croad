@@ -66,7 +66,7 @@ class Subject extends CI_Controller
 
 			if ($id = $this->input->get('id')) {
 				$tags = array();
-				$rows = $this->db->query('SELECT t.name FROM ab_video_tag vt LEFT JOIN ab_tag t ON vt.tid=t.id WHERE vt.vid='.$id)->result_array();
+				$rows = $this->db->query('SELECT t.name FROM ab_subject_tag vt LEFT JOIN ab_tag t ON vt.tid=t.id WHERE vt.vid='.$id)->result_array();
 				foreach($rows as $v) {
 					$tags[] = $v['name'];
 				}
@@ -137,7 +137,7 @@ class Subject extends CI_Controller
 						} else {
 							$tid = $tagrow['id'];
 						}
-						$this->base->insert_data('video_tag', array('vid'=>$id, 'tid'=>$tid));
+						$this->base->insert_data('subject_tag', array('vid'=>$id, 'tid'=>$tid));
 					}
 				}
 			}

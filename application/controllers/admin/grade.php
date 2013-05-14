@@ -5,7 +5,7 @@
 * @version 1.0.0 (12-12-13 下午7:25)
 * @author ZhangHao
 */
-class Stuff_grade extends CI_Controller
+class Grade extends CI_Controller
 {
 	private $_data;
 
@@ -28,7 +28,7 @@ class Stuff_grade extends CI_Controller
 	public function lists() {
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('lake_grade')->num_rows();
+		$total_num = $this->base->get_data('grade')->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -36,11 +36,11 @@ class Stuff_grade extends CI_Controller
 		$this->gpagination->currentPage($page);
 		$this->gpagination->items($total_num);
 		$this->gpagination->limit($limit);
-		$this->gpagination->target(site_url('admin/stuff_grade/lists'));
+		$this->gpagination->target(site_url('admin/grade/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('lake_grade', array(), '*', $limit, $offset)->result_array();
-        $this->load->view('admin/stuff_grade_list', $this->_data);
+		$this->_data['lists'] = $this->base->get_data('grade', array(), '*', $limit, $offset)->result_array();
+        $this->load->view('admin/grade_list', $this->_data);
 	}
 
 	/**
@@ -54,9 +54,9 @@ class Stuff_grade extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE) {
 			if ($id = $this->input->get('id')) {
-				$this->_data['content'] = $this->base->get_data('lake_grade', array('id'=>$id))->row_array();
+				$this->_data['content'] = $this->base->get_data('grade', array('id'=>$id))->row_array();
 			}
-			$this->load->view('admin/stuff_grade_op', $this->_data);
+			$this->load->view('admin/grade_op', $this->_data);
 		} else {
 			$id = $this->input->get('id');
 
@@ -65,12 +65,12 @@ class Stuff_grade extends CI_Controller
 			);
 
 			if($id) {
-				$this->base->update_data('lake_grade', array('id' => $id), $deal_data);
+				$this->base->update_data('grade', array('id' => $id), $deal_data);
 			} else {
-				$id = $this->base->insert_data('lake_grade', $deal_data);
+				$id = $this->base->insert_data('grade', $deal_data);
 			}
 
-			$this->msg->showmessage('添加成功', site_url('admin/stuff_grade/lists'));
+			$this->msg->showmessage('添加成功', site_url('admin/grade/lists'));
 		}
 	}
 
@@ -79,7 +79,7 @@ class Stuff_grade extends CI_Controller
     */
     public function del () {
         $id = intval($this->input->get('id'));
-        if($id && $this->base->del_data('lake_author', array('id' => $id))) {
+        if($id && $this->base->del_data('author', array('id' => $id))) {
         	exit('ok');
         } else {
         	exit('no');

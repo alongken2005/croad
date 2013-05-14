@@ -9,7 +9,7 @@ $this->load->view('admin/header');
 	</tr>
 <?php if($lists): foreach($lists as $v):?>
 	<tr>
-		<td><img src="<?=base_url(get_thumb($v['filename']))?>"/></td>
+		<td><img src="<?=get_thumb($v['filename'])?>"/></td>
 		<td>
 			<a href="<?=site_url('admin/mimage/op?id='.$v['id'])?>">修改</a>
 			<a href="<?=site_url('admin/mimage/del?id='.$v['id'])?>" class="del">删除</a>
