@@ -66,9 +66,11 @@ textarea { overflow: auto; vertical-align: top; }
 
 /*焦点图*/
 .foucs { width: 610px; height: 295px; float: left; position: relative; overflow: hidden; }
+/*
 .num { position: absolute; right: 2px; bottom: 5px; z-index: 10;}
 .num a { padding: 3px 8px; background: #000; color: #FFF; display: inline; text-align: center; margin-right: 3px; cursor: pointer;}
 .num a.cur { background: #8A0000; }
+*/
 .foucs ul { position: relative; z-index: 5; }
 .foucs ul li { position: absolute; display: none; }
 .foucs ul li img { width: 610px; height: 295px; }

@@ -1,4 +1,5 @@
 <?php $this->load->view(THEME.'/header');?>
+<script type="text/javascript" src="<?=THEME_VIEW?>/js/slide.js"></script>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/lake.css"/>
 <div class="box">
 	<div class="iland" style="margin-top: 95px;"></div>
@@ -11,13 +12,29 @@
 			<a href="" class="sp_index lake_tab_e"></a>
 			<a href="" class="sp_index lake_tab_f"></a>
 		</div>
-		<div class="focus">
-			<div class="focus_panel clearfix">
-			<?php foreach($piclist as $v):?>
-				<img src="<?=get_thumb($v['filename'], false)?>"/>
-			<?php endforeach;;?>
+		<div class="focus clearfix">
+			<div class="panel_box" >
+				<ul>
+					<?php foreach($piclist as $v):?>
+					<li>
+						<a href="">
+							<img src="<?=get_thumb($v['filename'], false)?>" />
+						</a>
+					</li>
+					<?php endforeach;?>
+				</ul>
+			</div>
+			<div class="num">
+				<span></span>
+				<?php foreach($piclist as $k=>$v):?>
+				<a href="javascript:void(0)"><img src="<?=get_thumb($v['filename'])?>"/></a>
+				<?php endforeach;?>
 			</div>
 		</div>
+
+<script type="text/javascript">
+    slidshow($('.focus'), true);
+</script>
 		<div class="intro">
 			<div class="title sp_index"></div>
 			<div class="content">
@@ -126,7 +143,7 @@
 		<div class="content clearfix">
 			<a href="javascript:void(0);" title="上翻" class="prev"></a>
 			<div class="scrollable-panel">
-				<div class="clearfix">
+				<div class="clearfix cb">
 					<div class="screen">
 				<?php
 					$i=1;

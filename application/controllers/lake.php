@@ -22,7 +22,7 @@ class Lake extends CI_Controller {
 	}
 
 	public function main() {
-		$this->_data['piclist'] = $this->base->get_data('pics', array('place'=>4))->result_array();
+		$this->_data['piclist'] = $this->base->get_data('pics', array('place'=>4), '*', 5, 0)->result_array();
 		$this->_data['toplist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.top=1")->result_array();
 		$this->_data['camplist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeCamp'")->result_array();
 		$this->_data['readlist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeRead'")->result_array();

@@ -4,11 +4,20 @@ a:hover { color: #CCC; }
 .sp_index { background-repeat: no-repeat; background-image: url(../images/lake.png); }
 .iland { height: 221px; margin: 0 auto; margin-top: 20px; background: url(../images/iland.png) no-repeat; }
 .iland2 { height: 165px; margin: 0 auto; margin-top: 20px; background: url(../images/iland2.png) no-repeat; }
-.lake_focus { overflow: hidden; zoom: 1; background: #CCE9EF; padding-bottom: 10px; }
+.lake_focus { overflow: hidden; zoom: 1; background: #CCE9EF; padding: 10px 20px; }
+.lake_focus .panel_box { position: relative; float: left; width: 820px; height: 400px; overflow: hidden; }
+.lake_focus .panel_box ul { position: absolute; nowhitespace: afterproperty; width: 2010em; }
+.lake_focus .panel_box li { float: left; }
+.lake_focus .panel_box img { width: 820px; height: 400px; }
+.lake_focus .num { width: 140px; float: left; position: relative; }
+.lake_focus .num a { display: block; float: left; margin-bottom: 5px; }
+.lake_focus .num img { width: 140px; height: 76px; float: left; }
+.lake_focus .num span { position: absolute; width: 130px; height: 66px; border: 5px solid #48BCE1; }
+
 .lake_focus .intro { overflow: hidden; zoom: 1; }
-.lake_focus .intro .title { float: left; margin-left: 30px; margin-top: 30px; width: 115px; height: 62px; background-position: -0px -0px; }
-.lake_focus .intro .content { float: right; margin-top: 20px; margin-right: 30px; width: 800px; line-height: 1.8; font-size: 14px; font-weight: 600; text-indent: 30px; color: #65778C; }
-.lake_menu { overflow: hidden; zoom: 1; margin-top: 20px; }
+.lake_focus .intro .title { float: left; margin-top: 30px; width: 115px; height: 62px; background-position: -0px -0px; }
+.lake_focus .intro .content { float: right; margin-top: 20px; width: 800px; line-height: 1.8; font-size: 14px; font-weight: 600; text-indent: 30px; color: #65778C; }
+.lake_menu { overflow: hidden; zoom: 1; margin: 20px 0; }
 .lake_menu a { float: left; margin-left: 67px; }
 .lake_tab_a { width:98px; height:19px; background-position: -401px -38px; }
 .lake_tab_a:hover { background-position: -262px -19px; }
@@ -27,7 +36,7 @@ a:hover { color: #CCC; }
 
 .more { float: right; margin-right: 20px; width: 107px; height: 30px; line-height: 30px; background-position: -0px -62px; font-size: 13px; font-weight: 600; color: #FFF; text-align: center; }
 
-.cn .li { float: left; display: inline; line-height: 1.8; margin: 30px 8px 0 8px; padding: 12px; width: 285px; height: 228px; border-radius: 10px; background: #DFDFDF; color: #666; }
+.cn .li { float: left; display: inline; line-height: 1.8; margin: 30px 0 0 19px; padding: 12px; width: 285px; height: 228px; border-radius: 10px; background: #DFDFDF; color: #666; }
 .cn .a1 { font-weight: 600; color: #007CBA; font-size: 14px; display: block;}
 .cn .a1:hover { text-decoration: none; }
 .cn .a1 b { color: #DE3168; }
@@ -38,7 +47,7 @@ a:hover { color: #CCC; }
 #lake_tab_a .title { width: 250px; margin: 0 auto; padding-top: 10px; padding-bottom: 5px; background-color: #FFF; border-top-left-radius: 20px; border-top-right-radius: 20px; }
 #lake_tab_a .title span { display: block; width:147px; height:27px; margin: 0 auto; background-position: -254px -54px }
 #lake_tab_a .content { border-top-left-radius: 20px; border-top-right-radius: 20px; background-image: #FEFFFF; background-image: -webkit-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: -ms-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: linear-gradient(to bottom, #feffff 0%,#ddf8ff 100%); }
-#lake_tab_a .screen { float: left; display: inline; width: 987px; height: 580px; padding-left: 13px; }
+#lake_tab_a .screen { float: left; display: inline; width: 1000px; height: 580px; }
 #lake_tab_a .scrollable-panel { height: 580px; }
 #lake_tab_a .trigger-bar { float: left; }
 
@@ -80,7 +89,7 @@ a:hover { color: #CCC; }
 .scrollable-trigger a.current, .scrollable-trigger a:hover { background: url(../images/lake.png) -264px -108px no-repeat; }
 /* 下面四项必须设置 */
 .scrollable-panel { position: relative; width: 1000px; height: 120px; overflow: hidden; }
-.scrollable-panel .cn { position: absolute; nowhitespace: afterproperty; width: 2010em; }
+.scrollable-panel .cn, .scrollable-panel .cb { position: absolute; nowhitespace: afterproperty; width: 2010em; }
 
 .subject .overall { padding: 25px 15px; border: 5px solid #97C5DF; border-radius: 25px; background-image: #FEFFFF; background-image: -webkit-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: -ms-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: linear-gradient(to bottom, #feffff 0%,#ddf8ff 100%); }
 .subject .overall .cover { width: 400px; height: 250px; }
