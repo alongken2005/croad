@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->load->view('admin/header');
 ?>
-<h2><?=intval($this->input->get('id')) ? '修改' : '添加'?><div class="operate"><a href="<?=site_url('admin/product/lists')?>">管理</a></div></h2>
+<h2><?=intval($this->input->get('id')) ? '修改' : '添加'?><div class="operate"><a href="<?=site_url('admin/subject/lists')?>">管理</a></div></h2>
 <div class="slider3">
-	<form action="<?=site_url('admin/stuff/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
+	<form action="<?=site_url('admin/subject/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
 	<table cellspacing="0" cellpadding="0" border="0" class="table1">
 		<tr>
 			<th><b>*</b> 标题：</th>
@@ -15,14 +15,14 @@ $this->load->view('admin/header');
 		<tr>
 			<th>封面：</th>
 			<td>
-				<input type="file" name="userfile"/>
+				<input type="file" name="cover"/>
 			</td>
 		</tr>
 	<?php if(isset($content['cover']) && $content['cover']):?>
 		<tr class="tr_icon">
 			<th></th>
 			<td>
-				<img src="<?=base_url('./data/uploads/stuff/'.$content['cover'])?>"/><a href="<?=site_url('admin/stuff/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
+				<img src="<?=get_thumb($content['cover'])?>"/><a href="<?=site_url('admin/subject/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
 			</td>
 		</tr>
 	<?php endif; ?>
@@ -37,15 +37,13 @@ $this->load->view('admin/header');
 			</td>
 		</tr>
 		<tr>
-			<th style="position: relative">
-				课件内容：<br>
-			</th>
+			<th><b>*</b> 界数：</th>
 			<td>
-				<a href="javascript:void(0)" class="abut2 add_subject" style="margin:5px">增加</a>
-				<div class="atttype">
-					<a href="javascript:void(0)" class="unvideo">非视频</a>
-					<a href="javascript:void(0)" class="video">视频</a>
-				</div>
+				<select name="grade">
+				<?php foreach($gradelist as $v):?>
+					<option value="<?=$v['id']?>" <?=(isset($content['grade']) && $content['grade'] == $v['id']) ? 'selected' : ''?>><?=$v['title']?></option>
+				<?php endforeach;?>
+				</select>
 			</td>
 		</tr>
 		<tr>

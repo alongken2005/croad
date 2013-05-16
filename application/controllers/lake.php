@@ -22,100 +22,72 @@ class Lake extends CI_Controller {
 	}
 
 	public function main() {
+		$this->_data['piclist'] = $this->base->get_data('pics', array('place'=>4), '*', 5, 0)->result_array();
+		$this->_data['toplist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.top=1")->result_array();
+		$this->_data['camplist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeCamp'")->result_array();
+		$this->_data['readlist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeRead'")->result_array();
+		$this->_data['authorlist'] = $this->base->get_data('author')->result_array();
 		$this->load->view(THEME.'/lake', $this->_data);
 	}
 
-	public function detail() {
-		$id = $this->input->get('id');
+	/**
+	 * 课程
+	 */
+	public function subject() {
+		$id = (int)$this->input->get('id');
 
-		$this->_data['movie'] = $this->base->get_data('movie', array('id'=>$id))->row_array();
-
-		//赏析
-		$this->_data['mviews'] = $this->base->get_data('mview', array('mid'=>$id), '*', 0, 0, 'sort DESC')->result_array();
-
-		//片花
-		$this->_data['mclips'] = $this->base->get_data('mclips', array('mid'=>$id), '*', 0, 0, 'sort DESC')->result_array();
-
-		//图片
-		$this->_data['mimage'] = $this->base->get_data('pics', array('place_id'=>$id, 'place'=>2), '*', 0, 0, 'sort DESC')->result_array();
-
-		//还喜欢
-		$this->_data['likes'] = $this->db->query("SELECT * FROM ab_movie WHERE id IN (SELECT mid FROM ab_movie_tag WHERE tid IN (SELECT tid FROM ab_movie_tag WHERE mid=".$id.")) AND id!=".$id)->result_array();
-
-		$this->load->view(THEME.'/movie_detail', $this->_data);
+		$this->_data['subject'] = $subject = $this->db->query("SELECT * FROM ab_subject WHERE id=".$id)->row_array();
+		$this->_data['author'] = $this->db->query("SELECT * FROM ab_author WHERE id=".$subject['authorid'])->row_array();
+		$this->_data['attachs'] = $this->base->get_data('attach', array('kind'=>'lake', 'relaid'=>$id), '*', 0, 0, 'sort DESC, ctime DESC')->result_array();
+		$this->_data['author_subject'] = $this->base->get_data('subject', array('authorid'=>$subject['authorid']), '*', 0, 0, 'sort DESC, ctime DESC')->result_array();
+		$this->load->view(THEME.'/lake_subject', $this->_data);
 	}
 
 	/**
-	 * 索票页面
+	 * 作者
 	 */
-	public function get_ticket() {
-		$id = $this->input->get('id');
-		$this->permission->login_check(site_url('movie/detail?id='.$id));
-		$uid = $this->session->userdata('uid');
-		$this->_data['user'] = $this->base->get_data('account', array('id'=>$uid), 'email, first_name, middle_name, last_name')->row_array();
-		$this->_data['action'] = 'index';
-		$this->_data['weeks'] = $this->_weeks;
-		$this->_data['tickets'] = $this->base->get_data('mticket', array('mid'=>$id), '*', 0, 0, 'stime ASC')->result_array();
-		$this->_data['movie'] = $this->base->get_data('movie', array('id'=>$id))->row_array();
+	public function author() {
+		$id = (int)$this->input->get('id');
 
-		$this->load->view(THEME.'/movie_ticket', $this->_data);
+		$this->_data['author'] = $this->base->get_data('author', array('id'=>$id))->row_array();
+		$this->_data['author_subject'] = $this->base->get_data('subject', array('authorid'=>$id), '*', 0, 0, 'sort DESC, ctime DESC')->result_array();
+		$this->_data['author_top'] = $this->base->get_data('author', array('top'=>1), '*', 0, 0, 'sort DESC, id DESC')->result_array();
+		$this->load->view(THEME.'/lake_author', $this->_data);
 	}
 
 	/**
-	 * 申请索票提交
+	 * 搜索
 	 */
-	public function ticket_submit() {
-		$id = $this->input->get('id');
-		$num = $this->input->post('num');
-		$name = $this->input->post('name');
-		$movie = $this->input->post('movie');
+	public function search() {
+		$type = (int)$this->input->get('type');
+		$stype = $this->input->get('stype') ? $this->input->get('stype') : 'subject';
+		$keyword = $this->input->get('keyword');
 
-		$this->permission->login_check();
-		$uid = $this->session->userdata('uid');
-		$email = $this->session->userdata('email');
-		$ticket = $this->base->get_data('mticket', array('id'=>$id))->row_array();
-		if($ticket['total']-$ticket['used'] < $num) {
-			echo json_encode(array('result'=>'no'));exit;
-		}
-
-		$uniqid = uniqid();
-		$weeks = $this->_weeks;
-		$endtime = date('m月d日', $ticket['stime']).'（'.$weeks[date('N', $ticket['stime'])].'）'.date('H:i', $ticket['stime']);
-
-		$insert_data = array(
-			'tid'	=> $id,
-			'uniqid'=> $uniqid,
-			'mid'	=> $ticket['mid'],
-			'num'	=> $num,
-			'email'	=> $email,
-			'ctime'	=> time(),
-		);
-
-		if($email) {
-			write_log($email, 'ticket', 'ticket');
-			$this->load->config('email');
-			$configemail = $this->config->item('smtp');
-			$this->load->library('email');
-			$this->email->initialize($configemail);
-			$this->email->from('ticket@chiildroad.com', '儿童之路');
-			$this->email->to($this->session->userdata('email'));
-			$this->email->subject("恭喜你，索票成功");
-			$message_file = $this->load->view(THEME.'/email_ticket', array('uniqid'=>$uniqid, 'endtime'=>$endtime, 'num'=>$num, 'name'=>$name, 'movie'=>$movie), TRUE);
-
-			$this->email->message($message_file);
-			error_reporting(0);
-			if($this->email->send()) {
-				write_log($email.'---success', 'ticket', 'ticket');
-				$insert_data['state'] = 1;
+		$where = 'WHERE 1';
+		if($stype == 'subject') {			//课件搜索
+			if($type == 1) {
+				$where .= ' AND s.top=1';
+			} elseif($type == 2) {
+				$where .= ' AND s.type="lakeCamp"';
+			} elseif($type == 3) {
+				$where .= ' AND s.type="lakeRead"';
 			}
-			write_log($this->email->print_debugger(), 'email', 'ticket');
-		}
 
-		if($this->base->insert_data('mticket_log', $insert_data)) {
-			$this->db->query('UPDATE ab_mticket SET used = used+'.$num.' WHERE id='.$id);
-			echo json_encode(array('uniqid'=>$uniqid, 'endtime'=>$endtime, 'num'=>$num, 'result'=>'yes'));exit;
+			if($keyword) {
+				$where .= ' AND s.title LIKE "%'.$keyword.'%"';
+			}
+
+			$this->_data['lists'] = $this->db->query('SELECT s.*, a.name FROM ab_subject s LEFT JOIN ab_author a ON a.id=s.authorid '.$where)->result_array();
+		} elseif($stype == 'author') {		//作者搜索
+			if($keyword) {
+				$where .= ' AND name LIKE "%'.$keyword.'%"';
+			}
+			$this->_data['lists'] = $this->db->query('SELECT * FROM ab_author '.$where)->result_array();
 		} else {
-			echo json_encode(array('result'=>'no'));exit;
+			$this->_data['lists'] = array();
 		}
+		$this->_data['stype'] = $stype;
+		$this->_data['type'] = $type;
+		$this->load->view(THEME.'/lake_search', $this->_data);
 	}
 }

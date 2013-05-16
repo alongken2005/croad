@@ -1,62 +1,175 @@
 <?php $this->load->view(THEME.'/header');?>
+<script type="text/javascript" src="<?=THEME_VIEW?>/js/slide.js"></script>
 <link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/lake.css"/>
 <div class="box">
 	<div class="iland" style="margin-top: 95px;"></div>
-	<div class="single_top">
-		<div class="single_t1"></div>
-		<div class="single_intro">
-			<h4 style="font-size: 18px;">《德国少年儿童百科知识全书 什么是什么 •WAS IST WAS 》<span style="color: #DE3168">精选</span></h4>
-			浙江儿童阅读推广研究中心科学年推荐阅读书目<br>
-			100余位科学家参与创作，图文并茂的科普经典<br>
-			德国本土销量超过5000万册，版权遍及全球45个国家和地区，<br>
-			CCTV2009年度获奖图书，2009年度最佳少儿百科知识图书奖<br>
-			2009年度最值得一读的三十本好书奖  2009年度最有影响的十本好书奖 畅销5000万册<br>
-			WAS IST WAS=逻辑思维培养+知识体系构建＝诺贝尔奖的摇篮<br>
+	<div class="lake_focus">
+		<div class="lake_menu">
+			<a href="#m1" class="sp_index lake_tab_a">文件通知</a>
+			<a href="#m2" class="sp_index lake_tab_b">儿童阅读</a>
+			<a href="#m2" class="sp_index lake_tab_c">班级读书会</a>
+			<a href="#m4" class="sp_index lake_tab_d">故事妈妈</a>
+			<a href="" class="sp_index lake_tab_e">新作文联盟</a>
+			<a href="" class="sp_index lake_tab_f">国学经典</a>
 		</div>
-		<div class="clear"></div>
-		<div class="right">
-			<div class="price">
-				<span>￥200.00</span><br>
-				市场价:￥<b>300.00</b>
+		<div class="focus clearfix">
+			<div class="panel_box" >
+				<ul>
+					<?php foreach($piclist as $v):?>
+					<li>
+						<a href="">
+							<img src="<?=get_thumb($v['filename'], false)?>" />
+						</a>
+					</li>
+					<?php endforeach;?>
+				</ul>
 			</div>
-			<a href="<?=site_url('single/check?id=1')?>" target="_blank" class="buy">节省￥100（6.6折）免费送货</a>
+			<div class="num">
+				<span></span>
+				<?php foreach($piclist as $k=>$v):?>
+				<a href="javascript:void(0)"><img src="<?=get_thumb($v['filename'])?>"/></a>
+				<?php endforeach;?>
+			</div>
+		</div>
+
+<script type="text/javascript">
+    slidshow($('.focus'), true);
+</script>
+		<div class="intro">
+			<div class="title sp_index"></div>
+			<div class="content">
+				运河儿童电影院是由浙江省杭州市拱墅区文化广电新闻出版局与中国儿童少年电影学会、浙江儿童阅读推广研究中心、中国儿童之路数字图书馆共同合作，是一个专门为青少年儿童而设的，以儿童电影和儿童剧为主的电影院。运河儿童电影院将通过观赏影片与开展形式多样的鉴赏、影评、摄影、导演等知识讲座相结合的活动模式，培养少年儿童的审美情趣和鉴赏能力，提高少年儿童的文化艺术修养。旨在为广大的青少年儿童提供一个休闲娱乐与学习研究于一体的场所。
+			</div>
 		</div>
 	</div>
 	<div class="single_bottom2"></div>
 
-	<div class="single_list png"></div>
-	<div class="single_suit">
-		<div class="corner"></div>
-	<?php $count = count($lists); foreach($lists as $k=>$v) {?>
-		<div class="li">
-			<img src="<?=base_url(get_thumb($v['cover']))?>" class="img"/>
-		</div>
-		<div class="single_summary">
-			<div class="word">
-				<h2><?=$v['title']?></h2>
-				<div class="author">
-					<?php
-					if($v['author1']) { echo "作者：".$v['author1'];}
-					if($v['author2']) { echo "&nbsp;&nbsp;&nbsp;插图作者：".$v['author2'];}
-					if($v['author3']) { echo "&nbsp;&nbsp;&nbsp;译者：".$v['author3'];}
-					?>
+	<div id="lake_tab_a">
+		<div class="title" id="m1"><span class="sp_index"></span></div>
+		<div class="content clearfix">
+			<div class="scrollable-panel">
+				<div class="clearfix cn">
+					<div class="screen">
+				<?php
+					$i=1;
+					foreach($toplist as $v):
+						if($i%7==0) echo '</div><div class="screen">';
+				?>
+					<div class="li">
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?>
+							<?php if($v['gname']):?><b>[<?=$v['gname']?>]</b><?php endif;?>
+						</a>
+						作者：<?=$v['name']?>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
+					</div>
+				<?php
+					$i++;
+					endforeach;
+				?>
+					</div>
 				</div>
-				<div class="intro"><?=$v['intro']?></div>
 			</div>
-			<div class="pic">
-				<img src="<?=base_url(get_thumb($v['pic1']))?>"/>
-				<img src="<?=base_url(get_thumb($v['pic2']))?>"/>
+			<div class="trigger-bar">
+				<a href="javascript:void(0);" title="上翻" class="prev"></a>
+				<div class="scrollable-trigger"></div>
+				<a href="javascript:void(0);" title="下翻" class="next"></a>
+			</div>
+			<a href="<?=site_url('lake/search?type=1')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
+		</div>
+		<div class="single_bottom3"></div>
+	</div>
+
+	<div id="lake_tab_b">
+		<div class="tab clearfix" id="m2">
+			<span class="tab_a current"><a href="javascript:void(0)"></a></span>
+			<span class="tab_b"><a href="javascript:void(0)"></a></span>
+		</div>
+		<div class="content0 clearfix" >
+			<div class="scrollable-panel">
+				<div class="clearfix cn">
+				<?php
+					foreach($camplist as $v):
+				?>
+					<div class="li">
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?>
+							<?php if($v['gname']):?><b>[<?=$v['gname']?>]</b><?php endif;?>
+						</a>
+						作者：<?=$v['name']?>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
+					</div>
+				<?php
+					endforeach;
+				?>
+				</div>
+			</div>
+			<div class="trigger-bar">
+				<a href="javascript:void(0);" title="上翻" class="prev"></a>
+				<div class="scrollable-trigger"></div>
+				<a href="javascript:void(0);" title="下翻" class="next"></a>
+			</div>
+			<a href="<?=site_url('lake/search?type=2')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
+		</div>
+
+		<div class="content1 clearfix" style="display: none">
+			<div class="scrollable-panel">
+				<div class="clearfix cn">
+				<?php
+					foreach($readlist as $v):
+				?>
+					<div class="li">
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?>
+							<?php if($v['gname']):?><b>[<?=$v['gname']?>]</b><?php endif;?>
+						</a>
+						作者：<?=$v['name']?>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
+					</div>
+				<?php
+					endforeach;
+				?>
+				</div>
+			</div>
+			<div class="trigger-bar">
+				<a href="javascript:void(0);" title="上翻" class="prev"></a>
+				<div class="scrollable-trigger"></div>
+				<a href="javascript:void(0);" title="下翻" class="next"></a>
+			</div>
+			<a href="<?=site_url('lake/search?type=3')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
+		</div>
+		<div class="single_bottom3"></div>
+	</div>
+
+	<div id="lake_tab_c">
+		<div class="title sp_index" id="m4"></div>
+		<div class="content clearfix">
+			<a href="javascript:void(0);" title="上翻" class="prev"></a>
+			<div class="scrollable-panel">
+				<div class="clearfix cb">
+					<div class="screen">
+				<?php
+					$i=1;
+					foreach($authorlist as $v):
+						if($i%9==0) echo '</div><div class="screen">';
+				?>
+					<div class="li">
+						<a href="<?=site_url('lake/author?id='.$v['id'])?>" class="img"><img src="<?=get_thumb($v['cover'])?>"/></a>
+						<div class="name"><?=$v['name']?></div>
+						<div class="zc"><?=$v['title']?></div>
+					</div>
+				<?php
+					$i++;
+					endforeach;
+				?>
+					</div>
+				</div>
+			</div>
+			<a href="javascript:void(0);" title="下翻" class="next"></a>
+
+			<div class="trigger-bar">
+				<div class="scrollable-trigger"></div>
 			</div>
 		</div>
-		<?php if(($k+1)%3 == 0 || ($k+1) == $count) {?>
-		<div class="clear"></div>
-		<div class="summary"></div>
-	<?php }}?>
 	</div>
 </div>
-<script type="text/javascript">
-
-</script>
 <table cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td class="bottom_left" width="50%"></td>
@@ -66,42 +179,81 @@
 		<td class="bottom_right" width="50%"></td>
 	</tr>
 </table>
-<div class="scrollable-trigger"></div>
+<script type="text/javascript" src="<?=base_url('./common/js/jquery.switchable.js')?>"></script>
+<script type="text/javascript">
+$(function(){
+	window.taba = $("#lake_tab_a .scrollable-trigger").switchable("#lake_tab_a .scrollable-panel .screen", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 1,
+		visible: 1,
+		api: true
+	});
+	$("#lake_tab_a .next").click(function(){
+		taba.next();
+	});
+	$("#lake_tab_a .prev").click(function(){
+		taba.prev();
+	});
 
+	$("#lake_tab_b .tab span").click(function() {
+		$("#lake_tab_b .tab span").removeClass('current');
+		$(this).addClass('current');
+		var index = $("#lake_tab_b .tab span").index($(this));
+		if(index == 1) {
+			$("#lake_tab_b .content1 .cn").css("left","0px");
+		}
+		$("#lake_tab_b .content0, #lake_tab_b .content1").hide();
+		$("#lake_tab_b .content"+index).show();
+	})
+
+	window.tabb0 = $("#lake_tab_b .content0 .scrollable-trigger").switchable("#lake_tab_b .content0 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content0 .next").click(function(){
+		tabb0.next();
+	});
+	$("#lake_tab_b .content0 .prev").click(function(){
+		tabb0.prev();
+	});
+
+	window.tabb1 = $("#lake_tab_b .content1 .scrollable-trigger").switchable("#lake_tab_b .content1 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content1 .next").click(function(){
+		tabb1.next();
+	});
+	$("#lake_tab_b .content1 .prev").click(function(){
+		tabb1.prev();
+	});
+
+	window.tabc = $("#lake_tab_c .scrollable-trigger").switchable("#lake_tab_c .scrollable-panel .screen", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 1,
+		visible: 1,
+		api: true
+	});
+	$("#lake_tab_c .next").click(function(){
+		tabc.next();
+	});
+	$("#lake_tab_c .prev").click(function(){
+		tabc.prev();
+	});
+});
+</script>
 <!--[if IE 6]>
 <script type="text/javascript" src="<?=base_url('./common/js/fixpng-min.js')?>"></script>
 <script type="text/javascript">
 DD_belatedPNG.fix('.png, .browse');
 </script>
 <![endif]-->
-
-<script type="text/javascript">
-
-	$(function() {
-		$('.single_suit .li').click(function() {
-			$('.single_summary').slideUp('fast');
-			var obj = $(this).nextAll('.summary').first();
-			obj.html($(this).next('.single_summary').clone());
-			var li = $(this);
-			obj.find('.single_summary').slideDown('fast', function() {
-				var offset = li.offset();
-				$('.single_suit .corner').offset({top: offset.top+300, left: offset.left+130});
-			});
-		})
-	})
-
-	$(window).load(function() {
-		$('.single_suit .li').first().click();
-	})
-
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-26645818-3']);
-	_gaq.push(['_trackPageview']);
-
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-</script>
 <?php $this->load->view(THEME.'/footer');?>

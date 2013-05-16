@@ -29,7 +29,7 @@
 		<div class="corner"></div>
 	<?php $count = count($lists); foreach($lists as $k=>$v) {?>
 		<div class="li">
-			<img src="<?=base_url(get_thumb($v['cover']))?>" class="img"/>
+			<img src="<?=get_thumb($v['cover'])?>" class="img"/>
 		</div>
 		<div class="single_summary">
 			<div class="word">
@@ -44,8 +44,8 @@
 				<div class="intro"><?=$v['intro']?></div>
 			</div>
 			<div class="pic">
-				<img src="<?=base_url(get_thumb($v['pic1']))?>"/>
-				<img src="<?=base_url(get_thumb($v['pic2']))?>"/>
+				<img src="<?=get_thumb($v['pic1'])?>"/>
+				<img src="<?=get_thumb($v['pic2'])?>"/>
 			</div>
 		</div>
 		<?php if(($k+1)%3 == 0 || ($k+1) == $count) {?>

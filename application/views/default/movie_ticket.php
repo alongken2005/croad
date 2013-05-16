@@ -20,7 +20,7 @@ if($action == 'index'):
 		<div class="hello">Hi，<?=$name?>，欢迎您&nbsp;<a href="<?=site_url('reg')?>">(不是您?)</a></div>
 	</div>
 	<div class="clear"></div>
-	<img class="cover" src="<?=base_url(get_thumb($movie['cover1']))?>"/>
+	<img class="cover" src="<?=get_thumb($movie['cover1'])?>"/>
 	<div class="ticket_box">
 		<div class="movie_name"><?=$movie['title']?></div>
 		<div class="step1">

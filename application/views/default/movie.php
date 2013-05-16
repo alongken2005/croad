@@ -95,7 +95,7 @@
 						if($v['movie']) { $url = $v['is_local'] == 1 ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('./data/uploads/stuff/'.$v['movie']) : $v['movie'];}
 				?>
 					<span class="li">
-						<a href="<?=site_url('movie/detail?id='.$v['id'])?>"><img src="<?=base_url(get_thumb($v['cover1']))?>"/></a>
+						<a href="<?=site_url('movie/detail?id='.$v['id'])?>"><img src="<?=get_thumb($v['cover1'])?>"/></a>
 						<span class="right_info">
 							<h3 class="title"><a href="<?=site_url('movie/detail?id='.$v['id'])?>"><?=$v['title']?></a></h3>
 							<p class="sintro"><?=cutstr(strip_tags($v['intro']), 138)?>｛<a href="<?=site_url('movie/detail?id='.$v['id'])?>" >查看全文</a>｝</p>
@@ -121,7 +121,7 @@
 				<?php foreach($yugao as $k=>$v): if($k != 0 && $k%3 == 0) { echo "</div><div>";}?>
 					<span class="li">
 						<a href="<?=site_url('movie/detail?id='.$v['id'])?>">
-							<img src="<?=base_url(get_thumb($v['cover2']))?>" />
+							<img src="<?=get_thumb($v['cover2'])?>" />
 						</a>
 						<a href="<?=site_url('movie/detail?id='.$v['id'])?>" style="height:30px;line-height: 30px; text-align: center;"><?=cutstr($v['title'], 16, '')?></a>
 						<h6><?=date('m月d日', $v['stime'])?></h6>
@@ -144,7 +144,7 @@
 				<?php foreach($huigu as $k=>$v): if($k != 0 && $k%5 == 0) { echo "</div><div>";}?>
 					<span class="li">
 						<a href="<?=site_url('movie/detail?id='.$v['id'])?>">
-							<img src="<?=base_url(get_thumb($v['cover1']))?>" />
+							<img src="<?=get_thumb($v['cover1'])?>" />
 						</a>
 						<a href="<?=site_url('movie/detail?id='.$v['id'])?>" style="margin-top: 6px; text-align: center;"><?=cutstr($v['title'], 16, '')?></a>
 					</span>
@@ -166,7 +166,7 @@
 					<span class="cron_tr"></span>
 					<span class="cron_bl"></span>
 					<span class="cron_br"></span>
-					<a rel="album_group" href="<?=base_url('./data/uploads/pics/'.$v['filename'])?>"><img src="<?=base_url(get_thumb($v['filename']))?>" /></a>
+					<a rel="album_group" href="<?=base_url('./data/uploads/pics/'.$v['filename'])?>"><img src="<?=get_thumb($v['filename'])?>" /></a>
 				</div>
 			</li>
 		<?php endforeach;?>

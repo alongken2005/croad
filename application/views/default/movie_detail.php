@@ -31,7 +31,7 @@
 	<div class="clear"></div>
 	<div class="movie_box">
 		<div class="cover">
-			<img src="<?=base_url(get_thumb($movie['cover1']))?>"/>
+			<img src="<?=get_thumb($movie['cover1'])?>"/>
 		</div>
 
 		<div class="movie_intro">
@@ -101,7 +101,7 @@
 				?>
 					<span class="li">
 						<a href="#xinshang_<?=$k?>" class="detail_xinshang">
-							<img src="<?=base_url(get_thumb($v['cover2']))?>" />
+							<img src="<?=get_thumb($v['cover2'])?>" />
 						</a>
 						<a href="#xinshang_<?=$k?>" class="detail_xinshang" style="height:30px;line-height: 30px; text-align: center;"><?=cutstr($v['title'], 16, '')?></a>
 						<div style="display: none;">
@@ -142,7 +142,7 @@
 				?>
 					<span class="li">
 						<a href="#pianhua_<?=$k?>" class="detail_pianhua">
-							<img src="<?=base_url(get_thumb($v['cover2']))?>" />
+							<img src="<?=get_thumb($v['cover2'])?>" />
 						</a>
 						<a href="#pianhua_<?=$k?>" class="detail_pianhua" style="height:30px;line-height: 30px; text-align: center;"><?=$v['title']?></a>
 
@@ -174,7 +174,7 @@
 				<?php foreach($mimage as $k=>$v): if($k != 0 && $k%3 == 0) { echo "</div><div>";}?>
 					<span class="li">
 						<a href="<?=base_url('./data/uploads/pics/'.$v['filename'])?>" rel="album_group">
-						<img src="<?=base_url(get_thumb($v['filename']))?>" />
+						<img src="<?=get_thumb($v['filename'])?>" />
 						</a>
 					</span>
 				<?php endforeach;?>
@@ -195,7 +195,7 @@
 				<?php foreach($likes as $k=>$v): if($k != 0 && $k%5 == 0) { echo "</div><div>";}?>
 					<span class="li">
 						<a href="<?=site_url('movie/detail?id='.$v['id'])?>">
-							<img src="<?=base_url(get_thumb($v['cover1']))?>" />
+							<img src="<?=get_thumb($v['cover1'])?>" />
 						</a>
 						<a href="<?=site_url('movie/detail?id='.$v['id'])?>" style="margin-top: 6px; text-align: center;"><?=$v['title']?></a>
 					</span>

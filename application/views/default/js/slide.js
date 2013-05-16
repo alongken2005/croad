@@ -1,13 +1,16 @@
 //焦点图封装
-function slidshow(contain) {
+function slidshow(contain, thumb) {
 	var sw = 0;
 	var count = contain.find('.num a').length;
 	contain.find('ul li').eq(0).show();
 	contain.find('.num a').eq(0).addClass("cur");
 
 	function myShow(i){
+		if(thumb) {
+			contain.find('.num span').animate({top: (i*contain.find('.num img').eq(0).height()+i*5)+'px'}, 150);
+		}
 		contain.find('.num a').eq(i).addClass("cur").siblings("a").removeClass("cur");
-		contain.find('ul li').eq(i).stop(true,true).fadeIn(600).siblings("li").fadeOut(600);
+		contain.find('ul li').eq(i).stop(true,true).fadeIn(300).siblings("li").fadeOut(300);
 	}
 
 	function timer() {

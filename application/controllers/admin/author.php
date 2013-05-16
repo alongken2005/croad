@@ -9,11 +9,8 @@ class Author extends CI_Controller
 {
 	private $_data;
 
-    public function __construct()
-    {
+    public function __construct() {
 		parent::__construct();
-
-		$this->_data['thisClass'] = __CLASS__;
 		$this->load->model('base_mdl', 'base');
 		$this->permission->power_check();
     }
@@ -62,9 +59,44 @@ class Author extends CI_Controller
 			$this->load->view('admin/author_op', $this->_data);
 		} else {
 			$deal_data = array(
+				'title'			=> $this->input->post('title'),
 				'content'		=> $this->input->post('content'),
 				'name'			=> $this->input->post('name'),
 			);
+
+			$dirname = './data/uploads/pics/'.date('Y/m/');
+			createFolder($dirname);
+
+			if($_FILES['cover']['size'] > 0) {
+				$config = array(
+					'upload_path'	=> $dirname,
+					'allowed_types'	=> 'gif|jpg|png',
+					'max_size'		=> 5000,
+					'max_width'		=> 3000,
+					'max_height'	=> 3000,
+					'encrypt_name'	=> true,
+				);
+
+				$this->load->library('upload', $config);
+
+				if(!$this->upload->do_upload('cover')) {
+					$this->_data['upload_err'] = $this->upload->display_errors();
+					$this->load->view('admin/pic_op', $this->_data);
+				}
+				$upload_data = $this->upload->data();
+
+				$config2 = array(
+					'source_image'	=> $upload_data['full_path'],
+					'maintain_ratio'=> true,
+					'width'			=> 195,
+					'height'		=> 235,
+				);
+
+				$this->load->library('image_lib', $config2);
+				$this->image_lib->resize();
+
+				$deal_data['cover'] = date('Y/m/').$upload_data['file_name'];
+			}
 
 			if ($id = $this->input->get('id')) {
 				if ($this->base->update_data('author', array('id' => $id), $deal_data)) {
@@ -87,7 +119,7 @@ class Author extends CI_Controller
     */
     public function del () {
         $id = intval($this->input->get('id'));
-        if($id && $this->base->del_data('author', array('id' => $id))) {
+        if($id && $this->base->del_data('lake_author', array('id' => $id))) {
         	exit('ok');
         } else {
         	exit('no');

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>儿童之路</title>
 	<script type="text/javascript" src="<?=base_url('./common/js/jquery.js')?>"></script>
-	<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/style.css"/>
 </head>
 <body>
 	<div class="box">

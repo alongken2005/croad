@@ -12,7 +12,7 @@ textarea { overflow: auto; vertical-align: top; }
 .right { float: right; }
 .clear { clear: both; height: 0; line-height: 0; overflow: hidden; font-size: 0; }
 .clear10 { clear: both; height: 10px; overflow: hidden; font-size: 0; }
-.clearfix{ overflow: hidden; _zoom: 1; }
+.clearfix { overflow: hidden; zoom: 1; }
 
 /*输入框*/
 .input1 { width: 80px; height: 26px; line-height: 26px; background: #FFF; color: #714a3a; font-size: 14px; font-weight: bold; padding: 0 3px; border: 1px solid #e0dfdd; }
@@ -66,9 +66,11 @@ textarea { overflow: auto; vertical-align: top; }
 
 /*焦点图*/
 .foucs { width: 610px; height: 295px; float: left; position: relative; overflow: hidden; }
+/*
 .num { position: absolute; right: 2px; bottom: 5px; z-index: 10;}
 .num a { padding: 3px 8px; background: #000; color: #FFF; display: inline; text-align: center; margin-right: 3px; cursor: pointer;}
 .num a.cur { background: #8A0000; }
+*/
 .foucs ul { position: relative; z-index: 5; }
 .foucs ul li { position: absolute; display: none; }
 .foucs ul li img { width: 610px; height: 295px; }

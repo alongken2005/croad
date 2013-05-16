@@ -40,7 +40,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th></th>
 			<td>
-				<img src="<?=base_url(get_thumb($row['cover1']))?>"/>
+				<img src="<?=get_thumb($row['cover1'])?>"/>
 			</td>
 		</tr>
 	<?php endif;?>
@@ -55,7 +55,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th></th>
 			<td>
-				<img src="<?=base_url(get_thumb($row['cover2']))?>"/>
+				<img src="<?=get_thumb($row['cover2'])?>"/>
 			</td>
 		</tr>
 	<?php endif;?>
