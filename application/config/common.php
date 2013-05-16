@@ -12,6 +12,9 @@ $config['pic_type'][1] = '影院相册';
 $config['pic_type'][3] = '电影首页焦点图';
 $config['pic_type'][4] = '千岛湖焦点图';
 
-$config['stuff_kinds']['lakeRead'] = '班级读书会';
-$config['stuff_kinds']['lakeCamp'] = '阅读研习营';
+$config['stuff_kinds']['lakeCread'] = '儿童阅读';
+$config['stuff_kinds']['lakeClass'] = '班级读书会';
+$config['stuff_kinds']['lakeStory'] = '故事妈妈';
+$config['stuff_kinds']['lakeContent'] = '新作文联盟';
+$config['stuff_kinds']['lakeState'] = '国学经典';
 ?>

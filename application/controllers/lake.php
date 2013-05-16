@@ -24,8 +24,18 @@ class Lake extends CI_Controller {
 	public function main() {
 		$this->_data['piclist'] = $this->base->get_data('pics', array('place'=>4), '*', 5, 0)->result_array();
 		$this->_data['toplist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.top=1")->result_array();
-		$this->_data['camplist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeCamp'")->result_array();
-		$this->_data['readlist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeRead'")->result_array();
+
+		//儿童阅读
+		$this->_data['lakeCread'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeCread'")->result_array();
+		//班级读书会
+		$this->_data['lakeClass'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeClass'")->result_array();
+		//故事妈妈
+		$this->_data['lakeStory'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeStory'")->result_array();
+		//新作文联盟
+		$this->_data['lakeContent'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeContent'")->result_array();
+		//国学经典
+		$this->_data['lakeState'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, a.name, g.title gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeState'")->result_array();
+
 		$this->_data['authorlist'] = $this->base->get_data('author')->result_array();
 		$this->load->view(THEME.'/lake', $this->_data);
 	}

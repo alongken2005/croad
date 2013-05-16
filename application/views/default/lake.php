@@ -5,12 +5,12 @@
 	<div class="iland" style="margin-top: 95px;"></div>
 	<div class="lake_focus">
 		<div class="lake_menu">
-			<a href="#m1" class="sp_index lake_tab_a">文件通知</a>
-			<a href="#m2" class="sp_index lake_tab_b">儿童阅读</a>
-			<a href="#m2" class="sp_index lake_tab_c">班级读书会</a>
-			<a href="#m4" class="sp_index lake_tab_d">故事妈妈</a>
-			<a href="" class="sp_index lake_tab_e">新作文联盟</a>
-			<a href="" class="sp_index lake_tab_f">国学经典</a>
+			<a href="#m1">文件通知</a>
+			<a href="#m2">儿童阅读</a>
+			<a href="#m2">班级读书会</a>
+			<a href="#m4">故事妈妈</a>
+			<a href="">新作文联盟</a>
+			<a href="">国学经典</a>
 		</div>
 		<div class="focus clearfix">
 			<div class="panel_box" >
@@ -45,7 +45,10 @@
 	<div class="single_bottom2"></div>
 
 	<div id="lake_tab_a">
-		<div class="title" id="m1"><span class="sp_index"></span></div>
+		<div class="title clearfix" id="m1">
+			<span><a href="">教学设计</a></span>
+			<span><a href="">名师讲堂</a></span>
+		</div>
 		<div class="content clearfix">
 			<div class="scrollable-panel">
 				<div class="clearfix cn">
@@ -81,14 +84,17 @@
 
 	<div id="lake_tab_b">
 		<div class="tab clearfix" id="m2">
-			<span class="tab_a current"><a href="javascript:void(0)"></a></span>
-			<span class="tab_b"><a href="javascript:void(0)"></a></span>
+			<span class="current"><a href="javascript:void(0)">儿童阅读</a></span>
+			<span><a href="javascript:void(0)">班级读书会</a></span>
+			<span><a href="javascript:void(0)">故事妈妈</a></span>
+			<span><a href="javascript:void(0)">新作文联盟</a></span>
+			<span><a href="javascript:void(0)">国学经典</a></span>
 		</div>
-		<div class="content0 clearfix" >
+		<div class="content0 clearfix contentbox" >
 			<div class="scrollable-panel">
 				<div class="clearfix cn">
 				<?php
-					foreach($camplist as $v):
+					foreach($lakeCread as $v):
 				?>
 					<div class="li">
 						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
@@ -110,11 +116,87 @@
 			<a href="<?=site_url('lake/search?type=2')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
 		</div>
 
-		<div class="content1 clearfix" style="display: none">
+		<div class="content1 clearfix contentbox" style="display: none">
 			<div class="scrollable-panel">
 				<div class="clearfix cn">
 				<?php
-					foreach($readlist as $v):
+					foreach($lakeClass as $v):
+				?>
+					<div class="li">
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?>
+							<?php if($v['gname']):?><b>[<?=$v['gname']?>]</b><?php endif;?>
+						</a>
+						作者：<?=$v['name']?>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
+					</div>
+				<?php
+					endforeach;
+				?>
+				</div>
+			</div>
+			<div class="trigger-bar">
+				<a href="javascript:void(0);" title="上翻" class="prev"></a>
+				<div class="scrollable-trigger"></div>
+				<a href="javascript:void(0);" title="下翻" class="next"></a>
+			</div>
+			<a href="<?=site_url('lake/search?type=3')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
+		</div>
+
+		<div class="content2 clearfix contentbox" style="display: none">
+			<div class="scrollable-panel">
+				<div class="clearfix cn">
+				<?php
+					foreach($lakeStory as $v):
+				?>
+					<div class="li">
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?>
+							<?php if($v['gname']):?><b>[<?=$v['gname']?>]</b><?php endif;?>
+						</a>
+						作者：<?=$v['name']?>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
+					</div>
+				<?php
+					endforeach;
+				?>
+				</div>
+			</div>
+			<div class="trigger-bar">
+				<a href="javascript:void(0);" title="上翻" class="prev"></a>
+				<div class="scrollable-trigger"></div>
+				<a href="javascript:void(0);" title="下翻" class="next"></a>
+			</div>
+			<a href="<?=site_url('lake/search?type=3')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
+		</div>
+		<div class="content3 clearfix contentbox" style="display: none">
+			<div class="scrollable-panel">
+				<div class="clearfix cn">
+				<?php
+					foreach($lakeStory as $v):
+				?>
+					<div class="li">
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
+						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?>
+							<?php if($v['gname']):?><b>[<?=$v['gname']?>]</b><?php endif;?>
+						</a>
+						作者：<?=$v['name']?>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
+					</div>
+				<?php
+					endforeach;
+				?>
+				</div>
+			</div>
+			<div class="trigger-bar">
+				<a href="javascript:void(0);" title="上翻" class="prev"></a>
+				<div class="scrollable-trigger"></div>
+				<a href="javascript:void(0);" title="下翻" class="next"></a>
+			</div>
+			<a href="<?=site_url('lake/search?type=3')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
+		</div>
+		<div class="content4 clearfix contentbox" style="display: none">
+			<div class="scrollable-panel">
+				<div class="clearfix cn">
+				<?php
+					foreach($lakeStory as $v):
 				?>
 					<div class="li">
 						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
@@ -182,7 +264,7 @@
 <script type="text/javascript" src="<?=base_url('./common/js/jquery.switchable.js')?>"></script>
 <script type="text/javascript">
 $(function(){
-	window.taba = $("#lake_tab_a .scrollable-trigger").switchable("#lake_tab_a .scrollable-panel .screen", {
+	var taba = $("#lake_tab_a .scrollable-trigger").switchable("#lake_tab_a .scrollable-panel .screen", {
 		triggerType: "click",
 		effect: "scroll",
 		steps: 1,
@@ -196,46 +278,7 @@ $(function(){
 		taba.prev();
 	});
 
-	$("#lake_tab_b .tab span").click(function() {
-		$("#lake_tab_b .tab span").removeClass('current');
-		$(this).addClass('current');
-		var index = $("#lake_tab_b .tab span").index($(this));
-		if(index == 1) {
-			$("#lake_tab_b .content1 .cn").css("left","0px");
-		}
-		$("#lake_tab_b .content0, #lake_tab_b .content1").hide();
-		$("#lake_tab_b .content"+index).show();
-	})
-
-	window.tabb0 = $("#lake_tab_b .content0 .scrollable-trigger").switchable("#lake_tab_b .content0 .scrollable-panel .li", {
-		triggerType: "click",
-		effect: "scroll",
-		steps: 3,
-		visible: 3,
-		api: true
-	});
-	$("#lake_tab_b .content0 .next").click(function(){
-		tabb0.next();
-	});
-	$("#lake_tab_b .content0 .prev").click(function(){
-		tabb0.prev();
-	});
-
-	window.tabb1 = $("#lake_tab_b .content1 .scrollable-trigger").switchable("#lake_tab_b .content1 .scrollable-panel .li", {
-		triggerType: "click",
-		effect: "scroll",
-		steps: 3,
-		visible: 3,
-		api: true
-	});
-	$("#lake_tab_b .content1 .next").click(function(){
-		tabb1.next();
-	});
-	$("#lake_tab_b .content1 .prev").click(function(){
-		tabb1.prev();
-	});
-
-	window.tabc = $("#lake_tab_c .scrollable-trigger").switchable("#lake_tab_c .scrollable-panel .screen", {
+	var tabc = $("#lake_tab_c .scrollable-trigger").switchable("#lake_tab_c .scrollable-panel .screen", {
 		triggerType: "click",
 		effect: "scroll",
 		steps: 1,
@@ -248,6 +291,84 @@ $(function(){
 	$("#lake_tab_c .prev").click(function(){
 		tabc.prev();
 	});
+
+	$("#lake_tab_b .tab span").click(function() {
+		$("#lake_tab_b .tab span").removeClass('current');
+		$(this).addClass('current');
+		var tabindex = $("#lake_tab_b .tab span").index($(this));
+		if(tabindex !== 0) {
+			$("#lake_tab_b .content"+tabindex+" .cn").css("left","0px");
+		}
+		$("#lake_tab_b .contentbox").hide();
+		$("#lake_tab_b .content"+tabindex).show();
+	});
+
+	var tabb0 = $("#lake_tab_b .content0 .scrollable-trigger").switchable("#lake_tab_b .content0 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content0 .next").click(function(){
+		tabb0.next();
+	});
+	$("#lake_tab_b .content0 .prev").click(function(){
+		tabb0.prev();
+	});
+	var tabb1 = $("#lake_tab_b .content1 .scrollable-trigger").switchable("#lake_tab_b .content1 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content1 .next").click(function(){
+		tabb1.next();
+	});
+	$("#lake_tab_b .content1 .prev").click(function(){
+		tabb1.prev();
+	});
+	var tabb2 = $("#lake_tab_b .content2 .scrollable-trigger").switchable("#lake_tab_b .content2 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content2 .next").click(function(){
+		tabb2.next();
+	});
+	$("#lake_tab_b .content2 .prev").click(function(){
+		tabb2.prev();
+	});
+	var tabb3 = $("#lake_tab_b .content3 .scrollable-trigger").switchable("#lake_tab_b .content3 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content3 .next").click(function(){
+		tabb3.next();
+	});
+	$("#lake_tab_b .content3 .prev").click(function(){
+		tabb3.prev();
+	});
+	vartabb4 = $("#lake_tab_b .content4 .scrollable-trigger").switchable("#lake_tab_b .content4 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content4 .next").click(function(){
+		tabb4.next();
+	});
+	$("#lake_tab_b .content4 .prev").click(function(){
+		tabb4.prev();
+	});
+
 });
 </script>
 <!--[if IE 6]>
