@@ -59,7 +59,7 @@ a:hover { color: #CCC; }
 #lake_tab_b { margin-top: 30px; }
 #lake_tab_b .contentbox { border-top-left-radius: 20px; border-top-right-radius: 20px; background-image: #FEFFFF; background-image: -webkit-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: -ms-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: linear-gradient(to bottom, #feffff 0%,#ddf8ff 100%); }
 #lake_tab_b .tab { width: 900px; margin: 0 auto; }
-#lake_tab_b .tab span { float: left; padding: 10px 30px; border-top-left-radius: 20px; border-top-right-radius: 20px; background-color: #DEF8FF; }
+#lake_tab_b .tab span { float: left; padding: 10px 30px; border-top-left-radius: 15px; border-top-right-radius: 15px; background-color: #DEF8FF; }
 #lake_tab_b .tab .current { background-color: #FFF; }
 #lake_tab_b .tab a { display: block; font-size: 18px; font-weight: 600;  }
 #lake_tab_b .tab .tab_a a { background-position: -115px -0; }

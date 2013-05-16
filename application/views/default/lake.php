@@ -108,11 +108,6 @@
 				?>
 				</div>
 			</div>
-			<div class="trigger-bar">
-				<a href="javascript:void(0);" title="上翻" class="prev"></a>
-				<div class="scrollable-trigger"></div>
-				<a href="javascript:void(0);" title="下翻" class="next"></a>
-			</div>
 			<a href="<?=site_url('lake/search?type=2')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
 		</div>
 
@@ -133,11 +128,6 @@
 					endforeach;
 				?>
 				</div>
-			</div>
-			<div class="trigger-bar">
-				<a href="javascript:void(0);" title="上翻" class="prev"></a>
-				<div class="scrollable-trigger"></div>
-				<a href="javascript:void(0);" title="下翻" class="next"></a>
 			</div>
 			<a href="<?=site_url('lake/search?type=3')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
 		</div>
@@ -160,11 +150,6 @@
 				?>
 				</div>
 			</div>
-			<div class="trigger-bar">
-				<a href="javascript:void(0);" title="上翻" class="prev"></a>
-				<div class="scrollable-trigger"></div>
-				<a href="javascript:void(0);" title="下翻" class="next"></a>
-			</div>
 			<a href="<?=site_url('lake/search?type=3')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
 		</div>
 		<div class="content3 clearfix contentbox" style="display: none">
@@ -185,11 +170,6 @@
 				?>
 				</div>
 			</div>
-			<div class="trigger-bar">
-				<a href="javascript:void(0);" title="上翻" class="prev"></a>
-				<div class="scrollable-trigger"></div>
-				<a href="javascript:void(0);" title="下翻" class="next"></a>
-			</div>
 			<a href="<?=site_url('lake/search?type=3')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
 		</div>
 		<div class="content4 clearfix contentbox" style="display: none">
@@ -209,11 +189,6 @@
 					endforeach;
 				?>
 				</div>
-			</div>
-			<div class="trigger-bar">
-				<a href="javascript:void(0);" title="上翻" class="prev"></a>
-				<div class="scrollable-trigger"></div>
-				<a href="javascript:void(0);" title="下翻" class="next"></a>
 			</div>
 			<a href="<?=site_url('lake/search?type=3')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
 		</div>
@@ -302,7 +277,7 @@ $(function(){
 		$("#lake_tab_b .contentbox").hide();
 		$("#lake_tab_b .content"+tabindex).show();
 	});
-
+/*
 	var tabb0 = $("#lake_tab_b .content0 .scrollable-trigger").switchable("#lake_tab_b .content0 .scrollable-panel .li", {
 		triggerType: "click",
 		effect: "scroll",
@@ -368,7 +343,7 @@ $(function(){
 	$("#lake_tab_b .content4 .prev").click(function(){
 		tabb4.prev();
 	});
-
+*/
 });
 </script>
 <!--[if IE 6]>
