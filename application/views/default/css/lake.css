@@ -18,7 +18,8 @@ a:hover { color: #CCC; }
 .lake_focus .intro .title { float: left; margin-top: 30px; width: 115px; height: 62px; background-position: -0px -0px; }
 .lake_focus .intro .content { float: right; margin-top: 20px; width: 800px; line-height: 1.8; font-size: 14px; font-weight: 600; text-indent: 30px; color: #65778C; }
 .lake_menu { overflow: hidden; zoom: 1; margin: 20px 0; }
-.lake_menu a { float: left; margin-left: 67px; }
+.lake_menu a { float: left; padding: 0px 20px 0 20px; }
+/*
 .lake_tab_a { width:98px; height:19px; background-position: -401px -38px; }
 .lake_tab_a:hover { background-position: -262px -19px; }
 .lake_tab_b { width:97px; height:19px; background-position: -457px -18px; }
@@ -31,6 +32,7 @@ a:hover { color: #CCC; }
 .lake_tab_e:hover { background-position: -539px -0px; }
 .lake_tab_f { width:58px; height:18px; background-position: -480px -56px; }
 .lake_tab_f:hover { background-position: -499px -36px; }
+*/
 .single_bottom2 { height: 40px; background: url(../images/single_buttom2.png) no-repeat; }
 .single_bottom3 { height: 42px; background: url(../images/single_buttom3.png) no-repeat; }
 

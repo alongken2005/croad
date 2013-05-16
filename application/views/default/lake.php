@@ -5,12 +5,12 @@
 	<div class="iland" style="margin-top: 95px;"></div>
 	<div class="lake_focus">
 		<div class="lake_menu">
-			<a href="#m1" class="sp_index lake_tab_a"></a>
-			<a href="#m2" class="sp_index lake_tab_b"></a>
-			<a href="#m2" class="sp_index lake_tab_c"></a>
-			<a href="#m4" class="sp_index lake_tab_d"></a>
-			<a href="" class="sp_index lake_tab_e"></a>
-			<a href="" class="sp_index lake_tab_f"></a>
+			<a href="#m1" class="sp_index lake_tab_a">文件通知</a>
+			<a href="#m2" class="sp_index lake_tab_b">儿童阅读</a>
+			<a href="#m2" class="sp_index lake_tab_c">班级读书会</a>
+			<a href="#m4" class="sp_index lake_tab_d">故事妈妈</a>
+			<a href="" class="sp_index lake_tab_e">新作文联盟</a>
+			<a href="" class="sp_index lake_tab_f">国学经典</a>
 		</div>
 		<div class="focus clearfix">
 			<div class="panel_box" >
