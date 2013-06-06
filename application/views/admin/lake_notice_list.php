@@ -1,20 +1,24 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->load->view('admin/header');
 ?>
-<h2>管理<div class="operate"><a href="<?=site_url('admin/lake_attach/op')?>">添加</a></div></h2>
+<h2>文件通知管理<div class="operate"><a href="<?=site_url('admin/lake_notice/op')?>">添加</a></div></h2>
 <table cellpadding="0" cellspacing="0" border="0" class="table2">
 	<tr>
+		<th width="60">排序</th>
 		<th>标题</th>
+		<th width="80">标红</th>
 		<th width="150">发布日期</th>
 		<th width="150">操作</th>
 	</tr>
 <?php if($lists): foreach($lists as $v):?>
 	<tr>
-		<td><?=$v['title']?></td>
+		<td><?=$v['sort']?></td>
+		<td style="text-align: left; padding-left: 10px"><?=$v['title']?></td>
+		<td><?=$v['mark'] == 1 ? '是' : '否'?></td>
 		<td><?=date('Y-m-d H:i', $v['ctime'])?></td>
 		<td>
-			<a href="<?=site_url('admin/lake_attach/op?id='.$v['id'])?>">修改</a>
-			<a href="<?=site_url('admin/lake_attach/del?id='.$v['id'])?>" class="del">删除</a>
+			<a href="<?=site_url('admin/lake_notice/op?id='.$v['id'])?>">修改</a>
+			<a href="<?=site_url('admin/lake_notice/del?id='.$v['id'])?>" class="del">删除</a>
 		</td>
 	</tr>
 <?php endforeach; endif;?>

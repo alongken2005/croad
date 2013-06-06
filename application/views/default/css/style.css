@@ -24,38 +24,30 @@ textarea { overflow: auto; vertical-align: top; }
 .input7 { width: 100px; height: 20px; line-height: 20px; background: #F7F7F7; border: 1px solid #DBDBDB; }
 
 /*按钮 */
-.org_search { width: 86px; height: 26px; border: none; cursor: pointer; background: url(../images/org_btn.png) no-repeat; float: right; }
-.org_search:hover { background: url(../images/org_btn.png) 0 -26px no-repeat; }
-.org_login { width: 86px; height: 26px; border: none; cursor: pointer; background: url(../images/org_btn.png) -86px 0 no-repeat; float: right; }
-.org_login:hover { background: url(../images/org_btn.png) -86px -26px no-repeat; }
-.send_resume { width: 120px; height: 26px; float: right; border: none; cursor: pointer; background: url(../images/btns.png) -172px 0 no-repeat; }
-.send_resume:hover { background: url(../images/btns.png) -172px -26px no-repeat; }
-.ypjob { width: 95px; height: 26px; display: block; margin: 0 auto; margin-top: 15px; border: none; cursor: pointer; background: url(../images/btns.png) -292px 0 no-repeat; }
-.ypjob:hover { background: url(../images/btns.png) -292px -26px no-repeat; }
-.submit { width: 64px; height: 25px; background: url(../images/btns.png) 0 -77px no-repeat; border: none; cursor: pointer; }
-.submit:hover { background: url(../images/btns.png) 0 -52px no-repeat; }
-.reset { width: 64px; height: 25px; background: url(../images/btns.png) -64px -77px no-repeat; border: none; cursor: pointer; }
-.reset:hover { background: url(../images/btns.png) -64px -52px no-repeat; }
+.btn1 { padding: 2px 10px; font-size: 13px; text-align: center; text-shadow: #80AD10 0 1px 0; border:1px solid #80AD10; border-radius: 2px; background: #A5D62D; background-image: -webkit-linear-gradient(top, #A5D62D, #9AC827); color:#FFF; cursor: auto; display: inline-block; cursor: pointer; }
+.btn1:hover { border:1px solid #6A8F0D; background: #94C025; background-image: -webkit-linear-gradient(top, #94C025, #799D1E); }
 .err { border: 1px solid #FF0E00; margin: 0 5px; padding: 3px 10px 2px; background: #F7EFDB; color: #FF0E00; }
 .box { width: 1000px; margin: 0 auto; }
 
 .room_header { overflow: hidden; zoom: 1; margin-bottom: 30px; padding-top: 15px; }
-.room_header .logo { float: left; width: 175px; height: 28px; background: url(../images/croad_logo.png) no-repeat; }
-.room_header .menu { float: left; width: 706px; }
+.room_header .logo { float: left; width: 175px; height: 28px; margin-top: 18px; background: url(../images/croad_logo.png) no-repeat; }
+.room_header .menu { float: left; width: 706px; margin-left: 60px; }
 .room_header .first_menu { height: 35px; background: url(../images/menu_line.png) no-repeat bottom left; }
-.room_header .first_menu a { width: 128px; height: 33px; margin-left: 80px; float: left; background-image: url(../images/area_menu.png); background-repeat: no-repeat; }
+.room_header .first_menu a { width: 128px; height: 33px; margin-left: 80px; float: left; }
 .room_header .room1 { background-position: 0 -33px; }
 .room_header .room1.active, .room_header .room1:hover { background-position: 0 0; }
-.room_header .room2 { background-position: -128px -33px; }
+.room_header .room2 { background-position: -128px -33px; background-image: url(../images/area_menu.png); background-repeat: no-repeat; }
 .room_header .room2.active, .room_header .room2:hover { background-position: -128px 0; }
 .room_header .room3 { background-position: -256px -33px; }
 .room_header .room3.active, .room_header .room3:hover { background-position: -256px 0; }
-.room_header .sec_menu { width: 261px; height: 23px; margin: 0 auto; margin-top: 15px; }
-.room_header .sec_menu a { height: 23px; float: left; background-image: url(../images/area_menu_child.png); background-repeat: no-repeat; }
-.room_header .sec_menu .sec1 { width: 98px; background-position: 0 -23px; }
+.room_header .sec_menu { width: 449px; height: 23px; margin: 0 auto; margin-top: 15px; }
+.room_header .sec_menu a { height: 23px; float: left; }
+.room_header .sec_menu .sec1 { width: 98px; background-position: 0 -23px; background-image: url(../images/area_menu_child.png); background-repeat: no-repeat; }
 .room_header .sec_menu .sec1.active, .room_header .sec_menu .sec1:hover { width: 98px; background-position: 0 0; }
-.room_header .sec_menu .sec2 { width: 123px; margin-left: 40px; background-position: -98px -23px; }
-.room_header .sec_menu .sec2.active, .room_header .sec_menu .sec2:hover { width: 123px; background-position: -98px 0; }
+.room_header .sec_menu .sec2 { width: 124px; margin-left: 40px; background-position: -98px -23px; background-image: url(../images/area_menu_child.png); background-repeat: no-repeat; }
+.room_header .sec_menu .sec2.active, .room_header .sec_menu .sec2:hover { width: 124px; background-position: -98px 0; }
+.room_header .sec_menu .sec3 { width: 147px; margin-left: 40px; background-position: -221px -23px; background-image: url(../images/area_menu_child.png); background-repeat: no-repeat; }
+.room_header .sec_menu .sec3.active, .room_header .sec_menu .sec3:hover { width: 147px; background-position: -222px 0; }
 
 .back_layer { padding: 5px 0; overflow: hidden; zoom: 1; }
 .back_layer .back { float: left; margin: 5px 0; padding: 4px 15px; border: 1px solid #666; border-radius: 3px; background-image: -webkit-linear-gradient(top, #CCC 0%,#999 100%); background-image: -ms-linear-gradient(top, #BDD95F 0%,#92B228 100%); background-image: linear-gradient(to bottom, #BDD95F 0%,#92B228 100%); color: #444; font-size: 14px; font-weight: 600; text-shadow: #CCC 0 1px 0; box-shadow: 0 0px 3px #999; }

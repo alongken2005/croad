@@ -17,7 +17,10 @@ $this->load->view('admin/header');
 		</tr>
 		<tr>
 			<th>标题：</th>
-			<td><input type="text" name="title" class="input2" value="<?=isset($content['title']) && $content['title'] ? $content['title'] : ''?>"/></td>
+			<td>
+				<input type="text" name="title" class="input2" value="<?=set_value('title', isset($row['title']) ? $row['title'] : '')?>"/>
+				<?php if(form_error('title')) { echo form_error('title'); } ?>
+			</td>
 		</tr>
 		<tr>
 			<th>封面：</th>
@@ -25,39 +28,40 @@ $this->load->view('admin/header');
 				<input type="file" name="cover"/>
 			</td>
 		</tr>
-	<?php if(isset($content['cover']) && $content['cover']):?>
+	<?php if(isset($row['cover']) && $row['cover']):?>
 		<tr class="tr_icon">
 			<th></th>
 			<td>
-				<img src="<?=get_thumb($content['cover'])?>"/><a href="<?=site_url('admin/lake_attach/file_del?type=img&id='.$content['id'])?>" class="del">删除</a>
+				<img src="<?=get_thumb($row['cover'])?>"/><a href="<?=site_url('admin/lake_attach/file_del?type=img&id='.$row['id'])?>" class="del">删除</a>
 			</td>
 		</tr>
 	<?php endif; ?>
 		<tr>
 			<th>课件类型：</th>
 			<td>
-				<input type="radio" name="filetype" value="doc" /> 文档
-				<input type="radio" name="filetype" value="online" /> 在线视频
-				<input type="radio" name="filetype" value="local" /> 本地视频
+				<input type="radio" class="filetype" name="filetype" value="doc" checked/> 文档
+				<input type="radio" class="filetype" name="filetype" value="online" <?=set_value('filetype', isset($row['filetype']) && $row['filetype'] == 'online' ? 'checked' : '')?>/> 在线视频
+				<input type="radio" class="filetype" name="filetype" value="local" <?=set_value('filetype', isset($row['filetype']) && $row['filetype'] == 'local' ? 'checked' : '')?>/> 本地视频
+				<?php if(form_error('filetype')) { echo form_error('filetype'); } ?>
 			</td>
 		</tr>
-		<tr id="doc">
+		<tr class="filetab docTab">
 			<th>选择文档：</th>
 			<td><input type="file" name="doc" /></td>
 		</tr>
-		<tr>
+		<tr class="filetab onlineTab">
 			<th>flash地址：</th>
-			<td><input type="text" name="online" class="input2" value="<?=isset($row['is_local']) && $row['is_local'] == 0 ? $row['movie'] : ''?>"/></td>
+			<td><input type="text" name="online" class="input2" value="<?=isset($row['filetype']) && $row['filetype'] == 'online' ? $row['filename'] : ''?>"/></td>
 		</tr>
-		<?php if(isset($row['is_local']) && $row['is_local'] == 1):?>
-		<tr>
+		<?php if(isset($row['filetype']) && $row['filetype'] == 'local'):?>
+		<tr class="filetab localTab">
 			<th>视频路径：</th>
 			<td>
-				data/uploads/stuff/<?=$row['movie']?>
+				data/uploads/attach/<?=$row['filename']?>
 			</td>
 		</tr>
 		<?php endif;?>
-		<tr>
+		<tr class="filetab localTab">
 			<th>选择本地视频：</th>
 			<td>
 				<div class="videoNameList" style="width:80px">
@@ -90,6 +94,8 @@ $this->load->view('admin/header');
 <script type="text/javascript" src="<?=base_url('./common/kindeditor/kindeditor.js')?>"></script>
 <script type="text/javascript">
 $(function() {
+	fileChange();
+	
 	KindEditor.ready(function(K) {
 		K.create('#content', {width : '670', height: '500', newlineTag:'br', filterMode : true});
 	});
@@ -107,7 +113,17 @@ $(function() {
 		}
 		return false;
 	})
+
+	$('.filetype').change(function() {
+		fileChange();
+	})
 })
+
+function fileChange() {
+	var val = $('.filetype:checked').val();
+	$('.filetab').hide();
+	$('.'+val+'Tab').show();
+}
 </script>
 
 <?php $this->load->view('admin/footer');?>

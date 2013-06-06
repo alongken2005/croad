@@ -1,7 +1,5 @@
-<?php $this->load->view(THEME.'/header');?>
-<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>/css/lake.css"/>
-<div class="box subject">
-	<div class="iland2" style="margin-top: 95px;"></div>
+<?php $this->load->view(THEME.'/lake_header');?>
+<div class="subject">
 	<div class="overall clearfix">
 		<img class="cover left" src="<?=get_thumb($subject['cover'])?>"/>
 		<div class="right">
@@ -48,15 +46,46 @@
 		</div>
 	</div>
 </div>
-<table cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td class="bottom_left" width="50%"></td>
-		<td class="bottom_center">
-			<div class="box" style="text-align: center; font-family: '微软雅黑'; font-size: 20px; font-weight: 600; margin-top: 30px;"><a href="<?=base_url()?>" target="_blank" style="color: #3399CC;">成为儿童之路会员，有机会参加更多活动！ </a></div>
-		</td>
-		<td class="bottom_right" width="50%"></td>
-	</tr>
-</table>
+<div class="comment">
+	<h3>留言</h3>
+	<?php foreach($com_lists as $v):?>
+	<div class="li">
+		<div class="cinfo clearfix">
+			<?php if($v['authorid']):?>
+			<a href="javascript:void(0)" class="user"><?=$users[$v['authorid']]?></a>
+			<?php endif;?>
+			<a href="#submitForm" rel="<?=$v['id']?>" class="replybtn">回复</a>
+			<?php if(isset($uid) && $uid == $v['authorid']):?>
+			<a href="">修改</a>
+			<a href="<?=site_url('lake/comment_del?id='.$v['id'])?>" class="commentDel">删除</a>
+			<?php endif;?>
+			<span><?=date('Y-m-d H:i', $v['ctime'])?></span>
+		</div>
+		<?php if($v['ccontent'] != ''):?>
+		<div class="reply">
+			<?=$v['ccontent']?>&nbsp;&nbsp;
+			<?php if($v['cuid']):?>
+			<a href="javascript:void(0)" class="reuser"><?=$users[$v['cuid']]?></a>
+			<?php endif;?>
+		</div>
+		<?php endif;?>
+		<div class="cmsg">
+			<?=$v['content']?>
+		</div>
+	</div>
+	<?php endforeach;?>
+	<?=$pagination ? $pagination : ''?>
+	<form action="<?=site_url('lake/comment')?>" method="post" id="submitForm">
+		<div class="recontent">
+			<div class="replyMark"></div>
+			<a class="close" title="取消回复" rel="取消回复"></a>
+		</div>
+		<textarea name="content"></textarea>
+		<input type="hidden" name="typeid" value="<?=$subject['id']?>"/>
+		<input type="hidden" name="cid" value="0" id="cid"/>
+		<input type="submit" class="btn1" value="留 言"/>
+	</form>
+</div>
 <script type="text/javascript" src="<?=base_url('./common/js/jquery.switchable.js')?>"></script>
 <script type="text/javascript">
 $(function(){
@@ -67,6 +96,29 @@ $(function(){
 		$(".subject .content0, .subject .content1").hide();
 		$(".subject .content"+index).show();
 	})
+
+	$('.replybtn').click(function() {
+		$('.recontent .replyMark').text($(this).parent().siblings('.cmsg').text());
+		$('#cid').val($(this).attr('rel'));
+		$('.recontent').show();
+	})
+
+	$('.recontent .close').click(function() {
+		$('.recontent').hide();
+		$('#cid').val(0);
+	})
+
+	//删除留言
+	$('.commentDel').click(function() {
+		$.get($(this).attr('href'), {}, function(data) {
+			if(data === 'ok') {
+				$(this).parent().parent().hide();
+			} else {
+				alert('删除失败');
+			}
+		});
+		return false;
+	})
 });
 </script>
 <!--[if IE 6]>
@@ -75,4 +127,4 @@ $(function(){
 DD_belatedPNG.fix('.png, .browse');
 </script>
 <![endif]-->
-<?php $this->load->view(THEME.'/footer');?>
+<?php $this->load->view(THEME.'/lake_footer');?>

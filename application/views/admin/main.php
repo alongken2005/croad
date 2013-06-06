@@ -54,18 +54,12 @@
 			</div>
 			<div title="千岛湖">
 				<ul>
-					<li>
-						<a href="<?=site_url('admin/grade/lists')?>" class="add_tab">界数管理</a>
-					</li>
-					<li>
-						<a href="<?=site_url('admin/author/lists')?>" class="add_tab">作者管理</a>
-					</li>
-					<li>
-						<a href="<?=site_url('admin/subject/lists')?>" class="add_tab">教案管理</a>
-					</li>
-					<li>
-						<a href="<?=site_url('admin/lake_attach/lists')?>" class="add_tab">教案课件管理</a>
-					</li>
+					<li><a href="<?=site_url('admin/grade/lists')?>" class="add_tab">界数管理</a></li>
+					<li><a href="<?=site_url('admin/author/lists')?>" class="add_tab">作者管理</a></li>
+					<li><a href="<?=site_url('admin/subject/lists')?>" class="add_tab">教案管理</a></li>
+					<li><a href="<?=site_url('admin/lake_attach/lists')?>" class="add_tab">教案课件管理</a></li>
+					<li><a href="<?=site_url('admin/lake_notice/lists')?>" class="add_tab">文件通知</a></li>
+					<li><a href="<?=site_url('admin/lake_intro/lists')?>" class="add_tab">介绍管理</a></li>
 				</ul>
 			</div>
 			<div title="单本购买">

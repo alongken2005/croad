@@ -95,7 +95,7 @@ class Gpagination
 		}
 	function getOutput(){
 			if(!$this->calculate)
-				if($this->calculate())
+				if($this->calculate() && $this->pagination)
 					return "<div class=\"$this->className\">$this->pagination</div>\n";
 		}
 	function get_pagenum_link($id){

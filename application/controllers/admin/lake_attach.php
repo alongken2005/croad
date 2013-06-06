@@ -48,8 +48,8 @@ class Lake_attach extends CI_Controller
 	public function op() {
     	//验证表单规则
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('relaid', '标题', 'required|trim');
-		$this->form_validation->set_rules('filetype', '视频', 'required|trim');
+		$this->form_validation->set_rules('title', '标题', 'required|trim');
+		$this->form_validation->set_rules('filetype', '课件类型', 'required|trim');
 		$this->form_validation->set_error_delimiters('<span class="err">', '</span>');
 		$this->load->helper('file');
 
@@ -57,7 +57,7 @@ class Lake_attach extends CI_Controller
 			$this->_data['stufflist'] = $this->base->get_data('subject')->result_array();
 
 			if ($id = $this->input->get('id')) {
-				$this->_data['content'] = $this->base->get_data('attach', array('id'=>$id))->row_array();
+				$this->_data['row'] = $this->base->get_data('attach', array('id'=>$id))->row_array();
 			}
 			$this->load->view('admin/lake_attach_op', $this->_data);
 		} else {

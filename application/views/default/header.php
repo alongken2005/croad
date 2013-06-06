@@ -8,17 +8,19 @@
 </head>
 <body>
 	<div class="box">
-		<div class="room_header" style="margin-top: 50px;">
+		<div class="room_header">
 			<a class="logo png" href="<?=base_url()?>" target="_blank"></a>
-			<!--div class="menu">
+			<div class="menu">
 				<div class="first_menu">
-					<a href="#" class="room1 png"></a>
+					<a href="javascript:void(0)"></a>
+					<!--a href="#" class="room1 png"></a-->
 					<a href="#" class="room2 active png"></a>
-					<a href="#" class="room3 png"></a>
+					<!--a href="#" class="room3 png"></a-->
 				</div>
 				<div class="sec_menu png">
-					<a href="#" class="sec1 png"></a>
-					<a href="<?=site_url('yunhe')?>" class="sec2 active png"></a>
+					<a href="javascript:void(0)"></a>
+					<a href="<?=site_url('movie')?>" class="sec2 png <?=$this->uri->segment(1) == 'movie' ? 'active' : ''?>"></a>
+					<a href="<?=site_url('lake')?>" class="sec3 png <?=$this->uri->segment(1) == 'lake' ? 'active' : ''?>"></a>
 				</div>
-			</div-->
+			</div>
 		</div>

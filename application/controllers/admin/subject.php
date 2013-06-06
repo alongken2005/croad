@@ -13,7 +13,7 @@ class Subject extends CI_Controller
     {
 		parent::__construct();
 		$this->_data['thisClass'] = $this->input->get('kind') ? $this->input->get('kind') : 'video';
-		$this->_data['kinds'] = $this->config->item('stuff_kinds');
+		$this->_data['kinds'] = $this->config->item('subject_kinds');
 		$this->load->model('base_mdl', 'base');
 		$this->permission->power_check();
 		//$this->output->enable_profiler(TRUE);
@@ -71,7 +71,7 @@ class Subject extends CI_Controller
 					$tags[] = $v['name'];
 				}
 				$this->_data['tags'] = implode(' ', $tags);
-				$this->_data['content'] = $this->base->get_data('subject', array('id'=>$id))->row_array();
+				$this->_data['row'] = $this->base->get_data('subject', array('id'=>$id))->row_array();
 			}
 			$this->load->view('admin/subject_op', $this->_data);
 		} else {
