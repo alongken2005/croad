@@ -29,9 +29,9 @@ $this->load->view('admin/header');
 		<tr>
 			<th>视频类型：</th>
 			<td>
-				<input type="radio" class="filetype" name="filetype" value="online" checked/> 在线视频
-				<input type="radio" class="filetype" name="filetype" value="local" <?=set_value('filetype', isset($row['filetype']) && $row['filetype'] == 'local' ? 'checked' : '')?>/> 本地视频
-				<?php if(form_error('filetype')) { echo form_error('filetype'); } ?>
+				<input type="radio" class="filetype" name="videoType" value="online" checked/> 在线视频
+				<input type="radio" class="filetype" name="videoType" value="local" <?=set_value('videoType', isset($row['videoType']) && $row['videoType'] == 'local' ? 'checked' : '')?>/> 本地视频
+				<?php if(form_error('videoType')) { echo form_error('videoType'); } ?>
 			</td>
 		</tr>
 		<tr class="filetab onlineTab">
@@ -47,7 +47,7 @@ $this->load->view('admin/header');
 		</tr>
 		<?php endif;?>
 		<tr class="filetab localTab">
-			<th>选择本地视频：</th>
+			<th>本地视频：</th>
 			<td>
 				<div class="videoNameList" style="width:80px">
 					<input type="radio" name="local" value="" checked/> 不选
@@ -64,7 +64,7 @@ $this->load->view('admin/header');
 			<td>
 				<select name="type">
 				<?php foreach($kinds as $k=>$v): if($k != 'top'):?>
-					<option value="<?=$k?>" <?=(isset($content['kind']) && $content['kind'] == $k) ? 'selected' : ''?>><?=$v?></option>
+					<option value="<?=$k?>" <?=(isset($row['kind']) && $row['kind'] == $k) ? 'selected' : ''?>><?=$v?></option>
 				<?php endif; endforeach;?>
 				</select>
 			</td>
@@ -74,9 +74,15 @@ $this->load->view('admin/header');
 			<td>
 				<select name="grade">
 				<?php foreach($gradelist as $v):?>
-					<option value="<?=$v['id']?>" <?=(isset($content['grade']) && $content['grade'] == $v['id']) ? 'selected' : ''?>><?=$v['title']?></option>
+					<option value="<?=$v['id']?>" <?=(isset($row['grade']) && $row['grade'] == $v['id']) ? 'selected' : ''?>><?=$v['title']?></option>
 				<?php endforeach;?>
 				</select>
+			</td>
+		</tr>
+		<tr>
+			<th> 时长：</th>
+			<td>
+				<input type="text" name="length" value="<?=set_value('length', isset($row['length']) ? $row['length'] : '')?>" class="input1"/>
 			</td>
 		</tr>
 		<tr>
@@ -88,7 +94,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th> 排序：</th>
 			<td>
-				<input type="text" name="sort" value="<?=set_value('sort', isset($content['sort']) ? $content['sort'] : 0)?>" class="input3"/>
+				<input type="text" name="sort" value="<?=set_value('sort', isset($row['sort']) ? $row['sort'] : 0)?>" class="input3"/>
 			</td>
 		</tr>
 		<tr>
@@ -96,7 +102,7 @@ $this->load->view('admin/header');
 			<td>
 				<select name="authorid">
 				<?php foreach($authorlist as $v):?>
-					<option value="<?=$v['id']?>" <?=(isset($content['authorid']) && $content['authorid'] == $v['id']) ? 'selected' : ''?>><?=$v['name']?></option>
+					<option value="<?=$v['id']?>" <?=(isset($row['authorid']) && $row['authorid'] == $v['id']) ? 'selected' : ''?>><?=$v['name']?></option>
 				<?php endforeach;?>
 				</select>
 			</td>
@@ -104,7 +110,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th>介绍：</th>
 			<td>
-				<textarea name="content" id="content"><?=set_value('content', isset($content['content']) ? $content['content'] : '')?></textarea>
+				<textarea name="content" id="content" style="width: 508px; height: 150px;"><?=set_value('content', isset($row['content']) ? $row['content'] : '')?></textarea>
 				<?php if(form_error('content')) { echo form_error('content'); } ?>
 			</td>
 		</tr>
@@ -119,15 +125,9 @@ $this->load->view('admin/header');
 	</form>
 </div>
 
-
-<script type="text/javascript" src="<?=base_url('./common/kindeditor/kindeditor.js')?>"></script>
 <script type="text/javascript">
 $(function() {
 	fileChange();
-
-	KindEditor.ready(function(K) {
-		K.create('#content', {width : '670', height: '500', newlineTag:'br', filterMode : true});
-	});
 
 	$('.del').click(function() {
 		obj = $(this);

@@ -4,7 +4,7 @@
 		<img class="cover left" src="<?=get_thumb($subject['cover'])?>"/>
 		<div class="right">
 			<h2><?=$subject['title']?></h2>
-			<div class="msg">时 长：</div>
+			<div class="msg">时 长：<?=$subject['length']?></div>
 			<div class="msg">阅 读：<?=$subject['hits']?></div>
 			<div class="msg">作 者：<a href="<?=site_url('lake/author?id='.$author['id'])?>"><?=$author['name']?></a></div>
 			<div class="info"><?=$subject['content']?></div>

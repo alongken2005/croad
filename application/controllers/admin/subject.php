@@ -88,8 +88,10 @@ class Subject extends CI_Controller
 				'sort'		=> $this->input->post('sort'),
 				'authorid'	=> $this->input->post('authorid'),
 				'content'	=> $this->input->post('content'),
+				'videoType'	=> $this->input->post('videoType'),
+				'length'	=> $this->input->post('length'),
 				'ctime'		=> $timestamp,
-				'mtime'		=> $timestamp
+				'mtime'		=> $timestamp,
 			);
 
 			if($_FILES['cover']['size'] > 0) {
@@ -122,6 +124,13 @@ class Subject extends CI_Controller
 				$this->image_lib->resize();
 
 				$deal_data['cover'] = date('Y/m/').$upload_data['file_name'];
+			}
+
+			$filetype = $this->input->post('videoType');
+			if($filetype == 'online') {
+				$deal_data['video'] = $this->input->post('online');
+			} elseif($filetype == 'local') {
+				$deal_data['video'] = $this->input->post('local');
 			}
 
 			if($id) {
