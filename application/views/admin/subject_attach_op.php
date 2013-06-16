@@ -1,20 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 $this->load->view('admin/header');
 ?>
-<h2><?=intval($this->input->get('id')) ? '修改' : '添加'?><div class="operate"><a href="<?=site_url('admin/lake_attach/lists')?>">管理</a></div></h2>
+<h2>课件<?=intval($this->input->get('id')) ? '修改' : '添加'?>
+	<div class="operate"><a href="<?=site_url('admin/subject/lists')?>">教案管理</a></div>
+	<div class="operate" style="margin-right: 10px;"><a href="<?=site_url('admin/subject/attach_lists?relaid='.$relaid)?>">课件管理</a></div></h2>
 <div class="slider3">
-	<form action="<?=site_url('admin/lake_attach/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
+	<form action="<?=site_url('admin/subject/attach_op?relaid='.$relaid.($this->input->get('id') ? '&id='.$this->input->get('id') : ''))?>" method="POST" enctype="multipart/form-data">
 	<table cellspacing="0" cellpadding="0" border="0" class="table1">
-		<tr>
-			<th>教案：</th>
-			<td>
-				<select name="relaid">
-				<?php foreach($stufflist as $v):?>
-					<option value="<?=$v['id']?>"><?=$v['title']?></option>
-				<?php endforeach;?>
-				</select>
-			</td>
-		</tr>
 		<tr>
 			<th>标题：</th>
 			<td>
@@ -74,10 +66,17 @@ $this->load->view('admin/header');
 				<?php endforeach; endif;?>
 			</td>
 		</tr>
+		<tr class="timeLength">
+			<th> 视频时长：</th>
+			<td>
+				<input type="text" name="other" value="<?=set_value('other', isset($row['other']) ? $row['other'] : '')?>" class="input1"/>
+				<span class="red">格式：1:34:59</span>
+			</td>
+		</tr>
 		<tr>
 			<th> 排序：</th>
 			<td>
-				<input type="text" name="sort" value="<?=set_value('sort', isset($content['sort']) ? $content['sort'] : 0)?>" class="input3"/>
+				<input type="text" name="sort" value="<?=set_value('sort', isset($row['sort']) ? $row['sort'] : 0)?>" class="input3"/>
 			</td>
 		</tr>
 		<tr>
@@ -95,7 +94,7 @@ $this->load->view('admin/header');
 <script type="text/javascript">
 $(function() {
 	fileChange();
-	
+
 	KindEditor.ready(function(K) {
 		K.create('#content', {width : '670', height: '500', newlineTag:'br', filterMode : true});
 	});
@@ -123,6 +122,11 @@ function fileChange() {
 	var val = $('.filetype:checked').val();
 	$('.filetab').hide();
 	$('.'+val+'Tab').show();
+	if(val == 'doc') {
+		$('.timeLength').hide();
+	} else {
+		$('.timeLength').show();
+	}
 }
 </script>
 

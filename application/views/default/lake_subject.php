@@ -25,7 +25,9 @@
 			<h2><?=$subject['title']?></h2>
 			<div class="msg">时 长：<?=$subject['length']?></div>
 			<div class="msg">阅 读：<?=$subject['hits']?></div>
+			<?php if(isset($author['id'])):?>
 			<div class="msg">作 者：<a href="<?=site_url('lake/author?id='.$author['id'])?>"><?=$author['name']?></a></div>
+			<?php endif;?>
 			<div class="info"><?=$subject['content']?></div>
 		</div>
 	</div>
@@ -37,12 +39,35 @@
 	<div class="clearfix content0">
 	<?php foreach($attachs as $v):?>
 		<div class="li">
-			<a href="333"><img src="<?=get_thumb($v['cover'])?>"/></a>
-			<h3><?=$v['title']?><b><?=secfmt($v['filesize'])?></b></h3>
+			<?php if($v['filetype'] == 'online' || $v['filetype'] == 'local'):?>
+			<a href="#subjecy_video<?=$v['id']?>" class="player_video"></a>
+			<a href="#subjecy_video<?=$v['id']?>" class="subject_video"><img src="<?=get_thumb($v['cover'])?>"/></a>
+			<?php else:?>
+			<a href="<?=site_url('lake/attach_down?id='.$v['id']).'&sid='.$subject['id']?>"><img src="<?=get_thumb($v['cover'])?>"/></a>
+			<?php endif;?>
+
+			<h3 class="clearfix"><a href="#subjecy_video<?=$v['id']?>" class="left subject_video"><?=$v['title']?></a><b class="right"><?=$v['other']?></b></h3>
+			<?php
+				$url = '';
+				if($v['filetype'] == 'online' || $v['filetype'] == 'local'):
+				$url = $v['filetype'] == 'local' ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('./data/uploads/attach/'.$v['filename']) : $subject['video'];
+			?>
+			<div style="display: none;">
+				<div id="subjecy_video<?=$v['id']?>" style="width:600px;">
+					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="600" height="480">
+					<param name="movie" value="<?=$url?>">
+					<param name="quality" value="high">
+					<param name="allowFullScreen" value="true" />
+					<embed src="<?=$url?>" allowFullScreen="true" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="600" height="480"></embed>
+					</object>
+				</div>
+			</div>
+			<?php endif;?>
 		</div>
 	<?php endforeach;?>
 	</div>
 	<div class="content1 clearfix" style="display: none">
+		<?php if(isset($author['id'])):?>
 		<div class="author clearfix">
 			<img src="<?=get_thumb($author['cover'])?>" class="left"/>
 			<div class="right">
@@ -63,6 +88,7 @@
 			</div>
 		<?php endforeach;?>
 		</div>
+		<?php endif;?>
 	</div>
 </div>
 <div class="comment">
@@ -138,7 +164,7 @@ $(function(){
 		return false;
 	})
 
-	$(".slide_video").fancybox();
+	$(".slide_video, .subject_video, .player_video").fancybox();
 });
 </script>
 <?php $this->load->view(THEME.'/lake_footer');?>

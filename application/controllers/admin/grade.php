@@ -11,6 +11,7 @@ class Grade extends CI_Controller
 
     public function __construct() {
 		parent::__construct();
+		$this->_data['kinds'] = $this->config->item('subject_kinds');
 		$this->load->model('base_mdl', 'base');
 		$this->permission->power_check();
     }
@@ -49,7 +50,7 @@ class Grade extends CI_Controller
 	public function op() {
     	//验证表单规则
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('title', '标题', 'required|trim');
+		$this->form_validation->set_rules('name', '名称', 'required|trim');
 		$this->form_validation->set_error_delimiters('<span class="err">', '</span>');
 
 		if ($this->form_validation->run() == FALSE) {
@@ -65,8 +66,9 @@ class Grade extends CI_Controller
 
 			$deal_data = array(
 				'name'		=> $this->input->post('name'),
-				'title'		=> $this->input->post('title'),
+				//'title'		=> $this->input->post('title'),
 				'content'	=> $this->input->post('content'),
+				'type'		=> $this->input->post('type'),
 				'chm'		=> $this->input->post('chm'),
 			);
 
@@ -122,7 +124,7 @@ class Grade extends CI_Controller
     */
     public function del () {
         $id = intval($this->input->get('id'));
-        if($id && $this->base->del_data('author', array('id' => $id))) {
+        if($id && $this->base->del_data('grade', array('id' => $id))) {
         	exit('ok');
         } else {
         	exit('no');

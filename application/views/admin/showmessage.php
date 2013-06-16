@@ -18,7 +18,7 @@
 				else:
 			?>
 				<a href="javascript:history.go(-1);">返回上一页</a> |
-				<a href="site_url()">返回首页</a>
+				<a href="<?=base_url()?>">返回首页</a>
 			<?php endif;?>
 			</p>
 		</div>

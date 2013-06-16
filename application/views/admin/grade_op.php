@@ -6,14 +6,20 @@ $this->load->view('admin/header');
 	<form action="<?=site_url('admin/grade/op'.(intval($this->input->get('id')) ? '?id='.intval($this->input->get('id')) : ''))?>" method="POST" enctype="multipart/form-data">
 	<table cellspacing="0" cellpadding="0" border="0" class="table1">
 		<tr>
-			<th><b>*</b> 界数名称：</th>
+			<th><b>*</b> 名称：</th>
 			<td>
-				<input type="text" name="name" class="input1" value="<?=isset($row['name']) ? $row['name'] : ''?>"/> <span class="red">前台真实的显示名称</span>
+				<input type="text" name="name" class="input1" value="<?=isset($row['name']) ? $row['name'] : ''?>"/>
 			</td>
 		</tr>
 		<tr>
-			<th><b>*</b> 后台标注：</th>
-			<td><input type="text" name="title" class="input1" value="<?=isset($row['title']) ? $row['title'] : ''?>"/> <span class="red">后台添加教案使用，必填</span></td>
+			<th><b>*</b> 分类：</th>
+			<td>
+				<select name="type">
+				<?php foreach($kinds as $k=>$v): if($k != 'top'):?>
+					<option value="<?=$k?>" <?=(isset($row['type']) && $row['type'] == $k) ? 'selected' : ''?>><?=$v?></option>
+				<?php endif; endforeach;?>
+				</select>
+			</td>
 		</tr>
 		<tr>
 			<th>封面：</th>
@@ -55,7 +61,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th>介绍：</th>
 			<td>
-				<textarea name="content" id="content"><?=isset($row['content']) ? $row['content'] : ''?></textarea>
+				<textarea name="content" style="width: 720px; height: 150px; margin-bottom: 15px;"><?=isset($row['content']) ? $row['content'] : ''?></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -77,13 +83,6 @@ $this->load->view('admin/header');
 <script type="text/javascript">
 $(function() {
 	KindEditor.ready(function(K) {
-		K.create('#content', {
-			width : '720',
-			height: '350',
-			newlineTag:'br',
-			filterMode : true,
-			uploadJson : '<?=site_url('tool/upload')?>',
-		});
 		K.create('#chm', {
 			width : '720',
 			height: '400',

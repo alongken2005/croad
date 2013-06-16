@@ -119,107 +119,35 @@
 			<span><a href="javascript:void(0)">新作文联盟</a></span>
 			<span><a href="javascript:void(0)">国学经典</a></span>
 		</div>
-		<div class="content0 clearfix contentbox" >
+<?php $i=0; foreach($gradeResult as $key=>$value):?>
+		<div class="content<?=$i?> clearfix contentbox" <?=$i>0?'style="display: none"':''?>>
 			<?php if($intros[4]):?>
 			<div class="intros"><?=$intros[4]?></div>
 			<?php endif;?>
-			<div class="scrollable-panel">
-				<div class="clearfix cn">
+			<div class="scrollable-panel" style="height:270px;">
+				<div class="clearfix cng">
 				<?php
-					foreach($lakeCread as $v):
+					foreach($value as $v):
 				?>
 					<div class="li">
-						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
-						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?></a>
-						<?php if($v['gname']):?>
-							<a href="<?=site_url('lake/grade?id='.$v['grade'])?>" target="blank" class="gname">[<?=$v['gname']?>]</a>
-						<?php endif;?>
-						<div class="clear"></div>
-						作者：<a href="<?=site_url('lake/author?id='.$v['authorid'])?>" class="author"><?=$v['name']?></a>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
+						<a href="<?=site_url('lake/grade?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
+						<a href="<?=site_url('lake/grade?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['name']?></a>
 					</div>
 				<?php
 					endforeach;
 				?>
 				</div>
 			</div>
-			<a href="<?=site_url('lake/search?type=lakeCread')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
-		</div>
 
-		<div class="content1 clearfix contentbox" style="display: none">
-			<?php if($intros[5]):?>
-			<div class="intros"><?=$intros[5]?></div>
-			<?php endif;?>
-			<div class="scrollable-panel">
-				<div class="clearfix cn">
-				<?php
-					foreach($lakeClass as $v):
-				?>
-					<div class="li">
-						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
-						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?></a>
-						<?php if($v['gname']):?>
-							<a href="<?=site_url('lake/grade?id='.$v['grade'])?>" target="blank" class="gname">[<?=$v['gname']?>]</a>
-						<?php endif;?>
-						<div class="clear"></div>
-						作者：<a href="<?=site_url('lake/author?id='.$v['authorid'])?>" class="author"><?=$v['name']?></a>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
-					</div>
-				<?php
-					endforeach;
-				?>
-				</div>
+			<div class="trigger-bar" <?php if(count($value) < 4): echo "style='display:none'"; endif;?>>
+				<a href="javascript:void(0);" title="上翻" class="prev"></a>
+				<div class="scrollable-trigger"></div>
+				<a href="javascript:void(0);" title="下翻" class="next"></a>
 			</div>
-			<a href="<?=site_url('lake/search?type=lakeClass')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
 		</div>
+<?php $i++; endforeach;?>
 
-		<div class="content2 clearfix contentbox" style="display: none">
-			<?php if($intros[6]):?>
-			<div class="intros"><?=$intros[6]?></div>
-			<?php endif;?>
-			<div class="scrollable-panel">
-				<div class="clearfix cn">
-				<?php
-					foreach($lakeStory as $v):
-				?>
-					<div class="li">
-						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
-						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?>
-							<?php if($v['gname']):?><b>[<?=$v['gname']?>]</b><?php endif;?>
-						</a>
-						作者：<a href="<?=site_url('lake/author?id='.$v['authorid'])?>" class="author"><?=$v['name']?></a>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
-					</div>
-				<?php
-					endforeach;
-				?>
-				</div>
-			</div>
-			<a href="<?=site_url('lake/search?type=lakeStory')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
-		</div>
-		<div class="content3 clearfix contentbox" style="display: none">
-			<?php if($intros[7]):?>
-			<div class="intros"><?=$intros[7]?></div>
-			<?php endif;?>
-			<div class="scrollable-panel">
-				<div class="clearfix cn">
-				<?php
-					foreach($lakeStory as $v):
-				?>
-					<div class="li">
-						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="img" target="_blank"><img src="<?=get_thumb($v['cover'])?>"/></a>
-						<a href="<?=site_url('lake/subject?id='.$v['id'])?>" class="a1" target="_blank"><?=$v['title']?></a>
-						<?php if($v['gname']):?>
-							<a href="<?=site_url('lake/grade?id='.$v['grade'])?>" target="blank" class="gname">[<?=$v['gname']?>]</a>
-						<?php endif;?>
-						<div class="clear"></div>
-						作者：<a href="<?=site_url('lake/author?id='.$v['authorid'])?>" class="author"><?=$v['name']?></a>&nbsp;&nbsp;&nbsp;浏览量：<?=$v['hits']?>
-					</div>
-				<?php
-					endforeach;
-				?>
-				</div>
-			</div>
-			<a href="<?=site_url('lake/search?type=lakeContent')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
-		</div>
-		<div class="content4 clearfix contentbox" style="display: none">
+		<!--div class="content4 clearfix contentbox" style="display: none">
 			<?php if($intros[8]):?>
 			<div class="intros"><?=$intros[8]?></div>
 			<?php endif;?>
@@ -243,7 +171,7 @@
 				</div>
 			</div>
 			<a href="<?=site_url('lake/search?type=lakeState')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
-		</div>
+		</div-->
 		<div class="single_bottom3"></div>
 	</div>
 
@@ -315,6 +243,34 @@ $(function(){
 	});
 	$("#lake_tab_a .content1 .prev").click(function(){
 		taba1.prev();
+	});
+
+	var tabb0 = $("#lake_tab_b .content0 .scrollable-trigger").switchable("#lake_tab_b .content0 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content0 .next").click(function(){
+		tabb0.next();
+	});
+	$("#lake_tab_b .content0 .prev").click(function(){
+		tabb0.prev();
+	});
+
+	var tabb1 = $("#lake_tab_b .content1 .scrollable-trigger").switchable("#lake_tab_b .content1 .scrollable-panel .li", {
+		triggerType: "click",
+		effect: "scroll",
+		steps: 3,
+		visible: 3,
+		api: true
+	});
+	$("#lake_tab_b .content1 .next").click(function(){
+		tabb1.next();
+	});
+	$("#lake_tab_b .content1 .prev").click(function(){
+		tabb1.prev();
 	});
 
 	var tabc = $("#lake_tab_c .scrollable-trigger").switchable("#lake_tab_c .scrollable-panel .screen", {

@@ -22,7 +22,7 @@ a:hover { color: #CCC; }
 .lake_focus .intro .title { float: left; margin-top: 30px; width: 115px; height: 62px; background-position: -0px -0px; }
 .lake_focus .intro .content { float: right; margin-top: 20px; width: 800px; line-height: 1.8; font-size: 14px; font-weight: 600; text-indent: 30px; color: #65778C; }
 .lake_menu { overflow: hidden; zoom: 1; margin: 20px 0; }
-.lake_menu a { float: left; padding: 0px 36px; font-size: 20px; font-weight: bold; color: #28B0DC; font-family: '微软雅黑'; text-shadow: #FFF 1px 1px 1px; }
+.lake_menu a { float: left; padding: 0px 34px; font-size: 20px; font-weight: bold; color: #28B0DC; font-family: '微软雅黑'; text-shadow: #FFF 1px 1px 1px; }
 .lake_menu a:hover { color: #DE3168;; }
 /*
 .lake_tab_a { width:98px; height:19px; background-position: -401px -38px; }
@@ -50,6 +50,11 @@ a:hover { color: #CCC; }
 .cn .li .img { display: block; }
 .cn .li img { width: 285px; height: 180px; }
 .cn .li .author, .cn .li .author:hover { color: #007CBA; }
+
+.cng .li { float: left; display: inline; line-height: 1.8; margin: 20px 0 10px 19px; padding: 12px; width: 285px; height: 205px; border-radius: 10px; background: #DFDFDF; color: #666; }
+.cng .a1 { display: block; text-align: center; color: #007CBA; font-size: 14px; font-weight: 600;  }
+.cng .li .img { display: block; }
+.cng .li img { width: 285px; height: 180px; }
 
 #lake_tab_a { margin-top: 30px; }
 #lake_tab_a .title { width: 272px; margin: 0 auto; }
@@ -101,7 +106,7 @@ a:hover { color: #CCC; }
 .scrollable-trigger a.current, .scrollable-trigger a:hover { background: url(../images/lake.png) -264px -108px no-repeat; }
 /* 下面四项必须设置 */
 .scrollable-panel { position: relative; width: 1000px; height: 120px; overflow: hidden; }
-.scrollable-panel .cn, .scrollable-panel .cb { position: absolute; nowhitespace: afterproperty; width: 2010em; }
+.scrollable-panel .cn, .scrollable-panel .cb, .scrollable-panel .cng { position: absolute; nowhitespace: afterproperty; width: 2010em; }
 
 .subject { margin-top: 20px; }
 .subject .overall { position: relative; padding: 25px 15px; border: 5px solid #97C5DF; border-radius: 25px; background-color: #FEFFFF; background-image: -webkit-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: -ms-linear-gradient(top, #feffff 0%,#ddf8ff 100%); background-image: linear-gradient(to bottom, #feffff 0%,#ddf8ff 100%); }
@@ -118,7 +123,12 @@ a:hover { color: #CCC; }
 .subject .tab .a1.current { background-position: 0 -114px; }
 .subject .tab .a2.current { background-position: 0 -38px; }
 .subject .content0 { margin: 0 15px; }
-.subject .content0 .li { float: left; margin: 0 18px 50px 18px; }
+.subject .content0 .li { float: left; margin: 0 18px 50px 18px; position: relative; }
+.subject .content0 .li .left { font-size: 12px; color: #017DBB; }
+.subject .content0 .li .right { font-size: 12px; color: #D22D65; }
+.subject .content0 .li .player_video { position: absolute; left: 10px; bottom: 30px; width: 76px; height: 76px; background: url(../images/play1.png) no-repeat ; }
+.subject .content0 .li .player_video:hover { background: url(../images/play2.png) no-repeat; }
+.subject .content0 .li h3 { margin-top: 5px; }
 .subject .content0 .li img { width: 285px; height: 180px; border: 1px solid #CCC; }
 .subject .author img, .authors .author img { width: 200px; }
 .subject .author .right, .authors .right { width: 680px; color: #999; }

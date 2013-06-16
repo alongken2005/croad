@@ -4,14 +4,12 @@ $this->load->view('admin/header');
 <h2>管理<div class="operate"><a href="<?=site_url('admin/grade/op')?>">添加</a></div></h2>
 <table cellpadding="0" cellspacing="0" border="0" class="table2">
 	<tr>
-		<th>界数名称</th>
-		<th width="350">后台标注</th>
+		<th style="text-align: left">【分类】名称</th>
 		<th width="280">操作</th>
 	</tr>
 <?php if($lists): foreach($lists as $v):?>
 	<tr>
-		<td><?=$v['name']?></td>
-		<td><?=$v['title']?></td>
+		<td style="text-align: left">【<?=$kinds[$v['type']]?>】<?=$v['name']?></td>
 		<td>
 			<a href="<?=site_url('admin/grade/pic_op?place_id='.$v['id'])?>">活动照片添加</a>&nbsp;&nbsp;
 			<a href="<?=site_url('admin/grade/pic_lists?place_id='.$v['id'])?>">活动照片管理</a>&nbsp;&nbsp;

@@ -40,6 +40,20 @@ class Lake extends CI_Controller {
 		//名师讲堂
 		$this->_data['toplist'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.top=1 LIMIT 12")->result_array();
 
+		//界数
+		$kinds = $this->config->item('subject_kinds');
+		$glist = $this->db->query("SELECT * FROM ab_grade")->result_array();
+		$gradeResult = array();
+		foreach($glist as $v) {
+			foreach($kinds as $key=>$kind) {
+				if($v['type'] == $key) {
+					$gradeResult[$key][] = $v;
+					break;
+				}
+			}
+		}
+		$this->_data['gradeResult'] = $gradeResult;
+
 		//儿童阅读
 		$this->_data['lakeCread'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeCread' LIMIT 6")->result_array();
 		//班级读书会
@@ -262,5 +276,24 @@ class Lake extends CI_Controller {
 	 */
 	public function comment_del() {
 		echo 'ok';
+	}
+
+	/**
+	 * 课件下载
+	 */
+	public function attach_down() {
+		$this->load->helper('download');
+		$id = $this->input->get('id');
+		$sid = $this->input->get('sid');
+		$attach = $this->base->get_data('attach', array('id'=>$id))->row_array();
+		if(file_exists('./data/uploads/attach/'.$attach['filename'])) {
+			$data = file_get_contents(base_url('data/uploads/attach/'.$attach['filename']));
+			$ext = pathinfo($attach['filename'], PATHINFO_EXTENSION);
+			$name = $attach['title'] ? $attach['title'].'.'.$ext : $attach['realname'];
+			force_download($name, $data);
+		} else {
+			$this->msg->showmessage('该文件不存在！', site_url('lake/subject?id='.$sid));
+		}
+
 	}
 }
