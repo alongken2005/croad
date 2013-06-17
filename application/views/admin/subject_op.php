@@ -62,9 +62,9 @@ $this->load->view('admin/header');
 		<tr>
 			<th><b>*</b> 教案类型：</th>
 			<td>
-				<select name="type">
+				<select name="type" class="type">
 				<?php foreach($kinds as $k=>$v): if($k != 'top'):?>
-					<option value="<?=$k?>" <?=(isset($row['kind']) && $row['kind'] == $k) ? 'selected' : ''?>><?=$v?></option>
+					<option value="<?=$k?>" <?=(isset($row['type']) && $row['type'] == $k) ? 'selected' : ''?>><?=$v?></option>
 				<?php endif; endforeach;?>
 				</select>
 			</td>
@@ -72,11 +72,11 @@ $this->load->view('admin/header');
 		<tr>
 			<th><b>*</b> 界数：</th>
 			<td>
-				<select name="grade">
+				<select name="grade" class="grade">
 				<?php foreach($gradelist as $v):?>
-					<option value="<?=$v['id']?>" <?=(isset($row['grade']) && $row['grade'] == $v['id']) ? 'selected' : ''?>><?=$v['title']?></option>
+					<option value="<?=$v['id']?>"><?=$v['title']?></option>
 				<?php endforeach;?>
-				</select>
+				</select> <span class="red">先选择教案类型</span>
 			</td>
 		</tr>
 		<tr>
@@ -128,6 +128,7 @@ $this->load->view('admin/header');
 <script type="text/javascript">
 $(function() {
 	fileChange();
+	typeChange();
 
 	$('.del').click(function() {
 		obj = $(this);
@@ -146,12 +147,23 @@ $(function() {
 	$('.filetype').change(function() {
 		fileChange();
 	})
+
+	$('.type').change(function() {
+		typeChange();
+	})
 })
 
 function fileChange() {
 	var val = $('.filetype:checked').val();
 	$('.filetab').hide();
 	$('.'+val+'Tab').show();
+}
+
+function typeChange() {
+	var val = $('.type option:selected').val();
+	$.get("<?=site_url('admin/subject/getSubGrade?grade='.(isset($row['grade']) ? $row['grade'] : 0).'&type=')?>"+val, '', function(data) {
+		$('.grade').empty().append(data);
+	})
 }
 </script>
 

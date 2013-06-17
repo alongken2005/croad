@@ -326,4 +326,23 @@ class Subject extends CI_Controller
         	exit('no');
         }
     }
+
+	public function getSubGrade() {
+		$type = $this->input->get('type');
+		$grade = $this->input->get('grade');
+		$lists = $this->base->get_data('grade', array('type'=>$type))->result_array();
+		write_log($grade);
+		if($lists) {
+			$option = '';
+			$select = '';
+			foreach($lists as $v) {
+				$select = ($grade && $grade == $v['id']) ? 'selected' : '';
+				$option .= '<option value="'.$v['id'].'" '.$select.'>'.$v['name'].'</option>';
+			}
+		} else {
+			$option = '<option>暂无界数可选</option>';
+		}
+
+		exit($option);
+	}
 }
