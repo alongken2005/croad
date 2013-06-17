@@ -60,6 +60,12 @@ $this->load->view('admin/header');
 			</td>
 		</tr>
 		<tr>
+			<th> 时长：</th>
+			<td>
+				<input type="text" name="length" value="<?=set_value('length', isset($row['length']) ? $row['length'] : '')?>" class="input1"/>
+			</td>
+		</tr>
+		<tr>
 			<th><b>*</b> 教案类型：</th>
 			<td>
 				<select name="type" class="type">
@@ -77,12 +83,6 @@ $this->load->view('admin/header');
 					<option value="<?=$v['id']?>"><?=$v['title']?></option>
 				<?php endforeach;?>
 				</select> <span class="red">先选择教案类型</span>
-			</td>
-		</tr>
-		<tr>
-			<th> 时长：</th>
-			<td>
-				<input type="text" name="length" value="<?=set_value('length', isset($row['length']) ? $row['length'] : '')?>" class="input1"/>
 			</td>
 		</tr>
 		<tr>
