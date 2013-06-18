@@ -28,7 +28,7 @@
 			<?php if(isset($author['id'])):?>
 			<div class="msg">作 者：<a href="<?=site_url('lake/author?id='.$author['id'])?>"><?=$author['name']?></a></div>
 			<?php endif;?>
-			<div class="info"><?=$subject['content']?></div>
+			<div class="info"><?=t2h($subject['content'])?></div>
 		</div>
 	</div>
 
@@ -84,7 +84,7 @@
 		<?php foreach($author_subject as $v):?>
 			<div class="li">
 				<a href="333"><img src="<?=get_thumb($v['cover'])?>"/></a>
-				<div><?=$v['title']?><b>浏览量：<?=$v['hits']?></b></div>
+				<div><?=$v['title']?></div>
 			</div>
 		<?php endforeach;?>
 		</div>

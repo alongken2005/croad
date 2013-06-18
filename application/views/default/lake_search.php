@@ -87,4 +87,3 @@ $(function() {
 })
 </script>
 <?php $this->load->view(THEME.'/lake_footer');?>
-<?php $this->load->view(THEME.'/footer');?>

@@ -36,7 +36,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th>介绍：</th>
 			<td>
-				<textarea name="content" id="content"><?=set_value('content', isset($content['content']) ? $content['content'] : '')?></textarea>
+				<textarea name="content" style="width:495px;height:100px;overflow:hidden;padding:5px"><?=set_value('content', isset($content['content']) ? $content['content'] : '')?></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -49,13 +49,8 @@ $this->load->view('admin/header');
 	</form>
 </div>
 
-
-<script type="text/javascript" src="<?=base_url('./common/kindeditor/kindeditor.js')?>"></script>
 <script type="text/javascript">
 $(function() {
-	KindEditor.ready(function(K) {
-		K.create('#content', {width : '670', height: '500', newlineTag:'br', filterMode : true});
-	});
 
 	$('.del').click(function() {
 		if(confirm('确定删除？')) {

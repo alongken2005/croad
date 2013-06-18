@@ -25,9 +25,9 @@ class Lake extends CI_Controller {
 
 		//介绍
 		$intros = array();
-		$intro = $this->base->get_data('notice', 'id IN (3,4,5,6,7,8)', 'id, content')->result_array();
+		$intro = $this->base->get_data('notice', array('area'=>'intro'), 'id, content, type')->result_array();
 		foreach($intro as $v) {
-			$intros[$v['id']] = $v['content'];
+			$intros[$v['type']] = $v['content'];
 		}
 		$this->_data['intros'] = $intros;
 
@@ -54,6 +54,7 @@ class Lake extends CI_Controller {
 		}
 		$this->_data['gradeResult'] = $gradeResult;
 
+		/**
 		//儿童阅读
 		$this->_data['lakeCread'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeCread' LIMIT 6")->result_array();
 		//班级读书会
@@ -64,7 +65,7 @@ class Lake extends CI_Controller {
 		$this->_data['lakeContent'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeContent' LIMIT 6")->result_array();
 		//国学经典
 		$this->_data['lakeState'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeState' LIMIT 6")->result_array();
-
+		*/
 		$this->_data['authorlist'] = $this->base->get_data('author', array(), '*', 16)->result_array();
 		$this->load->view(THEME.'/lake', $this->_data);
 	}

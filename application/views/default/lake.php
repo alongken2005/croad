@@ -36,7 +36,7 @@
 </script>
 		<div class="intro">
 			<div class="title sp_index"></div>
-			<div class="content"><?=$intros[3]?></div>
+			<div class="content"><?=$intros['lakeIntro']?></div>
 		</div>
 	</div>
 	<div class="single_bottom2"></div>
@@ -113,16 +113,16 @@
 
 	<div id="lake_tab_b">
 		<div class="tab clearfix" id="m2">
-			<span class="current"><a href="javascript:void(0)">儿童阅读</a></span>
-			<span><a href="javascript:void(0)">班级读书会</a></span>
-			<span><a href="javascript:void(0)">故事妈妈</a></span>
-			<span><a href="javascript:void(0)">新作文联盟</a></span>
-			<span><a href="javascript:void(0)">国学经典</a></span>
+			<span class="current" rel="lakeCread"><a href="javascript:void(0)">儿童阅读</a></span>
+			<span rel="lakeClass"><a href="javascript:void(0)">班级读书会</a></span>
+			<span rel="lakeStory"><a href="javascript:void(0)">故事妈妈</a></span>
+			<span rel="lakeContent"><a href="javascript:void(0)">新作文联盟</a></span>
+			<span rel="lakeState"><a href="javascript:void(0)">国学经典</a></span>
 		</div>
 <?php $i=0; foreach($gradeResult as $key=>$value):?>
-		<div class="content<?=$i?> clearfix contentbox" <?=$i>0?'style="display: none"':''?>>
-			<?php if($intros[4]):?>
-			<div class="intros"><?=$intros[4]?></div>
+		<div class="content<?=$key?> clearfix contentbox" <?=$i>0?'style="display: none"':''?>>
+			<?php if($intros[$key]):?>
+			<div class="intros"><?=$intros[$key]?></div>
 			<?php endif;?>
 			<div class="scrollable-panel" style="height:270px;">
 				<div class="clearfix cng">
@@ -290,8 +290,8 @@ $(function(){
 	$("#lake_tab_b .tab span").click(function() {
 		$("#lake_tab_b .tab span").removeClass('current');
 		$(this).addClass('current');
-		var tabindex = $("#lake_tab_b .tab span").index($(this));
-		if(tabindex !== 0) {
+		var tabindex = $(this).attr('rel');
+		if(tabindex != '') {
 			$("#lake_tab_b .content"+tabindex+" .cn").css("left","0px");
 		}
 		$("#lake_tab_b .contentbox").hide();
@@ -304,10 +304,4 @@ $(function(){
 	})
 });
 </script>
-<!--[if IE 6]>
-<script type="text/javascript" src="<?=base_url('./common/js/fixpng-min.js')?>"></script>
-<script type="text/javascript">
-DD_belatedPNG.fix('.png, .browse');
-</script>
-<![endif]-->
 <?php $this->load->view(THEME.'/lake_footer');?>
