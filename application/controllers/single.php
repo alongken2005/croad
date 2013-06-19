@@ -169,6 +169,25 @@ class Single extends CI_Controller {
 				$this->db->query("UPDATE ab_single_suit SET total=total-".$sorder['amount']." WHERE id=1");
 			}
 			$this->_data['buy_state'] = 'ok';
+
+			$this->load->config('email');
+			$configemail = $this->config->item('smtp');
+			$this->load->library('email');
+			$this->email->initialize($configemail);
+			$this->email->from('ticket@chiildroad.com', '儿童之路');
+			//$this->email->to('360586201@qq.com', 'wb-zhanghao@taobao.com');
+			$this->email->to('328128721@qq.com', 'support@childroad.com');
+			$this->email->subject("有人购买了图书");
+			$message_file = '购买人：'.$sorder['username'].'<br>订单号：'.$sorder['id'].'<br>购买数量：'.$sorder['amount'].'<br>送货地址：'.$sorder['address'].'<br>联系电话：'.$sorder['tel'];
+
+			$this->email->message($message_file);
+			error_reporting(0);
+			if($this->email->send()) {
+				write_log($email.'---success', 'ticket', 'alipay');
+				$insert_data['state'] = 1;
+			}
+			write_log($this->email->print_debugger(), 'email', 'alipay');
+
 			$this->load->view(THEME.'/single_return', $this->_data);
         } else {
 			$update_data = array(
