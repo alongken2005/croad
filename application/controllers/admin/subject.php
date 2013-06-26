@@ -29,12 +29,17 @@ class Subject extends CI_Controller
     * @deprecated 文章管理
     */
     public function lists () {
+		$searchTop = $this->input->get('searchTop');
+		$where = array();
+		if($searchTop == 1) {
+			$where['top'] = 1;
+		}
 
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('subject')->num_rows();
+		$total_num = $this->base->get_data('subject', $where)->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
-		$limit = 25;
+		$limit = 30;
 		$offset = ($page - 1) * $limit;
 
 		$this->gpagination->currentPage($page);
@@ -43,7 +48,7 @@ class Subject extends CI_Controller
 		$this->gpagination->target(site_url('admin/subject/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('subject', array(), '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
+		$this->_data['lists'] = $this->base->get_data('subject', $where, '*', $limit, $offset, 'sort ASC, ctime DESC')->result_array();
         $this->load->view('admin/subject_list', $this->_data);
     }
 
@@ -344,5 +349,20 @@ class Subject extends CI_Controller
 		}
 
 		exit($option);
+	}
+
+	/**
+	 * 设置名师讲堂
+	 */
+	public function top() {
+		$ids = $this->input->post('ids');
+		$idst = implode(',', $ids);
+		$top = $this->input->post('top');
+		$topids = implode(',', array_keys($top));
+		if($ids) {
+			$this->base->update_data('subject', 'id IN('.$idst.')', array('top'=>0));
+			$this->base->update_data('subject', 'id IN('.$topids.')', array('top'=>1));
+		}
+		$this->msg->showmessage('操作成功', site_url('admin/subject/lists'));
 	}
 }

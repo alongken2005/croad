@@ -23,7 +23,7 @@ $this->load->view('admin/header');
 		</tr>
 		<tr>
 			<th>封面：</th>
-			<td><input type="file" name="cover"/> <span class="red">尺寸：225*300(按照这个比例就可以，尺寸可以稍微大一些)</span></td>
+			<td><input type="file" name="cover"/> <span class="red">尺寸：400*250</span></td>
 		</tr>
 	<?php if(isset($row['cover'])):?>
 		<tr>

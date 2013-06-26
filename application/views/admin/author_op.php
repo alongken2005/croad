@@ -15,7 +15,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th>头像：</th>
 			<td>
-				<input type="file" name="cover"/> <span class="red">尺寸：195*235</span>
+				<input type="file" name="cover"/> <span class="red">尺寸：200*240</span>
 				<?php if(isset($upload_err)):?><span class="err"><?=$upload_err?></span><?php endif;?>
 			</td>
 		</tr>

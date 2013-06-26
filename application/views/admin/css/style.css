@@ -70,8 +70,8 @@ textarea { overflow: auto; vertical-align: top; border: 1px solid #e0dfdd; box-s
 .table2 .parent a { color: #1C68BC; }
 
 .condition { margin: 0 auto; margin-bottom: 10px; margin-top: 5px; width: 100%; border-collapse: collapse; }
-.condition th { border: 1px solid #FAC4A6; padding: 1px 0 1px 5px; background: #F7EFDB; text-align: right; color: #F4722A; font-size: 13px; }
-.condition td { text-align: left; border: 1px solid #FAC4A6; padding: 1px 0 1px 2px; }
+.condition th { border: 1px solid #FAC4A6; padding: 2px 0 2px 5px; background: #F7EFDB; text-align: right; color: #F4722A; font-size: 13px; }
+.condition td { text-align: left; border: 1px solid #FAC4A6; padding: 2px 0 2px 5px; }
 
 .tetab .l-tab-links li.l-selected a { padding-right: 20px; background: url(../images/checkbox-checked.gif) no-repeat right 6px; }
 

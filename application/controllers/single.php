@@ -123,9 +123,9 @@ class Single extends CI_Controller {
 			"return_url"		=> site_url('single/do_return'),
 			"seller_email"		=> $this->alipay_config['seller_email'],	//支付宝帐户,
 			"out_trade_no"		=> $orderid,								//商户订单号
-			"subject"			=> 'chlidroad',									//订单名称
+			"subject"			=> 'chlidroad',								//订单名称
 			"total_fee"			=> $price,									//必填,付款金额
-			//"total_fee"			=> 0.01,									//必填,付款金额
+			//"total_fee"			=> 0.01,								//必填,付款金额
 			"body"				=> 'chlidroad',								//必填,订单描述
 			"show_url"			=> site_url('single'),						//商品展示地址
 			"_input_charset "	=> $this->alipay_config['input_charset']
@@ -145,10 +145,6 @@ class Single extends CI_Controller {
 		require APPPATH.'libraries/alipay/alipay_notify.class.php';
         $alipayNotify = new AlipayNotify($this->alipay_config);
         $verify_result = $alipayNotify->verifyReturn();
-
-//		if(!$verify_result) {
-//			exit('非法的交易');
-//		}
 
         $id			= (int)$_GET['out_trade_no'];		//商户订单号
         $orderid	= $_GET['trade_no'];				//支付宝交易号
@@ -175,15 +171,14 @@ class Single extends CI_Controller {
 			$this->load->library('email');
 			$this->email->initialize($configemail);
 			$this->email->from('ticket@chiildroad.com', '儿童之路');
-			//$this->email->to('360586201@qq.com', 'wb-zhanghao@taobao.com');
-			$this->email->to('328128721@qq.com', 'support@childroad.com');
+			$this->email->to('360586201@qq.com,yeqian@childroad.com,328128721@qq.com,support@childroad.com');
 			$this->email->subject("有人购买了图书");
 			$message_file = '购买人：'.$sorder['username'].'<br>订单号：'.$sorder['id'].'<br>购买数量：'.$sorder['amount'].'<br>送货地址：'.$sorder['address'].'<br>联系电话：'.$sorder['tel'];
 
 			$this->email->message($message_file);
 			error_reporting(0);
 			if($this->email->send()) {
-				write_log($email.'---success', 'ticket', 'alipay');
+				write_log('success', 'ticket', 'alipay');
 				$insert_data['state'] = 1;
 			}
 			write_log($this->email->print_debugger(), 'email', 'alipay');
@@ -203,10 +198,6 @@ class Single extends CI_Controller {
 
 	public function do_notify() {
 		write_log('do_notify', 'pay', 'alipay');
-	}
-
-	public function set_default() {
-
 	}
 
 	public function getcity() {

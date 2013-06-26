@@ -17,7 +17,7 @@ $this->load->view('admin/header');
 		<tr>
 			<th>封面：</th>
 			<td>
-				<input type="file" name="cover"/>
+				<input type="file" name="cover"/> <span class="red">尺寸：290*185</span>
 			</td>
 		</tr>
 	<?php if(isset($row['cover']) && $row['cover']):?>

@@ -43,9 +43,14 @@
 	</div>
 	<div id="mainbox" style="width:99.3%; margin:0 auto; margin-top:4px; ">
 		<div position="left"  title="主要菜单" class="slider">
+			<div title="图书馆">
+				<ul>
+					<li><a href="<?=site_url('admin/books/lists')?>" class="add_tab" tabid="home">图书</a></li>
+				</ul>
+			</div>
 			<div title="运河电影">
 				<ul>
-					<li><a href="<?=site_url('admin/movie/lists')?>" class="add_tab" tabid="home">电影</a></li>
+					<li><a href="<?=site_url('admin/movie/lists')?>" class="add_tab">电影</a></li>
 					<li><a href="<?=site_url('admin/mview/lists')?>" class="add_tab">影视欣赏</a></li>
 					<li><a href="<?=site_url('admin/mclips/lists')?>" class="add_tab">电影片花</a></li>
 					<li><a href="<?=site_url('admin/mimage/lists')?>" class="add_tab">电影图片</a></li>

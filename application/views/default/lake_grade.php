@@ -7,7 +7,7 @@
 		<?php
 		if($row['video'] && $ext = strtolower(pathinfo($row['video'], PATHINFO_EXTENSION))):
 			if($ext == 'flv' or $ext == 'swf'):
-			$url = $ext == 'flv' ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('./data/uploads/stuff/'.$row['video']) : $row['video'];
+			$url = $ext == 'flv' ? base_url("common/flvplayer/flvplayer.swf")."?vcastr_file=".base_url('./data/uploads/attach/'.$row['video']) : $row['video'];
 		?>
 		<a href="#focus_video" class="slide_video"></a>
 		<div style="display: none;">

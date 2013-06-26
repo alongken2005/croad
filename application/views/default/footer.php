@@ -5,7 +5,7 @@
 DD_belatedPNG.fix('.png, .browse');
 </script>
 <![endif]-->
-<script type="text/javascript">
+<!--script type="text/javascript">
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-26645818-3']);
 	_gaq.push(['_trackPageview']);
@@ -15,6 +15,6 @@ DD_belatedPNG.fix('.png, .browse');
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-</script>
+</script-->
 </body>
 </html>
