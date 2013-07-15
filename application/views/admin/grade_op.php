@@ -71,6 +71,12 @@ $this->load->view('admin/header');
 			</td>
 		</tr>
 		<tr>
+			<th> 排序：</th>
+			<td>
+				<input type="text" name="sort" value="<?=set_value('sort', isset($row['sort']) ? $row['sort'] : 0)?>" class="input3"/>
+			</td>
+		</tr>
+		<tr>
 			<th></th>
 			<td>
 				<input type="submit" name="submit" value="提 交" class="but2"/>

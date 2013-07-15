@@ -42,8 +42,12 @@ class Lake extends CI_Controller {
 
 		//界数
 		$kinds = $this->config->item('subject_kinds');
-		$glist = $this->db->query("SELECT * FROM ab_grade")->result_array();
+		$glist = $this->db->query("SELECT * FROM ab_grade ORDER BY sort DESC")->result_array();
 		$gradeResult = array();
+		unset($kinds['lakeDesign'], $kinds['top']);
+		foreach($kinds as $key=>$kind) {
+			$gradeResult[$key] = array();
+		}
 		foreach($glist as $v) {
 			foreach($kinds as $key=>$kind) {
 				if($v['type'] == $key) {
@@ -52,20 +56,8 @@ class Lake extends CI_Controller {
 				}
 			}
 		}
-		$this->_data['gradeResult'] = $gradeResult;
 
-		/**
-		//儿童阅读
-		$this->_data['lakeCread'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeCread' LIMIT 6")->result_array();
-		//班级读书会
-		$this->_data['lakeClass'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeClass' LIMIT 6")->result_array();
-		//故事妈妈
-		$this->_data['lakeStory'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeStory' LIMIT 6")->result_array();
-		//新作文联盟
-		$this->_data['lakeContent'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeContent' LIMIT 6")->result_array();
-		//国学经典
-		$this->_data['lakeState'] = $this->db->query("SELECT s.title, s.cover, s.hits, s.id, s.grade, s.authorid, a.name, g.name gname FROM ab_subject s LEFT JOIN ab_grade g ON s.grade=g.id LEFT JOIN ab_author a ON s.authorid=a.id WHERE s.type='lakeState' LIMIT 6")->result_array();
-		*/
+		$this->_data['gradeResult'] = $gradeResult;
 		$this->_data['authorlist'] = $this->base->get_data('author', array(), '*', 16)->result_array();
 		$this->load->view(THEME.'/lake', $this->_data);
 	}

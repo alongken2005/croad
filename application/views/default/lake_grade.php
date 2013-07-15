@@ -29,9 +29,11 @@
 	</div>
 
 	<div class="tabs clearfix">
-		<a href="<?=site_url('lake/grade?id='.$row['id'])?>" <?=$tab == 'index' ? 'class="current"' : ''?>>会务手册</a>
-		<a href="<?=site_url('lake/grade?tab=pic&id='.$row['id'])?>" <?=$tab == 'pic' ? 'class="current"' : ''?>>活动图片</a>
-		<a href="<?=site_url('lake/grade?tab=subject&id='.$row['id'])?>" <?=$tab == 'subject' ? 'class="current"' : ''?>>本期课件</a>
+		<a href="<?=site_url('lake/grade?id='.$row['id'])?>" <?=$tab == 'index' ? 'class="current"' : ''?>>文件通知</a>
+		<a href="<?=site_url('lake/grade?tab=pic&id='.$row['id'])?>" <?=$tab == 'pic' ? 'class="current"' : ''?>>活动回顾</a>
+		<a href="<?=site_url('lake/grade?tab=subject&id='.$row['id'])?>" <?=$tab == 'subject' ? 'class="current"' : ''?>>
+			<?=$row['type'] == 'lakeStory' ? '故事视频' : '研习资料'?>
+		</a>
 	</div>
 	<?php if($tab == 'pic'):?>
 	<ul class="album">

@@ -74,7 +74,7 @@
 				<div class="scrollable-trigger"></div>
 				<a href="javascript:void(0);" title="下翻" class="next"></a>
 			</div>
-			<a href="<?=site_url('lake/search?type=lakeDesign')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
+			<a href="<?=site_url('lake/search?type=lakeDesign')?>" class="more png" target="_blank">更多内容 &raquo;</a>
 		</div>
 		<div class="content1 clearfix contentbox" style="display: none">
 			<div class="scrollable-panel">
@@ -106,7 +106,7 @@
 				<div class="scrollable-trigger"></div>
 				<a href="javascript:void(0);" title="下翻" class="next"></a>
 			</div>
-			<a href="<?=site_url('lake/search?type=top')?>" class="more sp_index" target="_blank">更多内容 &raquo;</a>
+			<a href="<?=site_url('lake/search?type=top')?>" class="more png" target="_blank">更多内容 &raquo;</a>
 		</div>
 		<div class="single_bottom3"></div>
 	</div>
@@ -178,7 +178,7 @@
 	<div id="lake_tab_c">
 		<div class="title sp_index" id="m4"></div>
 		<div class="content clearfix">
-			<a href="javascript:void(0);" title="上翻" class="prev"></a>
+			<a href="javascript:void(0);" title="上翻" class="iprev"></a>
 			<div class="scrollable-panel">
 				<div class="clearfix cb">
 					<div class="screen">
@@ -199,11 +199,13 @@
 					</div>
 				</div>
 			</div>
-			<a href="javascript:void(0);" title="下翻" class="next"></a>
+			<a href="javascript:void(0);" title="下翻" class="inext"></a>
 
-			<div class="trigger-bar">
+			<div class="trigger-bar" style="width: 280px;">
 				<div class="scrollable-trigger"></div>
 			</div>
+			<a href="<?=site_url('lake/search?stype=author')?>" class="more png" target="_blank" style="margin-right
+			   :140px;">更多内容 &raquo;</a>
 		</div>
 	</div>
 
@@ -280,10 +282,10 @@ $(function(){
 		visible: 1,
 		api: true
 	});
-	$("#lake_tab_c .next").click(function(){
+	$("#lake_tab_c .inext").click(function(){
 		tabc.next();
 	});
-	$("#lake_tab_c .prev").click(function(){
+	$("#lake_tab_c .iprev").click(function(){
 		tabc.prev();
 	});
 

@@ -5,11 +5,13 @@ $this->load->view('admin/header');
 <table cellpadding="0" cellspacing="0" border="0" class="table2">
 	<tr>
 		<th style="text-align: left">【分类】名称</th>
+		<th width="80">排序</th>
 		<th width="280">操作</th>
 	</tr>
 <?php if($lists): foreach($lists as $v):?>
 	<tr>
 		<td style="text-align: left">【<?=$kinds[$v['type']]?>】<?=$v['name']?></td>
+		<td><?=$v['sort']?></td>
 		<td>
 			<a href="<?=site_url('admin/grade/pic_op?place_id='.$v['id'])?>">活动照片添加</a>&nbsp;&nbsp;
 			<a href="<?=site_url('admin/grade/pic_lists?place_id='.$v['id'])?>">活动照片管理</a>&nbsp;&nbsp;

@@ -40,7 +40,7 @@ class Grade extends CI_Controller
 		$this->gpagination->target(site_url('admin/grade/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('grade', array(), '*', $limit, $offset)->result_array();
+		$this->_data['lists'] = $this->base->get_data('grade', array(), '*', $limit, $offset, 'sort DESC')->result_array();
         $this->load->view('admin/grade_list', $this->_data);
 	}
 
@@ -66,7 +66,7 @@ class Grade extends CI_Controller
 
 			$deal_data = array(
 				'name'		=> $this->input->post('name'),
-				//'title'		=> $this->input->post('title'),
+				'sort'		=> $this->input->post('sort'),
 				'content'	=> $this->input->post('content'),
 				'type'		=> $this->input->post('type'),
 				'chm'		=> $this->input->post('chm'),

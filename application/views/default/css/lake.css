@@ -41,7 +41,7 @@ a:hover { color: #CCC; }
 .single_bottom2 { height: 40px; background: url(../images/single_buttom2.png) no-repeat; }
 .single_bottom3 { height: 42px; background: url(../images/single_buttom3.png) no-repeat; }
 
-.more { float: right; margin-right: 20px; width: 107px; height: 30px; line-height: 30px; background-position: -0px -62px; font-size: 13px; font-weight: 600; color: #FFF; text-align: center; }
+.more { float: right; margin-right: 20px; width: 106px; height: 26px; line-height: 26px; background: url(../images/lake_more.png) no-repeat; font-size: 13px; font-weight: 600; color: #FFF; text-align: center; }
 
 .cn .li { float: left; display: inline; line-height: 1.8; margin: 20px 0 10px 19px; padding: 12px; width: 285px; height: 228px; border-radius: 10px; background: #DFDFDF; color: #666; }
 .cn .a1 { float: left; color: #007CBA; font-size: 14px; font-weight: 600;  }
@@ -89,11 +89,11 @@ a:hover { color: #CCC; }
 #lake_tab_c .li .name { color: #FFF; font-weight: bold; font-size: 14px; text-align: center; height: 25px; line-height: 25px; }
 #lake_tab_c .li .zc { color: #FFF; text-align: center; height: 15px; line-height: 15px; }
 #lake_tab_c .scrollable-panel { float: left; width: 880px; height: 520px; }
-#lake_tab_c .prev, #lake_tab_c .next { float: left; width: 33px; height: 51px; outline: none; background-repeat: no-repeat; margin-top: 200px; }
-#lake_tab_c .prev { background-image: url(../images/turn_left.png); margin-left: 27px; }
-#lake_tab_c .next { background-image: url(../images/turn_right.png); margin-right: 27px; }
-#lake_tab_c .prev:hover { text-decoration: none; background-image: url(../images/turn_left2.png); }
-#lake_tab_c .next:hover { text-decoration: none; background-image: url(../images/turn_right2.png); }
+#lake_tab_c .iprev, #lake_tab_c .inext { float: left; width: 33px; height: 51px; outline: none; background-repeat: no-repeat; margin-top: 200px; }
+#lake_tab_c .iprev { background-image: url(../images/turn_left.png); margin-left: 27px; }
+#lake_tab_c .inext { background-image: url(../images/turn_right.png); margin-right: 27px; }
+#lake_tab_c .iprev:hover { text-decoration: none; background-image: url(../images/turn_left2.png); }
+#lake_tab_c .inext:hover { text-decoration: none; background-image: url(../images/turn_right2.png); }
 
 .trigger-bar { width: 400px; height: 18px; padding-left: 465px; float: left; }
 .trigger-bar .prev, .trigger-bar .next { float: left; width: 11px; height: 17px; display: block; outline: none; background-image: url(../images/lake.png); background-repeat: no-repeat; }

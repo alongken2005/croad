@@ -119,7 +119,7 @@ class Author extends CI_Controller
     */
     public function del () {
         $id = intval($this->input->get('id'));
-        if($id && $this->base->del_data('lake_author', array('id' => $id))) {
+        if($id && $this->base->del_data('author', array('id' => $id))) {
         	exit('ok');
         } else {
         	exit('no');
