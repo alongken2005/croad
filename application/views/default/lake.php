@@ -190,7 +190,7 @@
 					<div class="li">
 						<a href="<?=site_url('lake/author?id='.$v['id'])?>" class="img"><img src="<?=get_thumb($v['cover'])?>"/></a>
 						<div class="name"><?=$v['name']?></div>
-						<div class="zc"><?=$v['title']?></div>
+						<div class="zc"><?=cutstr($v['title'], 23)?></div>
 					</div>
 				<?php
 					$i++;

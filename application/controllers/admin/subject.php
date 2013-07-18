@@ -131,10 +131,17 @@ class Subject extends CI_Controller
 			}
 
 			$filetype = $this->input->post('videoType');
-			if($filetype == 'online') {
+			if($filetype == 'online' && $this->input->post('online')) {
 				$deal_data['video'] = $this->input->post('online');
-			} elseif($filetype == 'local') {
-				$deal_data['video'] = $this->input->post('local');
+			} elseif($filetype == 'local' && $this->input->post('local')) {
+				$stuffdir = './data/uploads/attach/'.date('Y/m/');
+				createFolder($stuffdir);
+				$lo = $this->input->post('local');
+				$fname = uniqid().'.'.pathinfo($lo, PATHINFO_EXTENSION);
+				if(copy('./data/tmp/'.$lo, $stuffdir.$fname)) {
+					unlink('./data/tmp/'.$lo);
+				}
+				$deal_data['video'] = date('Y/m/').$fname;
 			}
 
 			if($id) {
@@ -164,7 +171,8 @@ class Subject extends CI_Controller
     */
     public function del () {
         $id = intval($this->input->get('id'));
-        if($id && $this->base->del_data('stuff', array('id' => $id))) {
+        if($id && $this->base->del_data('subject', array('id' => $id))) {
+			$this->base->del_data('attach', array('kind'=>'lake', 'relaid' => $id));
         	exit('ok');
         } else {
         	exit('no');
@@ -304,10 +312,17 @@ class Subject extends CI_Controller
 				$deal_data['filename'] = date('Y/m/').$upload_data['file_name'];
 				$deal_data['realname'] = $upload_data['orig_name'];
 				$deal_data['filesize'] = $upload_data['file_size'];
-			} elseif($filetype == 'online') {
+			} elseif($filetype == 'online' && $this->input->post('online')) {
 				$deal_data['filename'] = $this->input->post('online');
-			} elseif($filetype == 'local') {
-				$deal_data['filename'] = $this->input->post('local');
+			} elseif($filetype == 'local' && $this->input->post('local')) {
+				$stuffdir = './data/uploads/attach/'.date('Y/m/');
+				createFolder($stuffdir);
+				$lo = $this->input->post('local');
+				$fname = uniqid().'.'.pathinfo($lo, PATHINFO_EXTENSION);
+				if(copy('./data/tmp/'.$lo, $stuffdir.$fname)) {
+					unlink('./data/tmp/'.$lo);
+				}
+				$deal_data['filename'] = date('Y/m/').$fname;
 			}
 
 			if($id) {

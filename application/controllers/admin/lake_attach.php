@@ -131,10 +131,18 @@ class Lake_attach extends CI_Controller
 				$deal_data['filename'] = date('Y/m/').$upload_data['file_name'];
 				$deal_data['realname'] = $upload_data['orig_name'];
 				$deal_data['filesize'] = $upload_data['file_size'];
-			} elseif($filetype == 'online') {
+			} elseif($filetype == 'online' && $this->input->post('online')) {
 				$deal_data['filename'] = $this->input->post('online');
-			} elseif($filetype == 'local') {
-				$deal_data['filename'] = $this->input->post('local');
+			} elseif($filetype == 'local' && $this->input->post('local')) {
+				$stuffdir = './data/uploads/attach/'.date('Y/m/');
+				createFolder($stuffdir);
+				$lo = $this->input->post('local');
+				$fname = uniqid().'.'.pathinfo($lo, PATHINFO_EXTENSION);
+				if(copy('./data/tmp/'.$lo, $stuffdir.$fname)) {
+					unlink('./data/tmp/'.$lo);
+				}
+				$deal_data['filename'] = date('Y/m/').$fname;
+				//$deal_data['filename'] = $this->input->post('local');
 			}
 
 			if($id) {
