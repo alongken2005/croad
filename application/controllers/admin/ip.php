@@ -28,15 +28,14 @@ class Ip extends CI_Controller
 	public function lists() {
 		$keyword = $this->input->get('keyword');
 		
-		$where = array();
+		$where = "";
 		if($keyword) {
-			$where = "remark LIKE '%rr%'";
+			$where = "WHERE remark LIKE '%".$keyword."%'";
 		}
-		
 		
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('access_ip', $where)->num_rows();
+		$total_num = $this->db->query('SELECT * FROM ab_access_ip '.$where)->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -47,7 +46,7 @@ class Ip extends CI_Controller
 		$this->gpagination->target(site_url('admin/ip/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('access_ip', $where, '*', $limit, $offset, 'id DESC')->result_array();
+		$this->_data['lists'] = $this->db->query('SELECT * FROM ab_access_ip '.$where.' ORDER BY id DESC LIMIT '.$offset.','.$limit)->result_array();
         $this->load->view('admin/ip_list', $this->_data);
 	}
 

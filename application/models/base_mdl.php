@@ -43,7 +43,7 @@ class Base_mdl extends CI_Model {
 	 */
 	public function get_data($table, $where = array(), $select = '*', $limit = 0, $offset = 0, $order = '') {
 		$this->db->select($select);
-		$this->db->where($where, NULL, FALSE);
+		$this->db->where($where);
 		if ($limit) {
 			$this->db->limit($limit, $offset);
 		}
