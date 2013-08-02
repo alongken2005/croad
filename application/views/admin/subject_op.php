@@ -98,9 +98,10 @@ $this->load->view('admin/header');
 			</td>
 		</tr>
 		<tr>
-			<th><b>*</b> 作者：</th>
+			<th> 作者：</th>
 			<td>
 				<select name="authorid">
+					<option value="0">不选择</option>
 				<?php foreach($authorlist as $v):?>
 					<option value="<?=$v['id']?>" <?=(isset($row['authorid']) && $row['authorid'] == $v['id']) ? 'selected' : ''?>><?=$v['name']?></option>
 				<?php endforeach;?>

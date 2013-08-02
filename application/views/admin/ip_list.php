@@ -7,7 +7,7 @@ $this->load->view('admin/header');
 	<tr>
 		<th width="90">备注关键字：</th>
 		<td width="173">
-			<input type="text" name="keyword" class="input1"/>
+			<input type="text" name="keyword" class="input1" value="<?=$this->input->get('keyword')?>"/>
 		</td>
 		<td>
 			<input type="submit" value="查 询" class="search"/>

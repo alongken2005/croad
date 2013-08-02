@@ -34,7 +34,9 @@
 
 	<div class="tab clearfix">
 		<a href="javascript:void(0)" class="a1 current"></a>
+		<?php if(isset($author['id'])):?>
 		<a href="javascript:void(0)" class="a2"></a>
+		<?php endif;?>
 	</div>
 	<div class="clearfix content0">
 	<?php foreach($attachs as $v):?>

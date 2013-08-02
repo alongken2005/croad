@@ -26,9 +26,17 @@ class Ip extends CI_Controller
 	 * 教案附件内容列表
 	 */
 	public function lists() {
+		$keyword = $this->input->get('keyword');
+		
+		$where = array();
+		if($keyword) {
+			$where = "remark LIKE '%rr%'";
+		}
+		
+		
 		//分页配置
         $this->load->library('gpagination');
-		$total_num = $this->base->get_data('access_ip')->num_rows();
+		$total_num = $this->base->get_data('access_ip', $where)->num_rows();
 		$page = $this->input->get('page') > 1 ? $this->input->get('page') : '1';
 		$limit = 25;
 		$offset = ($page - 1) * $limit;
@@ -39,7 +47,7 @@ class Ip extends CI_Controller
 		$this->gpagination->target(site_url('admin/ip/lists'));
 
 		$this->_data['pagination'] = $this->gpagination->getOutput();
-		$this->_data['lists'] = $this->base->get_data('access_ip', array(), '*', $limit, $offset, 'ip DESC')->result_array();
+		$this->_data['lists'] = $this->base->get_data('access_ip', $where, '*', $limit, $offset, 'id DESC')->result_array();
         $this->load->view('admin/ip_list', $this->_data);
 	}
 
@@ -64,6 +72,7 @@ class Ip extends CI_Controller
 			$deal_data = array(
 				'ip'			=> $this->input->post('ip'),
 				'date_expire'	=> strtotime($this->input->post('date_expire')),
+				'remark'		=> $this->input->post('remark'),
 			);
 
 			if($id) {

@@ -14,6 +14,10 @@ $this->load->view('admin/header');
 			<td><input type="text" name="date_expire" class="Wdate input1" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" value="<?=isset($content['date_expire']) ? date('Y-m-d H:i', $content['date_expire']) : date('Y-m-d H:i')?>"/></td>
 		</tr>
 		<tr>
+			<th>备注：</th>
+			<td><input type="text" name="remark" class="input2" value="<?=isset($content['remark']) ? $content['remark'] : ''?>"/></td>
+		</tr>		
+		<tr>
 			<th></th>
 			<td>
 				<input type="submit" name="submit" value="提 交" class="but2"/>
