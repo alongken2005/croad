@@ -23,9 +23,9 @@ class Sharepic extends CI_Controller {
 
 	public function main() {
 		$data = file_get_contents("php://input");
-		$picName = base_url("data/".uniqid().".jpg");
+		$picName = "data/".uniqid().".jpg";
 		file_put_contents($picName, $data);
-		$this->_data = array('picName'=>  urldecode($picName), 'remark'=>$_GET['content']);
+		$this->_data = array('picName'=> base_url($picName), 'content'=> rawurldecode($_GET['content']), 'title'=>rawurldecode($_GET['title']), 'url'=>rawurldecode($_GET['url']));
 
 		$this->load->view(THEME.'/sharepic', $this->_data);
 	}
