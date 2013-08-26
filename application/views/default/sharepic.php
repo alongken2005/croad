@@ -6,19 +6,28 @@
 	<link rel="stylesheet" type="text/css" href="<?=THEME_VIEW?>css/style.css"/>
 </head>
 <body>
+	<div>标题：<?php echo $title?></div>
+	<div>备注：<?php echo $content?></div>
+	<div>url：<?php echo $url?></div>
+	<div>图片:<img src="<?php echo $picName?>"/></div>
 <!-- JiaThis Button BEGIN -->
 <div class="jiathis_style">
 <a class="jiathis_button_qzone"></a>
 <a class="jiathis_button_tsina"></a>
 <a class="jiathis_button_tqq"></a>
 <a class="jiathis_button_weixin"></a>
-<a class="jiathis_button_renren"></a>
-<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-<a class="jiathis_counter_style"></a>
 </div>
 <script type="text/javascript" >
 var jiathis_config={
-	pic:"http://c.hiphotos.baidu.com/album/w%3D2048/sign=2936f51c9345d688a302b5a490fa7c1e/a50f4bfbfbedab64e98471eff636afc379311e2e.jpg",
+	//pic:"<?php echo $picName?>",
+	pic:"http://www.sinaimg.cn/blog/qingzujian/00820tiantangaiqing.jpg",
+	title:"<?php echo $title?>",
+	summary:"<?php echo $content?>",
+	url:"<?php echo $url?>",
+	appkey:{
+        "tsina":"1246290740",
+        "tqq":"801176243"
+    }
 }
 </script>
 <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
