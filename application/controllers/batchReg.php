@@ -14,11 +14,13 @@ class BatchReg extends CI_Controller {
 	}
 	
 	public function index() {
-		$handle = fopen(base_url('data/users.csv'),"r");
+		$handle = fopen('data/users.csv',"r");
 		$i=1;
 		while(!feof($handle)){
 			$buffer = fgets($handle, 4096);
-			
+			if(!trim($buffer)) {
+				echo "err";exit();
+			}
 			list($name,$email,$password) = explode(',', $buffer);
 			//debug($name."__".$email."__".$password."<br>",0);
 			
@@ -62,7 +64,6 @@ class BatchReg extends CI_Controller {
 				$this->base->insert_data('account_group', $gdata);
 				echo $i."__".$name."ok<br>";
 				$i++;
-				exit;
 			} else {
 				echo $name."fail<br>";
 			}	
